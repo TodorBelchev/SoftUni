@@ -1,0 +1,55 @@
+header h1 {
+    text-align: center;
+    margin: 3rem;
+}
+
+main ul li {
+    border: 1px solid black;
+    border-radius: 15px;
+    list-style: none;
+    padding: 2rem;
+    margin-bottom: 1rem;
+}
+
+#add {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    margin: 3rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin:  10px 200px;
+}
+
+button {
+    padding: 1rem 2rem;
+    margin: 1rem;
+}
+
+input {
+    height: 47px;
+    width: 300px;
+}
+
+ul {
+    padding: 1rem;
+}
+
+section {
+    width: 30%;
+}
+
+.btnDiv {
+    display: flex;
+    justify-content: space-between;
+}
