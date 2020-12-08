@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Manager</title>
+    <link rel="stylesheet" href="style.css"> 
+    <script src="./app.js"></script>
+    <script>window.addEventListener('DOMContentLoaded', () => {
+        solve();
+    });</script>
+</head>
+<body>
+    <header>
+        <h1>ToDo Manager</h1>
+        <div id="add">
+            <input type="text">
+            <button>Add</button>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>ToDo</h2>
+            <ul id="todo">
+            </ul>
+        </section>
+        <section>
+            <h2>In Progress</h2>
+            <ul id="progress">
+            </ul>
+        </section>
+        <section>
+            <h2>Done</h2>
+            <ul id="done">
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
