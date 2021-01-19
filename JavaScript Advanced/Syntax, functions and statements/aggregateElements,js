@@ -1,0 +1,14 @@
+function solve(input) {
+    let sum = 0;
+    let inverseSum = 0;
+    let string = '';
+    for (let i = 0; i < input.length; i++) {
+        const current = Number(input[i]);
+        sum += current;
+        inverseSum += 1 / current;
+        string += current;
+    }
+    console.log(sum);
+    console.log(inverseSum);
+    console.log(string);
+}
