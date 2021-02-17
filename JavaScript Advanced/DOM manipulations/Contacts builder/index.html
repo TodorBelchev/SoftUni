@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Contacts Builder</title>
+    <script src="./Contact.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <article>
+            <div class="title">{firstName lastName}<button>&#8505;</button></div>
+            <div class="info">
+                <span>&phone; {phone}</span>
+                <span>&#9993; {email}</span>
+            </div>
+        </article>
+    </div>
+</body>
+<script>
+    let contacts = [
+        new Contact("Ivan", "Ivanov", "0888 123 456", "i.ivanov@gmail.com"),
+        new Contact("Maria", "Petrova", "0899 987 654", "mar4eto@abv.bg"),
+        new Contact("Jordan", "Kirov", "0988 456 789", "jordk@gmail.com")
+    ];
+    contacts[0].online = true;
+  
+    contacts.forEach(c => c.render('main'));
+
+    setTimeout(() => {
+        contacts[1].online = true;
+    },4000);
+</script>
+
+</html>
