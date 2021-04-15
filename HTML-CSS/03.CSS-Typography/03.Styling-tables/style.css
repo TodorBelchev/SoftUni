@@ -1,0 +1,16 @@
+table, td, th {
+    border: 1px solid rgb(221, 221, 221);
+}
+
+thead tr {
+    background: rgb(204, 204, 204);
+}
+
+tbody tr:nth-child(odd) {
+    background: rgb(241, 241, 241);
+}
+
+tbody tr:hover {
+    background: rgb(0, 0, 0);
+    color: white;
+}
