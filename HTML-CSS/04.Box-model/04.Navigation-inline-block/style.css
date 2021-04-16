@@ -1,0 +1,32 @@
+html {
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+header {
+    border-bottom: 2px solid black;
+}
+
+header h1, header nav {
+    display: inline-block;
+}
+
+header h1 {
+    text-transform: uppercase;
+    margin-right: 70px;
+    font-size: 40px;
+}
+
+header nav ul li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: green;
+}
