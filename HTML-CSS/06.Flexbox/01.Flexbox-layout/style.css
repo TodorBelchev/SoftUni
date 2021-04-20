@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgb(238, 238, 238);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+header, footer {
+    flex-basis: 100%;
+}
+
+header, main, aside, footer {
+    background: white;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 20px;
+    padding: 100px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px black;
+}
+
+main {
+    flex-grow: 3;
+}
+
+main, aside {
+    padding: 200px 100px;
+}
