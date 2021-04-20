@@ -1,0 +1,48 @@
+html {
+    box-sizing: border-box;
+}
+
+body, * {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 50px auto;
+}
+
+div, section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div {
+    max-width: 65vw;
+}
+
+span {
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+
+.notes {
+    flex-direction: column;
+    height: 440px;
+}
+
+.header {
+    flex-basis: 100%;
+    padding: 50px 0;
+}
+
+.regular {
+    flex-grow: 1;
+    padding: 40px 0;
+}
+
+.side {
+    width: 180px;
+    flex-grow: 1;
+}
