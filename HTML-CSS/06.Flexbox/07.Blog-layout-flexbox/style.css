@@ -1,0 +1,75 @@
+body {
+    background: rgb(238, 238, 238);
+}
+
+main {
+    flex-basis: 75%;
+}
+
+aside {
+    flex-grow: 1;
+    margin-left: 50px;
+}
+
+img {
+    padding: 10px;
+    background: rgb(255, 255, 255);
+    border: 3px solid black;
+    margin: 0 10px;
+}
+
+li {
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0, 153, 0);
+}
+
+.page {
+    font-family: Georgia, serif;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.site-title {
+    flex-basis: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-container p {
+    flex-basis: 100%;
+}
+
+.flex-container blockquote {
+    font-family: Georgia, serif;
+    flex-grow: 1;
+    border-left: 2px solid lightgray;
+    margin: 20px;
+}
+
+.flex-container blockquote p {
+    margin-left: 20px;
+}
+
+.flex-container blockquote p:nth-child(2) {
+    text-align: end;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+    margin-left: 0;
+}
