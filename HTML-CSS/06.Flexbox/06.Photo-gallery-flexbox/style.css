@@ -1,0 +1,34 @@
+html {
+    box-sizing: border-box;
+}
+
+body * {
+    box-sizing: inherit;
+}
+
+body {
+    background: rgb(238, 238, 238);
+}
+
+body, ul, li {
+    display: flex;
+}
+
+ul {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.gallery {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.gallery img {
+    background: white;
+    border: 8px solid black;
+    padding: 20px;
+    margin: 20px;
+    object-fit: contain;
+}
