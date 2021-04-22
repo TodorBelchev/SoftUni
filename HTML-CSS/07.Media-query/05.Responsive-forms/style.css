@@ -1,0 +1,84 @@
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+form {
+    margin: 100px auto;
+    width: 500px;
+    position: relative;
+}
+
+form p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form label {
+    align-items: center;
+    justify-content: center;
+    flex-basis: 20%;
+}
+
+form label span {
+    font-weight: bold;
+    flex-basis: 20%;
+}
+
+form fieldset p:nth-child(2) {
+    margin-top: 35px;
+}
+
+form fieldset p input {
+    flex-grow: 1;
+    height: 25px;
+    padding-left: 40px;
+}
+
+fieldset legend {
+    position: absolute;
+    left: 2px;
+    top: -19px;
+    z-index: 1;
+    background: white;
+    border: 1px solid black;
+    padding: 10px 30px;
+    width: 30%;
+    font-weight: bold;
+}
+
+.submit-btn {
+    margin: 20px 0 20px 30px;
+    padding: 7px 16px;
+    background: #2D2D2D;
+    color: white;
+    border: none;
+}
+
+fieldset, legend, input, .submit-btn {
+    border-radius: 5px;
+}
+
+i {
+    position: absolute;
+    left: 130px;
+}
+
+@media all and (max-width:800px) {
+    form {
+        width: 300px;
+    }
+    form p {
+        position: relative;
+        display: block;
+    }
+    i {
+        left: 10px;
+        top: 25px;
+    }
+    .submit-btn {
+        margin: 20px 0 20px 0px;
+    }
+}
