@@ -1,0 +1,33 @@
+span::after {
+    color: green;
+}
+
+.mq-width span::after {
+    content: 'Viewport width is larger than 600px';
+}
+
+.mq-height span::after {
+    content: 'Viewport height is larger than 600px';
+}
+
+.mq-ar span::after {
+    content: 'Aspect ration is larger than 8/5';
+}
+
+@media all and (max-width: 600px) {
+    .mq-width span::after {
+        content: '';
+    }
+}
+
+@media all and (max-height: 600px) {
+    .mq-height span::after {
+        content: '';
+    }
+}
+
+@media all and (min-aspect-ratio: 8/5) {
+    .mq-ar span::after {
+        content: '';
+    }
+}
