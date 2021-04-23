@@ -1,0 +1,266 @@
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
+html {
+    font-family: "Helvetica", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body {
+    margin: 0 auto;
+    background: black;
+}
+
+header {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(61, 61, 61, 0.8) 35%, rgba(0, 0, 0, 0.8) 100%), url(assets/bg.jpg);
+    color: white;
+    height: 850px;
+    text-align: center;
+    border-bottom: 10px solid #464646;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.hero {
+    width: 45%;
+    margin: 0 auto;
+}
+
+.get-email {
+    width: 60%;
+    margin: 0;
+    padding: 15px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin: 150px 0 0 0;
+}
+
+.hero-subtitle {
+    font-weight: 400;
+}
+
+.hero-text, .hero-subtext {
+    font-size: 1.2rem;
+}
+
+.get-email-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.try-btn {
+    width: 40%;
+    padding: 11px;
+    background: #E40813;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.try-btn i {
+    margin-left: 20px;
+}
+
+.sign-btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 5px;
+    background: #E40813;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.benefits {
+    margin: 0 auto;
+    color: white;
+}
+
+.benefits img {
+    width: 50%;
+    margin-left: 130px;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 10px solid #464646;
+    padding: 100px 0 50px 0;
+    margin: 0 auto;
+    padding: 3% 14%;
+    height: 450px;
+}
+
+.benefit-text {
+    width: 30%;
+}
+
+.benefit-text h2 {
+    font-size: 2rem;
+}
+
+.reverse .benefit-text {
+    order: 1;
+    margin-right: 170px;
+}
+
+.reverse img {
+    margin: 0 130px 0 0;
+    width: 40%;
+}
+
+.faq {
+    color: white;
+    margin: 0 auto;
+    border-bottom: 10px solid #464646;
+    padding: 50px;
+}
+
+.faq ul {
+    padding: 0;
+    list-style: none;
+}
+
+.faq-dropdown {
+    text-align: center;
+    margin: 0 25%;
+}
+
+.faq-dropdown h2 {
+    font-size: 2rem;
+}
+
+.faq-dropdown p {
+    margin-top: 50px;
+}
+
+.faq-dropdown ul li {
+    background: gray;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq .get-email-wrapper {
+    margin: 0 25%;
+}
+
+footer {
+    color: gray;
+    margin: 50px auto;
+    width: 47%;
+}
+
+footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    width: 220px;
+    padding: 5px 0;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: gray;
+}
+
+@media all and (max-width: 768px) {
+    header {
+        height: 650px;
+    }
+    header nav {
+        padding: 20px 30px;
+    }
+    .logo {
+        width: 30%;
+    }
+    .hero {
+        width: 90%;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+        margin: 60px 0 0 0;
+    }
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+    .hero-text {
+        font-size: 1rem;
+    }
+    .hero-subtext {
+        font-size: 1rem;
+    }
+    .get-email-wrapper {
+        display: block;
+    }
+    .get-email {
+        width: 88%;
+    }
+    .try-btn {
+        width: 70%;
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+    .benefits {
+        text-align: center;
+    }
+    .benefit {
+        flex-direction: column;
+        padding: 12% 6%;
+    }
+    .benefit-text {
+        width: 100%;
+        margin: 0;
+    }
+    .benefit img {
+        width: 71%;
+        margin: 0 0 20px 0;
+    }
+    .reverse .benefit-text {
+        order: 0;
+        margin: 0;
+    }
+    .faq {
+        padding: 0;
+    }
+    .faq-dropdown {
+        margin: 0;
+    }
+    .faq-dropdown h2 {
+        font-size: 1.5rem;
+    }
+    .faq .get-email-wrapper {
+        margin: 0 5%;
+        text-align: center;
+    }
+    .try-btn {
+        margin: 20px 20px 50px 20px;
+    }
+    footer {
+        width: 90%;
+    }
+    footer ul li {
+        width: 150px;
+        font-size: 0.8rem;
+        margin-right: 16px;
+    }
+    footer p {
+        font-size: 0.8rem;
+    }
+}
