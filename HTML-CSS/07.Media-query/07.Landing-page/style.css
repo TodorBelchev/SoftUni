@@ -1,0 +1,224 @@
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
+html {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    --main-color: #68347B;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header article h1 {
+    margin: 20px 0 0 0;
+    color: var(--main-color);
+}
+
+header article p {
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    padding: 5px 20px;
+    color: black;
+}
+
+.need-website {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.menu {
+    display: none;
+}
+
+.need-website-content-title {
+    font-size: 1.5rem;
+}
+
+.need-website-content-btn {
+    padding: 7px 10px;
+    background: white;
+    border-radius: 5px;
+}
+
+.fa-globe-americas {
+    font-size: 7rem;
+    margin: 7rem 7rem 7rem 5rem;
+}
+
+.team-title {
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.team-title::after {
+    content: "_____";
+    height: 2px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 88%;
+    margin: 50px auto;
+}
+
+.team-member {
+    text-align: center;
+    width: 29%;
+}
+
+.team-member-img {
+    border-radius: 50%;
+    width: 5rem;
+    margin: 1rem;
+}
+
+.team-member-name, .position {
+    margin: 0;
+}
+
+.description {
+    font-style: italic;
+}
+
+.newsletter {
+    background: var(--main-color);
+    width: 100vw;
+    position: relative;
+    left: 49.3%;
+    margin-left: -50vw;
+    text-align: center;
+    height: 15vh;
+}
+
+.newsletter-title {
+    padding: 25px 0;
+    color: white;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.newsletter-title::after {
+    content: "_____";
+    height: 2px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+
+.newsletter-email {
+    width: 12%;
+    height: 13%;
+}
+
+.newsletter-btn {
+    padding: 5px 10px;
+}
+
+.testimonials {
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.testimonials::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: lightgray;
+    width: 100vw;
+    left: 49.3%;
+    margin-left: -50vw;
+    box-shadow: 0px 15px 39px -1px rgba(0, 0, 0, 0.75);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+footer i, header i {
+    padding: 5px;
+}
+
+.moto, .sitemap, .contacts {
+    flex-basis: 25%;
+}
+
+.sitemap ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.sitemap ul li {
+    padding: 0 10px 0 0;
+    width: 46%;
+    font-size: 14px;
+}
+
+.sitemap ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.contacts p {
+    margin: 0;
+}
+
+@media all and (max-width: 800px) {
+    body {
+        max-width: 95%;
+    }
+    header nav {
+        display: none;
+    }
+    .menu {
+        display: block;
+    }
+    .fa-globe-americas {
+        margin: 1rem;
+    }
+    .need-website, .team {
+        margin: 0;
+        width: 100%;
+    }
+    .team-member {
+        width: 40%;
+    }
+    .newsletter-email {
+        width: 45%;
+    }
+    footer {
+        display: block;
+    }
+}
