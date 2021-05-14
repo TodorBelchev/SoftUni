@@ -16,7 +16,7 @@ module.exports = (req, res) => {
     const extName = path.extname(pathName)
 
     if (pathName.startsWith('/content') && req.method === 'GET') {
-        fs.readFile(`./${pathName}`, (err, data) => {
+        fs.readFile(`.${pathName}`, (err, data) => {
             if (err) {
                 console.log(err);
                 res.writeHead(404, '404 not found');
