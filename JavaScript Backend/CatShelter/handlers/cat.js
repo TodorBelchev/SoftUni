@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const qs = require('querystring');
+const formidable = require('formidable');
 const { handleHtmlFileRead } = require('../utils');
 
 module.exports = (req, res) => {
@@ -20,6 +21,32 @@ module.exports = (req, res) => {
             const breeds = JSON.parse(data);
             fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { breeds }));
         });
+    } else if (pathName === '/cats/add-cat' && req.method === 'POST') {
+        const form = formidable.IncomingForm();
+        form.parse(req, (err, fields, files) => {
+            if (err) throw err;
+
+            const oldPath = files.upload.path;
+            const newPath = path.normalize(path.join(__dirname.replace('\\handlers', ''), 'content/images/' + files.upload.name));
+
+            fs.rename(oldPath, newPath, (err) => {
+                if (err) throw err;
+                console.log('File uploaded');
+            })
+
+            fs.readFile('./data/cats.json', (err, data) => {
+                const catsData = JSON.parse(data);
+                catsData.push({ id: catsData.length + 1, ...fields, image: files.upload.name });
+
+                fs.writeFile('./data/cats.json', JSON.stringify(catsData), (err) => {
+                    if (err) throw err;
+                    console.log('File saved');
+                });
+
+                res.writeHead(302, { location: '/' });
+                res.end();
+            });
+        });
     } else if (pathName === '/cats/add-breed' && req.method === 'GET') {
         filePath = path.normalize(path.join(__dirname, '../views/addBreed.html'));
         fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res));
@@ -38,9 +65,7 @@ module.exports = (req, res) => {
                 breeds.push(body.breed);
 
                 fs.writeFile('./data/breeds.json', JSON.stringify(breeds), (err) => {
-                    if (err) {
-                        throw err;
-                    }
+                    if (err) throw err;
                     console.log('File saved');
                 });
 
