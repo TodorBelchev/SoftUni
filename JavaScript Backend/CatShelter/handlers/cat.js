@@ -11,7 +11,15 @@ module.exports = (req, res) => {
 
     if (pathName === '/cats/add-cat' && req.method === 'GET') {
         filePath = path.normalize(path.join(__dirname, '../views/addCat.html'));
-        fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res));
+        fs.readFile('./data/breeds.json', (err, data) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+
+            const breeds = JSON.parse(data);
+            fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { breeds }));
+        });
     } else if (pathName === '/cats/add-breed' && req.method === 'GET') {
         filePath = path.normalize(path.join(__dirname, '../views/addBreed.html'));
         fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res));

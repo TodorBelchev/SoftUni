@@ -1,4 +1,4 @@
-const handleHtmlFileRead = (err, data, res) => {
+const handleHtmlFileRead = (err, data, res, templateData) => {
     if (err) {
         console.log(err);
         res.writeHead(404, '404 not found');
@@ -6,8 +6,14 @@ const handleHtmlFileRead = (err, data, res) => {
         return;
     }
 
-    res.writeHead(200, { 'Content-Type': 'text/html'});
-    res.write(data);
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    if (templateData && templateData.breeds) {
+        const catBreedOptions = templateData.breeds.map(x => `<option value="${x}">${x}</option>`);
+        const modifiedData = data.toString().replace('{{catBreeds}}', catBreedOptions);
+        res.write(modifiedData);
+    } else {
+        res.write(data);
+    }
     res.end();
 };
 
