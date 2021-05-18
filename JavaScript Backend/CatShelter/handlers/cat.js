@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const qs = require('querystring');
 const formidable = require('formidable');
-const { handleHtmlFileRead } = require('../utils');
+const { handleHtmlFileRead, readFromFile } = require('../utils');
 
 module.exports = (req, res) => {
     const baseUrl = 'http://' + req.headers.host + '/cats';
@@ -73,6 +73,22 @@ module.exports = (req, res) => {
                 res.end();
             });
         });
+    } else if (pathName.includes('/cats-edit') && req.method === 'GET') {
+        const id = pathName.split('/').pop();
+
+        const promises = [
+            readFromFile('./data/cats.json'),
+            readFromFile('./data/breeds.json')
+        ];
+
+        Promise.all(promises)
+            .then(result => {
+                const cat = result[0][id - 1];
+                cat.breeds = result[1];
+                filePath = path.normalize(path.join(__dirname, '../views/editCat.html'));
+                fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { cat }));
+            })
+            .catch(err => console.log(err));
     } else {
         return true;
     }
