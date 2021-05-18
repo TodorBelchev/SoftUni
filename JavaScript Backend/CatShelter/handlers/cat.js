@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const qs = require('querystring');
 const formidable = require('formidable');
+const uuid = require('uuid');
 const { handleHtmlFileRead, readFromFile } = require('../utils');
 
 module.exports = (req, res) => {
@@ -36,7 +37,7 @@ module.exports = (req, res) => {
 
             fs.readFile('./data/cats.json', (err, data) => {
                 const catsData = JSON.parse(data);
-                catsData.push({ id: catsData.length + 1, ...fields, image: files.upload.name });
+                catsData.push({ id: uuid.v4(), ...fields, image: files.upload.name });
 
                 fs.writeFile('./data/cats.json', JSON.stringify(catsData), (err) => {
                     if (err) throw err;
@@ -74,7 +75,7 @@ module.exports = (req, res) => {
             });
         });
     } else if (pathName.includes('/cats-edit') && req.method === 'GET') {
-        const id = pathName.split('/').pop();
+        const catId = pathName.split('/').pop();
 
         const promises = [
             readFromFile('./data/cats.json'),
@@ -83,7 +84,7 @@ module.exports = (req, res) => {
 
         Promise.all(promises)
             .then(result => {
-                const cat = result[0][id - 1];
+                const cat = result[0].find(x => x.id === catId);
                 cat.breeds = result[1];
                 filePath = path.normalize(path.join(__dirname, '../views/editCat.html'));
                 fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { cat }));
@@ -107,7 +108,9 @@ module.exports = (req, res) => {
             fs.readFile('./data/cats.json', (err, data) => {
                 const catsData = JSON.parse(data);
                 const catId = req.url.split('/').pop();
-                catsData[catId - 1] = { id: catId, ...fields, image: files.upload.name || catsData[catId - 1].image };
+                const cat = catsData.find(x => x.id === catId);
+                const index = catsData.indexOf(cat);
+                catsData[index] = { id: catId, ...fields, image: files.upload.name || catsData[index].image };
 
                 fs.writeFile('./data/cats.json', JSON.stringify(catsData), (err) => {
                     if (err) throw err;
