@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <title>Cat Shelter</title>
 </head>
+
 <body>
     <header>
         <nav>
@@ -19,10 +21,20 @@
         </nav>
         <h1>Cat Shelter</h1>
     </header>
-        <form method="POST" class="cat-form" enctype="multipart/form-data">
-            <h2>Edit Cat</h2>
-            {{cat}}
-            <button>Edit Cat</button>
-        </form>
+    <form method="POST" class="cat-form" enctype="multipart/form-data">
+        <h2>Edit Cat</h2>
+        <label for="name">Name</label>
+        <input name="name" type="text" id="name" value="{{name}}">
+        <label for="description">Description</label>
+        <textarea name="description" id="description">{{description}}</textarea>
+        <label for="image">Image</label>
+        <input name="upload" type="file" id="image">
+        <label for="group">Breed</label>
+        <select name="breed" id="group">
+            {{breeds}}
+        </select>
+        <button type="submit">Edit Cat</button>
+    </form>
 </body>
+
 </html>

@@ -31,18 +31,10 @@ const handleHtmlFileRead = (err, data, res, templateData) => {
         const modifiedData = data.toString().replace('{{cats}}', catsTemplate);
         res.write(modifiedData);
     } else if (templateData && templateData.cat) {
-        const catTemplate = `
-        <label for="name">Name</label>
-        <input type="text" id="name" value="${templateData.cat.name}">
-        <label for="description">Description</label>
-        <textarea id="description">${templateData.cat.description}</textarea>
-        <label for="image">Image</label>
-        <input type="file" id="image">
-        <label for="group">Breed</label>
-        <select id="group">
-            ${templateData.cat.breeds.map(x => `<option value="${x}" ${templateData.cat.breed === x ? 'selected' : ''}>${x}</option>`).join('')}
-        </select>`;
-        const modifiedData = data.toString().replace('{{cat}}', catTemplate);
+        const breeds = templateData.cat.breeds.map(x => `<option value="${x}" ${templateData.cat.breed === x ? 'selected' : ''}>${x}</option>`).join('');
+        let modifiedData = data.toString().replace('{{name}}', templateData.cat.name);
+        modifiedData = modifiedData.replace('{{description}}', templateData.cat.description);
+        modifiedData = modifiedData.replace('{{breeds}}', breeds);
         res.write(modifiedData);
     } else {
         res.write(data);

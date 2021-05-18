@@ -89,6 +89,35 @@ module.exports = (req, res) => {
                 fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { cat }));
             })
             .catch(err => console.log(err));
+    } else if (pathName.includes('/cats-edit') && req.method === 'POST') {
+        const form = formidable.IncomingForm();
+        form.parse(req, (err, fields, files) => {
+            if (err) throw err;
+
+            const oldPath = files.upload.path;
+            const newPath = path.normalize(path.join(__dirname.replace('\\handlers', ''), 'content/images/' + files.upload.name));
+
+            if (files.upload.name) {
+                fs.rename(oldPath, newPath, (err) => {
+                    if (err) throw err;
+                    console.log('File uploaded');
+                });
+            }
+
+            fs.readFile('./data/cats.json', (err, data) => {
+                const catsData = JSON.parse(data);
+                const catId = req.url.split('/').pop();
+                catsData[catId - 1] = { id: catId, ...fields, image: files.upload.name || catsData[catId - 1].image };
+
+                fs.writeFile('./data/cats.json', JSON.stringify(catsData), (err) => {
+                    if (err) throw err;
+                    console.log('File saved');
+                });
+
+                res.writeHead(302, { location: '/' });
+                res.end();
+            });
+        });
     } else {
         return true;
     }
