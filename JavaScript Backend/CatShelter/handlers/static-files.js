@@ -4,7 +4,9 @@ const fs = require('fs');
 function getContentType(extName) {
     const contentTypes = {
         '.css': 'text/css',
-        '.png': 'image/png'
+        '.png': 'image/png',
+        '.jpg': 'image/jpg',
+        '.jpeg': 'image/jpeg'
     }
     return contentTypes[extName];
 }

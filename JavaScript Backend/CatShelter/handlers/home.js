@@ -10,7 +10,15 @@ module.exports = (req, res) => {
 
     if(pathname === '/' && req.method === 'GET') {
         const filePath = path.normalize(path.join(__dirname, '../views/index.html'));
-        fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res));
+        fs.readFile('./data/cats.json', (err, data) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+
+            const cats = JSON.parse(data);
+            fs.readFile(filePath, (err, data) => handleHtmlFileRead(err, data, res, { cats }));
+        });
     } else {
         return true;
     }
