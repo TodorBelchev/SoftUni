@@ -106,6 +106,8 @@ module.exports = (req, res) => {
             }
 
             fs.readFile('./data/cats.json', (err, data) => {
+                if (err) throw err;
+
                 const catsData = JSON.parse(data);
                 const catId = req.url.split('/').pop();
                 const cat = catsData.find(x => x.id === catId);
@@ -121,6 +123,32 @@ module.exports = (req, res) => {
                 res.end();
             });
         });
+    } else if (pathName.startsWith('/cats-find-new-home')) {
+        fs.readFile('./data/cats.json', (err, data) => {
+            if (err) throw err;
+
+            const catsData = JSON.parse(data);
+            const catId = req.url.split('/').pop();
+            const cat = catsData.find(x => x.id === catId);
+            const index = catsData.indexOf(cat);
+            catsData.splice(index, 1);
+
+
+            const imagePath = path.join(__dirname.replace('handlers', ''), './content/images/') + cat.image;
+
+            fs.rm(imagePath, (err) => {
+                if (err) throw err;
+                console.log('Image deleted');
+            });
+
+            fs.writeFile('./data/cats.json', JSON.stringify(catsData), (err) => {
+                if (err) throw err;
+                console.log('File saved');
+            });
+
+            res.writeHead(302, { location: '/' });
+            res.end();
+        })
     } else {
         return true;
     }
