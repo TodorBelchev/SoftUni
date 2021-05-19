@@ -19,9 +19,9 @@
             </ul>
         </nav>
         <h1>Cat Shelter</h1>
-        <form action="/search">
-            <input type="text">
-            <button type="button">Search</button>
+        <form method="POST" action="/search" enctype="multipart/form-data">
+            <input type="text" id="search" name="search">
+            <button type="submit">Search</button>
         </form>
     </header>
 	
