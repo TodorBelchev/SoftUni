@@ -17,7 +17,7 @@ function create(req, res) {
                 fs.writeFile('./config/database.json', JSON.stringify(cubicles), (err) => {
                     if (err) throw err;
                     console.log('File saved');
-                    res.render('home');
+                    res.redirect('/');
                 });
             });
         }

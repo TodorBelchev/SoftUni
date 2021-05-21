@@ -1,8 +1,14 @@
+const fs = require('fs');
+
 function home(req, res) {
 
     const handlers = {
         'GET': (req, res) => {
-            res.render('home');
+            fs.readFile('./config/database.json', (err, data) => {
+                if (err) throw err;
+                const cubes = JSON.parse(data);
+                res.render('home', { cubes });
+            });
         },
         'POST': (req, res) => {
 
