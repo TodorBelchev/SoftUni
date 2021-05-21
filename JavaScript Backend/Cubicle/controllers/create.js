@@ -5,7 +5,7 @@ function create(req, res) {
 
     const handlers = {
         'GET': (req, res) => {
-            res.render('create');
+            res.status(200).render('create');
         },
         'POST': (req, res) => {
             const { name, description, imageURL, difficultyLevel } = req.body;
@@ -17,7 +17,7 @@ function create(req, res) {
                 fs.writeFile('./config/database.json', JSON.stringify(cubicles), (err) => {
                     if (err) throw err;
                     console.log('File saved');
-                    res.redirect('/');
+                    res.status(201).redirect('/');
                 });
             });
         }

@@ -7,7 +7,7 @@ function home(req, res) {
             fs.readFile('./config/database.json', (err, data) => {
                 if (err) throw err;
                 const cubes = JSON.parse(data);
-                res.render('home', { cubes });
+                res.status(200).render('home', { cubes });
             });
         },
         'POST': (req, res) => {

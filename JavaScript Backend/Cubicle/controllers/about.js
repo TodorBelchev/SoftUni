@@ -2,7 +2,7 @@ function about(req, res) {
 
     const handlers = {
         'GET': (req, res) => {
-            res.render('about');
+            res.status(200).render('about');
         },
         'POST': (req, res) => {
 

@@ -1,12 +1,10 @@
-// TODO: Require Controllers...
 const home = require('../controllers/home');
 const about = require('../controllers/about');
 const create = require('../controllers/create');
 const details = require('../controllers/details');
-const Cube = require('../models/Cube');
+const notFound = require('../controllers/notFound');
 
 module.exports = (app) => {
-    // TODO...
 
     app.all('/', home);
 
@@ -15,5 +13,7 @@ module.exports = (app) => {
     app.all('/create', create);
 
     app.all('/details/:id', details);
+
+    app.get('*', notFound);
 
 };
