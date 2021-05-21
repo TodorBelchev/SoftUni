@@ -2,6 +2,7 @@
 const home = require('../controllers/home');
 const about = require('../controllers/about');
 const create = require('../controllers/create');
+const details = require('../controllers/details');
 const Cube = require('../models/Cube');
 
 module.exports = (app) => {
@@ -12,5 +13,7 @@ module.exports = (app) => {
     app.all('/about', about);
 
     app.all('/create', create);
+
+    app.all('/details/:id', details);
 
 };
