@@ -1,22 +1,16 @@
 // TODO: Require Controllers...
+const home = require('../controllers/home');
+const about = require('../controllers/about');
+const create = require('../controllers/create');
+const Cube = require('../models/Cube');
 
 module.exports = (app) => {
     // TODO...
 
-    app.get('/', (req, res) => {
-        res.render('home')
-    });
+    app.all('/', home);
 
-    app.get('/about', (req, res) => {
-        res.render('about')
-    });
+    app.all('/about', about);
 
-    app.get('/create', (req, res) => {
-        res.render('create');
-    });
+    app.all('/create', create);
 
-    app.post('/create', (req, res) => {
-        console.log('here');
-        console.log(req);
-    });
 };
