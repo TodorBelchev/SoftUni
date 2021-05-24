@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const routes = require('./routes');
 
 module.exports = (app) => {
 
@@ -7,6 +8,8 @@ module.exports = (app) => {
     app.set('view engine', 'hbs');
 
     app.use(express.urlencoded({ extended: true }));
-    app.use(express.static('./static'))
+    app.use(express.static('./static'));
+
+    app.use(routes);
 
 };

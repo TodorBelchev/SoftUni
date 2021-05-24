@@ -1,19 +1,13 @@
-const home = require('../controllers/home');
-const about = require('../controllers/about');
-const create = require('../controllers/create');
-const details = require('../controllers/details');
-const notFound = require('../controllers/notFound');
+const { Router } = require('express');
 
-module.exports = (app) => {
+const home = require('../controllers/homeController');
+const cube = require('../controllers/cubeController');
+const notFound = require('../controllers/notFoundController');
 
-    app.all('/', home);
+const router = Router();
 
-    app.all('/about', about);
+router.use('/', home);
+router.use('/cube', cube);
+router.get('*', notFound);
 
-    app.all('/create', create);
-
-    app.all('/details/:id', details);
-
-    app.get('*', notFound);
-
-};
+module.exports = router;
