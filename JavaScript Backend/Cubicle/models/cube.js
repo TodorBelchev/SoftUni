@@ -1,13 +1,32 @@
-const uuid = require('uuid');
+const mongoose = require('mongoose');
 
-class Cube {
-    constructor(name, description, imageURL, difficultyLevel) {
-        this.id = uuid.v4();
-        this.name = name;
-        this.description = description;
-        this.imageURL = imageURL;
-        this.difficultyLevel = difficultyLevel;
-    }
-}
+const cubeSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true,
+        maxLength: 50
+    },
+    imageURL: {
+        type: String,
+        required: true,
+        match: /^https?/
+    },
+    difficultyLevel: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 6
+    },
+    accessories: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Accessory'
+    }]
+});
+
+const Cube = mongoose.model('Cube', cubeSchema);
 
 module.exports = Cube;
