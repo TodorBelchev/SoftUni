@@ -1,14 +1,13 @@
 const { Router } = require('express');
 const fs = require('fs');
 
+const Cube = require('../models/Cube');
+
 const router = Router();
 
-router.get('/', (req, res) => {
-    fs.readFile('./config/database.json', (err, data) => {
-        if (err) throw err;
-        const cubes = JSON.parse(data);
-        res.status(200).render('home', { cubes });
-    });
+router.get('/', async (req, res) => {
+    const cubes = await Cube.find({}).lean();
+    res.status(200).render('home', { cubes });
 });
 
 router.get('/about', (req, res) => {
