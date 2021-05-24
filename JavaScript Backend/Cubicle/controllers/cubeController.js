@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
-const Cube = require('../models/Cube');
-const Accessory = require('../models/Accessory');
+const cubeServices = require('../services/cubeServices');
+const accessoryServices = require('../services/accessoryServices');
 
 const router = Router();
 
@@ -9,32 +9,45 @@ router.get('/create', (req, res) => {
     res.status(200).render('create');
 });
 
-router.post('/create', (req, res) => {
-    const { name, description, imageURL, difficultyLevel } = req.body;
-    const cube = new Cube({ name, description, imageURL, difficultyLevel });
-    cube.save();
-    res.status(201).redirect('/');
+router.post('/create', async (req, res) => {
+    try {
+        await cubeServices.create(req.body);
+        res.status(201).redirect('/');
+    } catch (error) {
+        console.log(error);
+        res.status(500).end()
+    }
 });
 
 router.get('/details/:id', async (req, res) => {
-    const cube = await Cube.findById(req.params.id)
-        .populate('accessories')
-        .lean();
-    res.status(200).render('details', cube);
+    try {
+        const cube = await cubeServices.getOneWithAccessories(req.params.id);
+        res.status(200).render('details', cube);
+    } catch (error) {
+        console.log(error);
+        res.status(500).end()
+    }
 });
 
 router.get('/attach/:id', async (req, res) => {
-    const cube = await Cube.findById(req.params.id).lean();
-    const accessories = await Accessory.find({ _id: {$nin: cube.accessories} }).lean();
-    res.status(200).render('attachAccessory', { cube, accessories });
+    try {
+        const cube = await cubeServices.getOneById(req.params.id);
+        const accessories = await accessoryServices.getNotAttached(cube.accessories);
+        res.status(200).render('attachAccessory', { cube, accessories });
+    } catch (error) {
+        console.log(error);
+        res.status(500).end()
+    }
 });
 
 router.post('/attach/:id', async (req, res) => {
-    const cube = await Cube.findById(req.params.id);
-    const accessory = await Accessory.findById(req.body.accessory);
-    cube.accessories.push(accessory);
-    cube.save();
-    res.status(200).redirect('/cube/details/' + req.params.id);
+    try {
+        await cubeServices.attachAccessory(req.params.id, req.body.accessory);
+        res.status(200).redirect('/cube/details/' + req.params.id);
+    } catch (error) {
+        console.log(error);
+        res.status(500).end()
+    }
 });
 
 module.exports = router;

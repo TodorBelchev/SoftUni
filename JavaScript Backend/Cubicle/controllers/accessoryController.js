@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const Accessory = require('../models/Accessory');
+
+const accessoryServices = require('../services/accessoryServices');
 
 const router = Router();
 
@@ -7,11 +8,14 @@ router.get('/create', (req, res) => {
     res.status(200).render('createAccessory');
 });
 
-router.post('/create', (req, res) => {
-    const { name, description, imageURL } = req.body;
-    const accessory = new Accessory({ name, description, imageURL });
-    accessory.save();
-    res.status(201).redirect('/');
+router.post('/create', async (req, res) => {
+    try {
+        await accessoryServices.create(req.body);
+        res.status(201).redirect('/');
+    } catch (error) {
+        console.log(error);
+        res.status(500).end();
+    }
 });
 
 module.exports = router;

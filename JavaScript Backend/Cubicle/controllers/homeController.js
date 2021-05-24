@@ -1,12 +1,11 @@
 const { Router } = require('express');
-const fs = require('fs');
 
-const Cube = require('../models/Cube');
+const cubeServices = require('../services/cubeServices');
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const cubes = await Cube.find({}).lean();
+    const cubes = await cubeServices.getAll();
     res.status(200).render('home', { cubes });
 });
 
