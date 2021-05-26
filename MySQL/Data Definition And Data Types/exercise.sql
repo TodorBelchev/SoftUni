@@ -70,3 +70,215 @@ VALUES
 (3, 'John Doe2', 'm', '2000-01-01'),
 (4, 'John Doe3', 'm', '2000-01-01'),
 (5, 'John Doe4', 'm', '2000-01-01');
+
+-- 07. Create Table Users
+
+CREATE TABLE `users`
+(
+	`id` INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+    `username` VARCHAR(30) UNIQUE NOT NULL,
+    `password` VARCHAR(26) NOT NULL,
+    `profile_picture` BLOB,
+    `last_login_time` TIMESTAMP,
+    `is_deleted` BOOLEAN
+);
+
+INSERT INTO `users`
+(`username`, `password`)
+VALUES
+('Pesho', '12345'),
+('Gosho', '12345'),
+('Stamat', '12345'),
+('Tosho', '12345'),
+('Losho', '12345');
+
+-- 08. Change Primary Key
+
+ALTER TABLE `users`
+DROP PRIMARY KEY,
+ADD CONSTRAINT `pk_users` PRIMARY KEY(`id`, `username`);
+
+-- 09. Set Default Value of a Field
+
+ALTER TABLE `users` 
+MODIFY COLUMN `last_login_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP; -- now()
+
+-- 10. Set Unique Field
+
+ALTER TABLE `users`
+DROP PRIMARY KEY,
+ADD CONSTRAINT PRIMARY KEY (`id`),
+ADD CONSTRAINT UNIQUE (`username`);
+
+-- 11. Movies Database
+
+CREATE TABLE `directors`
+(
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `director_name` VARCHAR(50) NOT NULL,
+    `notes` TEXT
+);
+
+CREATE TABLE `genres`
+(
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `genre_name` VARCHAR(50) NOT NULL,
+    `notes` TEXT
+);
+
+CREATE TABLE `categories`
+(
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `category_name` VARCHAR(50) NOT NULL,
+    `notes` TEXT
+);
+
+CREATE TABLE `movies`
+(
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(50) NOT NULL,
+    `director_id` INT NOT NULL,
+    `copyright_year` YEAR NOT NULL,
+    `length` TIME NOT NULL,
+    `genre_id` INT NOT NULL,
+    `category_id` INT NOT NULL,
+    `rating` INT,
+    `notes` TEXT
+);
+
+INSERT INTO `directors`
+(`director_name`)
+VALUES
+('Pesho'),
+('Pesho'),
+('Pesho'),
+('Pesho'),
+('Pesho');
+
+INSERT INTO `genres`
+(`genre_name`)
+VALUES
+('Horror'),
+('Horror'),
+('Horror'),
+('Horror'),
+('Horror');
+
+INSERT INTO `categories`
+(`category_name`)
+VALUES
+('Scary'),
+('Scary'),
+('Scary'),
+('Scary'),
+('Scary');
+
+INSERT INTO `movies`
+(`id`, `title`, `director_id`, `copyright_year`, `length`, `genre_id`, `category_id`)
+VALUES
+(1, 'Pesho', 1, '2020', 108, 1, 1),
+(2, 'Pesho', 1, '2020', 108, 1, 1),
+(3, 'Pesho', 1, '2020', 108, 1, 1),
+(4, 'Pesho', 1, '2020', 108, 1, 1),
+(5, 'Pesho', 1, '2020', 108, 1, 1);
+
+-- 12. Car Rental Database
+
+CREATE TABLE `categories`
+(
+	`id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `category` VARCHAR(50) NOT NULL,
+    `daily_rate` DOUBLE NOT NULL,
+    `weekly_rate` DOUBLE NOT NULL,
+    `monthly_rate` DOUBLE NOT NULL,
+    `weekend_rate` DOUBLE NOT NULL
+);
+
+CREATE TABLE `cars`
+(
+	`id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `plate_number` VARCHAR(30) NOT NULL,
+    `make` VARCHAR(30) NOT NULL,
+    `model` VARCHAR(30) NOT NULL,
+    `car_year` YEAR NOT NULL,
+    `category_id` INT NOT NULL,
+    `doors` INT NOT NULL,
+    `picture` BLOB,
+    `car_condition` VARCHAR(30),
+    `available` BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE `employees`
+(
+	`id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `first_name` VARCHAR(30) NOT NULL,
+    `last_name` VARCHAR(30) NOT NULL,
+    `title` VARCHAR(30) NOT NULL,
+    `notes` TEXT
+);
+
+CREATE TABLE `customers`
+(
+	`id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `driver_license_number` VARCHAR(30) NOT NULL,
+    `full_name` VARCHAR(50) NOT NULL,
+    `address` VARCHAR(50) NOT NULL,
+    `city` VARCHAR(50) NOT NULL,
+    `zip_code` INT NOT NULL,
+    `notes` TEXT
+);
+
+CREATE TABLE `rental_orders`
+(
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`employee_id` INT NOT NULL,
+	`customer_id` INT NOT NULL,
+	`car_id` INT NOT NULL,
+	`car_condition` VARCHAR(20),
+	`tank_level` DOUBLE,
+	`kilometrage_start` DOUBLE,
+	`kilometrage_end` DOUBLE,
+	`total_kilometrage` DOUBLE,
+	`start_date` DATE,
+	`end_date` DATE,
+	`total_days` INT,
+	`rate_applied` DOUBLE,
+	`tax_rate` DOUBLE,
+	`order_status` VARCHAR(30),
+	`notes` TEXT
+);
+
+INSERT INTO `categories`
+(`category`, `daily_rate`, `weekly_rate`, `monthly_rate`, `weekend_rate`)
+VALUES 
+('1', 1, 2, 3, 4),
+('2', 1, 2, 3, 4),
+('3', 1, 2, 3, 4);
+
+INSERT INTO `cars`
+(`plate_number`, `make`, `model`, `car_year`, `category_id`, `doors`, `car_condition`)
+VALUES 
+('1', '1', '1', '2000', 1, 2, 'New'),
+('2', '2', '2', '2000', 1, 2, 'Used'),
+('3', '3', '3', '2000', 1, 2, 'Used');
+
+INSERT INTO `employees`
+(`first_name`, `last_name`, `title`)
+VALUES 
+('Pesho', 'Petrov', 'Worker'),
+('Pesho', 'Petrov', 'Worker'),
+('Pesho', 'Petrov', 'Worker');
+
+INSERT INTO `customers`
+(`driver_license_number`, `full_name`, `address`, `city`, `zip_code`)
+VALUES 
+('1111', 'Pesho Petrov', 'Some address', 'Sofia', 1000),
+('1111', 'Pesho Petrov', 'Some address', 'Sofia', 1000),
+('1111', 'Pesho Petrov', 'Some address', 'Sofia', 1000);
+
+INSERT INTO `rental_orders`
+(`employee_id`, `customer_id`, `car_id`, `car_condition`, `start_date`)
+VALUES 
+(1, 1, 1, 'New','2000-01-01'),
+(1, 1, 1, 'New','2000-01-01'),
+(1, 1, 1, 'New', '2000-01-01');
