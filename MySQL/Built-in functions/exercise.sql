@@ -28,3 +28,35 @@ SELECT `name`
 FROM `towns`
 WHERE CHAR_LENGTH(`name`) IN (5,6)
 ORDER BY `name` ASC;
+
+-- 06. Find Towns Starting With
+SELECT `town_id`, `name`
+FROM `towns`
+WHERE LOWER(SUBSTRING(`name`, 1, 1)) IN ('m', 'k', 'b', 'e')
+ORDER BY `name` ASC;
+
+-- 07. Find Towns Not Starting With
+SELECT `town_id`, `name`
+FROM `towns`
+WHERE LOWER(SUBSTRING(`name`, 1, 1)) NOT IN ('r', 'b', 'd')
+ORDER BY `name` ASC;
+
+-- 08. Create View Employees Hired After
+CREATE VIEW `v_employees_hired_after_2000`
+AS
+SELECT `first_name`, `last_name`
+FROM `employees`
+WHERE `hire_date` >= '2001-01-01';
+
+SELECT * FROM `v_employees_hired_after_2000`;
+
+-- 09. Length of Last Name
+SELECT `first_name`, `last_name`
+FROM `employees`
+WHERE CHAR_LENGTH(`last_name`) = 5;
+
+-- 10. Countries Holding 'A'
+SELECT `country_name`, `iso_code`
+FROM `countries`
+WHERE CHAR_LENGTH(`country_name`) - CHAR_LENGTH(REPLACE(LOWER(`country_name`), 'a', '')) >= 3
+ORDER BY `iso_code`;
