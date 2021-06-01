@@ -7,8 +7,8 @@ function create(data) {
     return cube.save();
 }
 
-async function getAll() {
-    return await Cube.find({}).lean();
+async function getAll(query) {
+    return await Cube.find({ name: new RegExp(query.search, 'i'), difficultyLevel: { $gte: query.from || 0, $lte: query.to || 6 } }).lean();
 }
 
 async function getOneWithAccessories(id) {

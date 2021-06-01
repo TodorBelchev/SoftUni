@@ -5,8 +5,8 @@ const cubeServices = require('../services/cubeServices');
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const cubes = await cubeServices.getAll();
-    res.status(200).render('home', { cubes });
+    const cubes = await cubeServices.getAll(req.query);
+    res.status(200).render('home', { cubes, query: req.query });
 });
 
 router.get('/about', (req, res) => {
