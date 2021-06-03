@@ -56,7 +56,7 @@ WHERE
     `magic_wand_creator` = 'Ollivander family'
 GROUP BY `deposit_group`
 HAVING `total_sum` < 150000
-ORDER BY `deposit_group` DESC;
+ORDER BY `total_sum` DESC;
 
 -- 8. Deposit Charge
 SELECT 
@@ -127,7 +127,7 @@ SELECT
 FROM
     `employees`
 WHERE
-    `salary` > 30000 AND `manager_id` != 41
+    `salary` > 30000 AND `manager_id` != 42
 GROUP BY `department_id`
 ORDER BY `department_id`;
 
@@ -136,9 +136,8 @@ SELECT
     `department_id`, MAX(`salary`) AS `max_salary`
 FROM
     `employees`
-WHERE
-    `salary` < 30000 OR `salary` > 70000
 GROUP BY `department_id`
+HAVING NOT `max_salary` BETWEEN 30000 AND 70000
 ORDER BY `department_id` ASC;
 
 -- 15. Employees Count Salaries
@@ -163,6 +162,7 @@ SELECT
 FROM
     `employees`
 GROUP BY `department_id`
+HAVING `third_highest_salary` IS NOT NULL
 ORDER BY `department_id`;
 
 -- 17. Salary Challenge**
@@ -172,12 +172,13 @@ FROM
     `employees`
 WHERE
     `salary` > (SELECT 
-            AVG(`salary`)
+            AVG(`salary`) AS `avg`
         FROM
             `employees` AS `e`
         WHERE
             `e`.`department_id` = `employees`.`department_id`)
-ORDER BY `department_id` ASC , `employee_id` ASC;
+ORDER BY `department_id` ASC , `employee_id` ASC
+LIMIT 10;
 
 -- 18. Departments Total Salaries
 SELECT 
