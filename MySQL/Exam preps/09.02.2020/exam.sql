@@ -99,3 +99,79 @@ WHERE LEFT(`first_name`, 1) = 'A' AND `id` IN (SELECT `coach_id` FROM `players_c
 -- 04. Delete
 DELETE FROM `players`
 WHERE `age` >= 45;
+
+-- 05. Players
+SELECT `first_name`, `age`, `salary`
+FROM `players`
+ORDER BY `salary` DESC;
+
+-- 06. Young offense players without contract
+SELECT 
+	`id`,
+    CONCAT(`first_name`, ' ', `last_name`) AS `full_name`,
+    `age`,
+    `position`,
+    `hire_date`
+FROM
+    `players`
+WHERE
+    `age` < 23 AND `position` = 'A'
+        AND `hire_date` IS NULL
+        AND (SELECT 
+            `strength`
+        FROM
+            `skills_data`
+        WHERE
+            `skills_data_id` = `id`) > 50
+ORDER BY `salary` ASC , `age` ASC;
+
+-- 07. Detail info for all teams
+SELECT 
+    `name`,
+    `established`,
+    `fan_base`,
+    (SELECT 
+            COUNT(`id`)
+        FROM
+            `players`
+        WHERE
+            `team_id` = `teams`.`id`) AS `count`
+FROM
+    `teams`
+ORDER BY `count` DESC , `fan_base` DESC;
+
+-- 08. The fastest player by towns
+SELECT 
+    MAX(`sd`.speed) AS `max_speed`, `t`.`name`
+FROM
+    `towns` AS `t`
+        LEFT JOIN
+    `stadiums` AS `s` ON `t`.`id` = `s`.`town_id`
+        LEFT JOIN
+    `teams` AS `te` ON `te`.`stadium_id` = `s`.`id`
+        LEFT JOIN
+    `players` AS `p` ON `p`.`team_id` = `te`.`id`
+        LEFT JOIN
+    `skills_data` AS `sd` ON `sd`.`id` = `p`.`skills_data_id`
+WHERE
+    `te`.`name` != 'Devify'
+GROUP BY `t`.`id`
+ORDER BY `max_speed` DESC , `t`.`name` ASC;
+
+-- 09. Total salaries and players by country
+SELECT 
+    `c`.`name`,
+    COUNT(`p`.`id`) AS `total_count_of_players`,
+    SUM(`p`.`salary`) AS `total_sum_of_salaries`
+FROM
+    `countries` AS `c`
+        LEFT JOIN
+    `towns` AS `t` ON `c`.`id` = `t`.`country_id`
+        LEFT JOIN
+    `stadiums` AS `s` ON `t`.`id` = `s`.`town_id`
+        LEFT JOIN
+    `teams` AS `te` ON `te`.`stadium_id` = `s`.`id`
+        LEFT JOIN
+    `players` AS `p` ON `p`.`team_id` = `te`.`id`
+GROUP BY `c`.`id`
+ORDER BY `total_count_of_players` DESC , `c`.`name` ASC;
