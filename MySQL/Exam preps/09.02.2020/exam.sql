@@ -175,3 +175,44 @@ FROM
     `players` AS `p` ON `p`.`team_id` = `te`.`id`
 GROUP BY `c`.`id`
 ORDER BY `total_count_of_players` DESC , `c`.`name` ASC;
+
+-- 10. Find all players that play on stadium
+CREATE FUNCTION udf_stadium_players_count (stadium_name VARCHAR(30))
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	RETURN (SELECT COUNT(`p`.`id`)
+	FROM `stadiums` AS `s`
+	LEFT JOIN `teams` AS `t`
+    ON `t`.`stadium_id` = `s`.`id`
+	LEFT JOIN `players` AS `p`
+    ON `p`.`team_id` = `t`.`id`
+	WHERE `s`.`name` = stadium_name);
+END;
+
+-- 11. Find good playmaker by teams
+CREATE PROCEDURE udp_find_playmaker (`min_dribble` INT, `team_name` VARCHAR(45))
+BEGIN
+SELECT 
+    CONCAT(`first_name`, ' ', `last_name`) AS `full_name`,
+    `age`,
+    `salary`,
+    `sd`.`dribbling` AS `dribbling`,
+    `sd`.`speed` AS `speed`,
+    `t`.`name` AS `team_name`
+FROM
+    `players`
+        LEFT JOIN
+    `teams` AS `t` ON `players`.`team_id` = `t`.`id`
+        LEFT JOIN
+    `skills_data` AS `sd` ON `sd`.`id` = `players`.`skills_data_id`
+WHERE
+    (SELECT 
+            AVG(`speed`)
+        FROM
+            `skills_data`) < `speed`
+        AND `dribbling` > `min_dribble`
+        AND `t`.`name` = `team_name`
+ORDER BY `speed` DESC
+LIMIT 1;
+END;
