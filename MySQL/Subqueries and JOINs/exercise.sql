@@ -169,3 +169,80 @@ WHERE
     mc.`country_code` = 'BG'
         AND p.`elevation` > 2835
 ORDER BY p.`elevation` DESC;
+
+-- 13. Count Mountain Ranges
+SELECT 
+    mc.`country_code`,
+    COUNT(m.`mountain_range`) AS `mountain_range`
+FROM
+    `mountains_countries` AS mc
+        JOIN
+    `mountains` AS m ON mc.`mountain_id` = m.`id`
+WHERE
+    mc.`country_code` IN ('BG' , 'RU', 'US')
+GROUP BY mc.`country_code`
+ORDER BY `mountain_range` DESC;
+
+-- 14. Countries with Rivers
+SELECT 
+    c.`country_name`, r.`river_name`
+FROM
+    `countries` AS c
+        LEFT JOIN
+    `countries_rivers` AS cr ON c.`country_code` = cr.`country_code`
+        LEFT JOIN
+    `rivers` AS r ON cr.`river_id` = r.`id`
+WHERE
+    c.`continent_code` = 'AF'
+ORDER BY c.`country_name` ASC
+LIMIT 5;
+
+-- 15. *Continents and Currencies
+SELECT 
+    c.`continent_code`,
+    c.`currency_code`,
+    COUNT(*) AS `currency_usage`
+FROM
+    `countries` AS c
+GROUP BY c.`continent_code` , c.`currency_code`
+HAVING `currency_usage` > 1
+    AND `currency_usage` = (SELECT 
+        COUNT(*) AS cn
+    FROM
+        `countries` AS c2
+    WHERE
+        c2.`continent_code` = c.`continent_code`
+    GROUP BY c2.`currency_code`
+    ORDER BY cn DESC
+    LIMIT 1)
+ORDER BY c.`continent_code` ASC , c.`currency_code` ASC;
+
+-- 16. Countries without any Mountains
+SELECT 
+    COUNT(*) AS `country_count`
+FROM
+    `countries`
+WHERE
+    `country_code` NOT IN (SELECT 
+            `country_code`
+        FROM
+            `mountains_countries`);
+
+-- 17. Highest Peak and Longest River by Country
+SELECT 
+    `country_name`,
+    MAX(p.`elevation`) AS `highest_peak_elevation`,
+    MAX(r.`length`) AS `longest_river_length`
+FROM
+    `countries` AS c
+        JOIN
+    `mountains_countries` AS mc ON c.`country_code` = mc.`country_code`
+        JOIN
+    `peaks` AS p ON mc.`mountain_id` = p.`mountain_id`
+        JOIN
+    `countries_rivers` AS cr ON c.`country_code` = cr.`country_code`
+        JOIN
+    `rivers` AS r ON cr.`river_id` = r.`id`
+GROUP BY c.`country_name`
+ORDER BY `highest_peak_elevation` DESC , `longest_river_length` DESC , c.`country_name` ASC
+LIMIT 5;
