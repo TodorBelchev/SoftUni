@@ -144,3 +144,24 @@ FROM
     `cards` AS ca ON ba.`id` = ca.`bank_account_id`
 GROUP BY b.`name`
 ORDER BY `count_of_cards` DESC , b.`name` ASC;
+
+-- 10. Extract client cards count
+CREATE FUNCTION udf_client_cards_count(`name` VARCHAR(30))
+RETURNS INT
+DETERMINISTIC
+	RETURN (
+    SELECT COUNT(ca.`id`) AS `cards`
+	FROM `clients` AS c
+	JOIN `bank_accounts` AS b ON c.`id` = b.`client_id`
+	JOIN `cards` AS ca on b.`id` = ca.`bank_account_id`
+	WHERE c.`full_name` = `name`);
+
+-- 11. Extract client info
+DELIMITER $$
+CREATE PROCEDURE udp_clientinfo(`name` VARCHAR(20))
+BEGIN
+	SELECT c.`full_name`, c.`age`, b.`account_number`, CONCAT('$', b.`balance`) AS `balance`
+	FROM `clients` AS c
+	JOIN `bank_accounts` AS b ON c.`id` = b.`client_id`
+	WHERE c.`full_name` = `name`;
+END $$
