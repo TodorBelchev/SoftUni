@@ -138,3 +138,56 @@ FROM
     `journeys` AS j ON tc.`journey_id` = j.`id`
 WHERE
     `purpose` = 'Technical';
+
+-- 10. Extract the fastest spaceship
+SELECT 
+    s.`name`, sp.`name`
+FROM
+    `spaceships` AS s
+        JOIN
+    `journeys` AS j ON s.`id` = j.`spaceship_id`
+        JOIN
+    `spaceports` AS sp ON j.`destination_spaceport_id` = sp.`id`
+ORDER BY s.`light_speed_rate` DESC
+LIMIT 1;
+
+-- 11. Extract - pilots younger than 30 years
+SELECT 
+    s.`name`, s.`manufacturer`
+FROM
+    `spaceships` AS s
+        JOIN
+    `journeys` AS j ON s.`id` = j.`spaceship_id`
+        JOIN
+    `travel_cards` AS t ON j.`id` = t.`journey_id`
+        JOIN
+    `colonists` AS c ON c.`id` = t.`colonist_id`
+WHERE
+    t.`job_during_journey` = 'Pilot'
+        AND YEAR(`birth_date`) > YEAR('1989-01-01')
+ORDER BY s.`name` ASC;
+
+-- 12. Extract all educational mission
+SELECT 
+    p.`name`, s.`name`
+FROM
+    `planets` AS p
+        JOIN
+    `spaceports` AS s ON p.`id` = s.`planet_id`
+        JOIN
+    `journeys` AS j ON s.`id` = j.`destination_spaceport_id`
+WHERE
+    j.`purpose` = 'Educational'
+ORDER BY s.`name` DESC;
+
+-- 13. Extract all planets and their journey count
+SELECT 
+    p.`name`, COUNT(j.`id`) AS `journeys_count`
+FROM
+    `planets` AS p
+        JOIN
+    `spaceports` AS s ON p.`id` = s.`planet_id`
+        JOIN
+    `journeys` AS j ON s.`id` = j.`destination_spaceport_id`
+GROUP BY p.`name`
+ORDER BY `journeys_count` DESC , p.`name` ASC;
