@@ -191,3 +191,70 @@ FROM
     `journeys` AS j ON s.`id` = j.`destination_spaceport_id`
 GROUP BY p.`name`
 ORDER BY `journeys_count` DESC , p.`name` ASC;
+
+-- 14. Extract the shortest journey
+SELECT 
+    j.`id`,
+    p.`name` AS `planet_name`,
+    s.`name` AS `spaceport_name`,
+    j.`purpose` AS `journey_purpose`
+FROM
+    `planets` AS p
+        JOIN
+    `spaceports` AS s ON p.`id` = s.`planet_id`
+        JOIN
+    (SELECT 
+        `id`,
+            `journey_end` - `journey_start` AS `diff`,
+            `destination_spaceport_id`,
+            `purpose`
+    FROM
+        `journeys`
+    GROUP BY `id`
+    ORDER BY `diff` ASC
+    LIMIT 1) AS j ON s.`id` = j.`destination_spaceport_id`;
+
+-- 15. Extract the less popular job
+SELECT 
+    t.`job_during_journey`
+FROM
+    `travel_cards` AS t
+        JOIN
+    (SELECT 
+        `id`, `journey_end` - `journey_start` AS `diff`
+    FROM
+        `journeys`
+    GROUP BY `id`
+    ORDER BY `diff` DESC
+    LIMIT 1) AS j ON t.`journey_id` = j.`id`
+GROUP BY t.`job_during_journey`
+ORDER BY COUNT(j.`id`) ASC
+LIMIT 1;
+
+-- 16. Get colonists count
+CREATE FUNCTION udf_count_colonists_by_destination_planet (planet_name VARCHAR (30))
+RETURNS INT
+DETERMINISTIC
+	RETURN(
+		SELECT COUNT(*)
+	FROM `planets` AS p
+	JOIN `spaceports` AS s ON p.`id` = s.`planet_id`
+	JOIN `journeys` AS j ON s.`id` = j.`destination_spaceport_id`
+	JOIN `travel_cards` AS t ON j.`id` = t.`journey_id`
+	JOIN `colonists` AS c ON t.`colonist_id` = c.`id`
+	WHERE p.`name` = planet_name
+    );
+
+-- 17. Modify spaceship
+DELIMITER $$
+CREATE PROCEDURE udp_modify_spaceship_light_speed_rate(spaceship_name VARCHAR(50), light_speed_rate_increase INT(11)) 
+BEGIN START TRANSACTION;
+	IF spaceship_name NOT IN (SELECT `name` FROM `spaceships`)
+		THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Spaceship you are trying to modify does not exists.';
+		ROLLBACK;
+	ELSE
+		UPDATE `spaceships`
+        SET `light_speed_rate` = `light_speed_rate` + light_speed_rate_increase
+        WHERE `name` = spaceship_name AND `id` >= 1;
+    END IF;
+END $$
