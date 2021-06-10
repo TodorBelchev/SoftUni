@@ -95,3 +95,46 @@ DELETE FROM `colonists`
 WHERE `id` NOT IN (
 	SELECT `colonist_id` FROM `travel_cards`
 );
+
+-- 5. Extract all travel cards
+SELECT `card_number`, `job_during_journey`
+FROM `travel_cards`
+ORDER BY `card_number` ASC;
+
+-- 6. Extract all colonists
+SELECT
+    `id`,
+    CONCAT(`first_name`, ' ', `last_name`) AS `full_name`,
+    `ucn`
+FROM `colonists`
+ORDER BY `first_name` ASC, `last_name` ASC, `id` ASC;
+
+-- 7. Extract all military journeys
+SELECT `id`, `journey_start`, `journey_end`
+FROM `journeys`
+WHERE `purpose` = 'Military'
+ORDER BY `journey_start` ASC;
+
+-- 8. Extract all pilots
+SELECT 
+    c.`id`,
+    CONCAT(c.`first_name`, ' ', c.`last_name`) AS `full_name`
+FROM
+    `colonists` AS c
+        JOIN
+    `travel_cards` AS tc ON c.`id` = tc.`colonist_id`
+WHERE
+    `job_during_journey` = 'Pilot'
+ORDER BY `id` ASC;
+
+-- 9. Count all colonists
+SELECT 
+    COUNT(*)
+FROM
+    `colonists` AS c
+        JOIN
+    `travel_cards` AS tc ON c.`id` = tc.`colonist_id`
+        JOIN
+    `journeys` AS j ON tc.`journey_id` = j.`id`
+WHERE
+    `purpose` = 'Technical';
