@@ -2,16 +2,18 @@ const { Router } = require('express');
 
 const cubeServices = require('../services/cubeServices');
 const accessoryServices = require('../services/accessoryServices');
+const { cookie_name } = require('../config/config').development;
 
 const router = Router();
 
 router.get('/create', (req, res) => {
-    res.status(200).render('create');
+    res.status(200).render('create', { title: 'Create cube' });
 });
 
 router.post('/create', async (req, res) => {
     try {
-        await cubeServices.create(req.body);
+        const data = Object.assign({}, req.body, { creator: req[cookie_name]._id });
+        await cubeServices.create(data);
         res.status(201).redirect('/');
     } catch (error) {
         console.log(error);
@@ -22,7 +24,8 @@ router.post('/create', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
     try {
         const cube = await cubeServices.getOneWithAccessories(req.params.id);
-        res.status(200).render('details', cube);
+        cube.isCreator = req.user && cube.creator == req.user._id;
+        res.status(200).render('details', { cube, title: 'Cubicle' });
     } catch (error) {
         console.log(error);
         res.status(500).end()

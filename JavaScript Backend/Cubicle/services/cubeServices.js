@@ -2,8 +2,8 @@ const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 
 function create(data) {
-    const { name, description, imageURL, difficultyLevel } = data;
-    const cube = new Cube({ name, description, imageURL, difficultyLevel });
+    const { name, description, imageURL, difficultyLevel, creator } = data;
+    const cube = new Cube({ name, description, imageURL, difficultyLevel, creator });
     return cube.save();
 }
 

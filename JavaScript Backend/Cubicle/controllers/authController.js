@@ -6,11 +6,11 @@ const { cookie_name } = require('../config/config').development;
 const router = Router();
 
 router.get('/register', (req, res) => {
-    res.render('register');
+    res.render('register', { title: 'Register' });
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', { title: 'Login' });
 });
 
 router.post('/register', async (req, res) => {

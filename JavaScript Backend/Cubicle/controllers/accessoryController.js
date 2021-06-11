@@ -5,7 +5,7 @@ const accessoryServices = require('../services/accessoryServices');
 const router = Router();
 
 router.get('/create', (req, res) => {
-    res.status(200).render('createAccessory');
+    res.status(200).render('createAccessory', { title: 'Create accessory' });
 });
 
 router.post('/create', async (req, res) => {
