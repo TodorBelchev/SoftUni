@@ -14,12 +14,15 @@
             <ul>
                 <li><img class="logo" src="/images/logo.png"></li>
                 <li><a href="/">Browse</a></li>
+                {{#if isLogged}}
                 <li><a href="/cube/create">Add a Cube</a></li>
                 <li><a href="/accessory/create">Add Accessory</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                {{else}}
                 <li><a href="/auth/login">Login</a></li>
                 <li><a href="/auth/register">Register</a></li>
-                <li><a href="/about">Logout</a></li>
+                {{/if}}
+                <li><a href="/about">About</a></li>
             </ul>
         </header>
         {{#if error}}

@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const User = require('../models/User');
+const { secret } = require('../config/config').development;
 
 const login = async (username, password) => {
     let user = await User.findOne({ username: { $regex: new RegExp(username, 'i') } }).lean();
@@ -11,7 +13,7 @@ const login = async (username, password) => {
 
     if (!isMatch) throw new Error('Invalid password!');
 
-    const token = jwt.sign({ username, _id: user._id }, 'very strong secret');
+    const token = jwt.sign({ username, _id: user._id }, secret);
     return token;
 };
 
