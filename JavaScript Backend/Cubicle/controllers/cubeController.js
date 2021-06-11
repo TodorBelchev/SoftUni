@@ -66,4 +66,15 @@ router.post('/edit/:id', isCreator(), async (req, res) => {
     res.redirect(`/cube/details/${cubeId}`);
 });
 
+router.get('/delete/:id', isCreator(), async (req, res) => {
+    const cube = await cubeServices.getOneById(req.params.id);
+    cube[`select${cube.difficultyLevel}`] = true;
+    res.status(200).render('deleteCube', { title: 'Delete cube', cube });
+});
+
+router.post('/delete/:id', isCreator(), async (req, res) => {
+    await cubeServices.deleteCube(req.params.id);
+    res.redirect('/');
+});
+
 module.exports = router;

@@ -17,6 +17,12 @@ async function edit(data, id) {
     await cube.save();
 }
 
+async function deleteCube(id) {
+    await Cube.deleteOne({ _id: id }, function (err) {
+        console.log(err);
+    });
+}
+
 async function getAll(query) {
     return await Cube.find({ name: new RegExp(query.search, 'i'), difficultyLevel: { $gte: query.from || 0, $lte: query.to || 6 } }).lean();
 }
@@ -44,5 +50,6 @@ module.exports = {
     getOneWithAccessories,
     getOneById,
     attachAccessory,
-    edit
+    edit,
+    deleteCube
 }
