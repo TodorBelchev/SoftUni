@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
     username: {
-        String,
+        type: String,
         required: true
     },
     password: {
-        String,
+        type: String,
         required: true
     }
 });
