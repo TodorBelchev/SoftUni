@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const cubeServices = require('../services/cubeServices');
 const accessoryServices = require('../services/accessoryServices');
+const { isCreator } = require('../middlewares/guards');
 const { cookie_name } = require('../config/config').development;
 
 const router = Router();
@@ -28,28 +29,28 @@ router.get('/details/:id', async (req, res) => {
         res.status(200).render('details', { cube, title: 'Cubicle' });
     } catch (error) {
         console.log(error);
-        res.status(500).end()
+        res.status(500).end();
     }
 });
 
-router.get('/attach/:id', async (req, res) => {
+router.get('/attach/:id', isCreator(), async (req, res) => {
     try {
         const cube = await cubeServices.getOneById(req.params.id);
         const accessories = await accessoryServices.getNotAttached(cube.accessories);
         res.status(200).render('attachAccessory', { cube, accessories });
     } catch (error) {
         console.log(error);
-        res.status(500).end()
+        res.status(500).end();
     }
 });
 
-router.post('/attach/:id', async (req, res) => {
+router.post('/attach/:id', isCreator(), async (req, res) => {
     try {
         await cubeServices.attachAccessory(req.params.id, req.body.accessory);
         res.status(200).redirect('/cube/details/' + req.params.id);
     } catch (error) {
         console.log(error);
-        res.status(500).end()
+        res.status(500).end();
     }
 });
 

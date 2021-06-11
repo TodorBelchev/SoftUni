@@ -1,19 +1,20 @@
 const { Router } = require('express');
 
 const authService = require('../services/authService');
+const { isGuest, isAuth } = require('../middlewares/guards');
 const { cookie_name } = require('../config/config').development;
 
 const router = Router();
 
-router.get('/register', (req, res) => {
+router.get('/register', isGuest(), (req, res) => {
     res.render('register', { title: 'Register' });
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', isGuest(), (req, res) => {
     res.render('login', { title: 'Login' });
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest(), async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const rePass = req.body.repeatPassword;
@@ -37,7 +38,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', isGuest(), async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -55,7 +56,7 @@ router.post('/login', async (req, res) => {
 
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isAuth(), (req, res) => {
     res.clearCookie('user');
     res.redirect('/');
 });
