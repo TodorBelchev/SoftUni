@@ -54,4 +54,16 @@ router.post('/attach/:id', isCreator(), async (req, res) => {
     }
 });
 
+router.get('/edit/:id', isCreator(), async (req, res) => {
+    const cube = await cubeServices.getOneById(req.params.id);
+    cube[`select${cube.difficultyLevel}`] = true;
+    res.status(200).render('editCube', { title: 'Edit cube', cube });
+});
+
+router.post('/edit/:id', isCreator(), async (req, res) => {
+    const cubeId = req.params.id;
+    await cubeServices.edit(req.body, cubeId);
+    res.redirect(`/cube/details/${cubeId}`);
+});
+
 module.exports = router;

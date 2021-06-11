@@ -7,6 +7,16 @@ function create(data) {
     return cube.save();
 }
 
+async function edit(data, id) {
+    const cube = await Cube.findById(id);
+    if (!cube) {
+        throw new Error('No such cube');
+    }
+
+    Object.assign(cube, data);
+    await cube.save();
+}
+
 async function getAll(query) {
     return await Cube.find({ name: new RegExp(query.search, 'i'), difficultyLevel: { $gte: query.from || 0, $lte: query.to || 6 } }).lean();
 }
@@ -33,5 +43,6 @@ module.exports = {
     getAll,
     getOneWithAccessories,
     getOneById,
-    attachAccessory
+    attachAccessory,
+    edit
 }
