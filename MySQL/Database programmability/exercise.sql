@@ -90,3 +90,146 @@ DETERMINISTIC
 BEGIN
 	RETURN sum * POW((1 + interest_rate), years);
 END
+
+-- 11. Calculating Interest
+CREATE FUNCTION ufn_calculate_future_value(sum DECIMAL(10, 4), interest_rate DECIMAL(10, 4), years INT)
+RETURNS DECIMAL(10, 4)
+DETERMINISTIC
+BEGIN
+	RETURN sum * POW((1 + interest_rate), years);
+END;
+
+CREATE PROCEDURE usp_calculate_future_value_for_account(
+    account_id INT, interest_rate DECIMAL(19, 4))
+BEGIN
+    SELECT 
+         a.id AS 'account_id', h.first_name, h.last_name, a.balance AS 'current_balance',
+         ufn_calculate_future_value(a.balance, interest_rate, 5) AS 'balance_in_5_years'
+    FROM
+        `account_holders` AS h
+            JOIN
+        `accounts` AS a ON h.id=a.account_holder_id
+    WHERE a.id = account_id;
+END
+
+-- 12. Deposit Money
+CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL(10, 4)) 
+BEGIN
+	IF money_amount > 0 THEN START TRANSACTION;
+		UPDATE `accounts` AS a
+		SET a.`balance` = a.`balance` + money_amount
+		WHERE a.`id` = account_id;
+		
+		IF(SELECT a.`balance`
+			FROM `accounts` AS a
+			WHERE a.`id` = account_id) < 0
+			THEN ROLLBACK;
+		ELSE
+			COMMIT;
+		END IF;
+	END IF;
+END
+
+-- 13. Withdraw Money
+CREATE PROCEDURE usp_withdraw_money(account_id INT, money_amount DECIMAL(20, 4)) 
+BEGIN
+	IF money_amount > 0 THEN START TRANSACTION;
+		UPDATE `accounts` AS a
+		SET a.`balance` = a.`balance` - money_amount
+		WHERE a.`id` = account_id;
+		
+		IF(SELECT a.`balance`
+			FROM `accounts` AS a
+			WHERE a.`id` = account_id) < 0
+			THEN ROLLBACK;
+		ELSE
+			COMMIT;
+		END IF;
+	END IF;
+END
+
+-- 14. Money Transfer
+CREATE PROCEDURE usp_transfer_money(
+    from_account_id INT, to_account_id INT, money_amount DECIMAL(19, 4))
+BEGIN
+    IF money_amount > 0 
+        AND from_account_id <> to_account_id 
+        AND (SELECT a.id 
+            FROM `accounts` AS a 
+            WHERE a.id = to_account_id) IS NOT NULL
+        AND (SELECT a.id 
+            FROM `accounts` AS a 
+            WHERE a.id = from_account_id) IS NOT NULL
+        AND (SELECT a.balance 
+            FROM `accounts` AS a 
+            WHERE a.id = from_account_id) >= money_amount
+    THEN
+        START TRANSACTION;
+        
+        UPDATE `accounts` AS a 
+        SET 
+            a.balance = a.balance + money_amount
+        WHERE
+            a.id = to_account_id;
+            
+        UPDATE `accounts` AS a 
+        SET 
+            a.balance = a.balance - money_amount
+        WHERE
+            a.id = from_account_id;
+        
+        IF (SELECT a.balance 
+            FROM `accounts` AS a 
+            WHERE a.id = from_account_id) < 0
+            THEN ROLLBACK;
+        ELSE
+            COMMIT;
+        END IF;
+    END IF;
+END
+
+-- 15. Log Accounts Trigger
+CREATE TABLE `logs` (
+    `log_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `account_id` INT NOT NULL,
+    `old_sum` DECIMAL(19, 4) NOT NULL,
+    `new_sum` DECIMAL(19, 4) NOT NULL
+);
+
+CREATE TRIGGER `tr_balance_updated`
+AFTER UPDATE ON `accounts`
+FOR EACH ROW
+BEGIN
+    IF OLD.`balance` <> NEW.`balance` THEN
+        INSERT INTO `logs` 
+            (`account_id`, `old_sum`, `new_sum`)
+        VALUES (OLD.`id`, OLD.`balance`, NEW.`balance`);
+    END IF;
+END
+
+-- 16. Emails Trigger
+CREATE TABLE `notification_emails`(
+	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `recipient` INT,
+    `subject` TEXT,
+    `body` TEXT
+);
+
+CREATE TABLE `logs` (
+    `log_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `account_id` INT NOT NULL,
+    `old_sum` DECIMAL(19, 4) NOT NULL,
+    `new_sum` DECIMAL(19, 4) NOT NULL
+);
+
+CREATE TRIGGER `tr_notification_emails`
+AFTER INSERT ON `logs`
+FOR EACH ROW
+BEGIN
+    INSERT INTO `notification_emails` 
+        (`recipient`, `subject`, `body`)
+    VALUES (
+        NEW.`account_id`,
+        CONCAT('Balance change for account: ', NEW.`account_id`), 
+        CONCAT('On ', DATE_FORMAT(NOW(), '%b %d %Y at %r'), ' your balance was changed from ', ROUND(NEW.`old_sum`, 2), ' to ', ROUND(NEW.`new_sum`, 2), '.'));
+END
