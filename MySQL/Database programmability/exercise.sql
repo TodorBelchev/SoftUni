@@ -47,3 +47,46 @@ DETERMINISTIC
             ELSE 'High'
 		END
     );
+
+-- 6. Employees by Salary Level
+CREATE PROCEDURE usp_get_employees_by_salary_level(salary_level VARCHAR(7))
+BEGIN
+	SELECT `first_name`, `last_name`
+	FROM `employees`
+    WHERE `salary` < 30000 AND salary_level = 'low'
+    OR `salary` >= 30000 AND `salary` <= 50000 AND salary_level = 'average'
+    OR `salary` > 50000 AND salary_level = 'high'
+    ORDER BY `first_name` DESC, `last_name` DESC;
+END
+
+-- 7. Define Function
+CREATE FUNCTION ufn_is_word_comprised(set_of_letters varchar(50), word varchar(50))
+RETURNS BIT
+RETURN word REGEXP (concat('^[', set_of_letters, ']+$'));
+
+-- 8. Find Full Name
+CREATE PROCEDURE usp_get_holders_full_name()
+BEGIN
+	SELECT CONCAT(`first_name`, ' ', `last_name`) AS `full_name`
+	FROM `account_holders`
+	ORDER BY `full_name` ASC;
+END
+
+-- 9. People with Balance Higher Than
+CREATE PROCEDURE usp_get_holders_with_balance_higher_than(salary_input DECIMAL(19,4))
+BEGIN
+	SELECT ah.`first_name`, ah.`last_name`
+	FROM `account_holders` AS ah
+	JOIN `accounts` AS a ON ah.`id` = a.`account_holder_id`
+	GROUP BY ah.`id`
+	HAVING SUM(a.`balance`) > salary_input
+	ORDER BY ah.`id` ASC;
+END
+
+-- 10. Future Value Function
+CREATE FUNCTION ufn_calculate_future_value(sum DECIMAL(10, 4), interest_rate DECIMAL(10, 4), years INT)
+RETURNS DECIMAL(10, 4)
+DETERMINISTIC
+BEGIN
+	RETURN sum * POW((1 + interest_rate), years);
+END
