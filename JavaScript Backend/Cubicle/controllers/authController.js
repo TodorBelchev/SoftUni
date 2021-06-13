@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const authService = require('../services/authService');
 const { isGuest, isAuth } = require('../middlewares/guards');
-const { cookie_name } = require('../config/config').development;
+const { cookie_name } = require('../config').development;
 
 const router = Router();
 
@@ -19,22 +19,26 @@ router.post('/register', isGuest(), async (req, res) => {
     const password = req.body.password;
     const rePass = req.body.repeatPassword;
 
-    try {
-        if (username.length == 0 || password.length == 0 || rePass.length == 0) {
-            throw new Error('All fields are required!');
-        }
-        if (password !== rePass) {
-            throw new Error('Passwords don`t match!');
-        }
+    if (password !== rePass) {
+        res.render('register', { error: 'Passwords don`t match!', oldData: { username } });
+    }
 
-        const hashedPass = await bcrypt.hash(req.body.password, 10);
-        await authService.register(username, hashedPass);
+    try {
+        await authService.register(username, password);
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
         res.locals.isLogged = true;
         res.redirect('/');
     } catch (error) {
-        res.render('register', { error: error.message });
+        let errorMSG = '';
+
+        if (error.name === 'MongoError' && error.code === 11000) {
+            errorMSG = 'Username already exists!'
+        } else {
+            errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        }
+
+        res.render('register', { error: errorMSG, oldData: { username } });
     }
 });
 
@@ -51,7 +55,7 @@ router.post('/login', isGuest(), async (req, res) => {
         res.locals.isLogged = true;
         res.redirect('/');
     } catch (error) {
-        res.render('login', { error: error.message });
+        res.render('login', { error: error.message, oldData: username });
     }
 
 });

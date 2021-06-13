@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { cookie_name ,secret } = require('../config/config').development;
+const { cookie_name ,secret } = require('../config').development;
 
 module.exports = async (req, res, next) => {
     const token = req.cookies[cookie_name];

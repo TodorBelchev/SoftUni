@@ -2,10 +2,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
-const { secret } = require('../config/config').development;
+const { secret } = require('../config').development;
 
 const login = async (username, password) => {
-    let user = await User.findOne({ username: { $regex: new RegExp(username, 'i') } }).lean();
+    let user = await User.findOne({ username }).lean();
 
     if (user == null) throw new Error('User not found!');
 
@@ -18,9 +18,6 @@ const login = async (username, password) => {
 };
 
 const register = async (username, password) => {
-    let user = await User.findOne({ username: { $regex: new RegExp(username, 'i') } }).lean();
-    if (user) throw new Error('Username already exists!');
-
     user = new User({ username, password });
 
     return await user.save();
