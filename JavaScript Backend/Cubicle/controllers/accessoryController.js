@@ -14,7 +14,8 @@ router.post('/create', async (req, res) => {
         res.status(201).redirect('/');
     } catch (error) {
         console.log(error);
-        res.status(500).end();
+        const errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        res.render('createAccessory', { title: 'Create accessory', error: errorMSG, oldData: req.body });
     }
 });
 

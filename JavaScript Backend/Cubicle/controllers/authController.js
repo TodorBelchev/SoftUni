@@ -20,7 +20,7 @@ router.post('/register', isGuest(), async (req, res) => {
     const rePass = req.body.repeatPassword;
 
     if (password !== rePass) {
-        res.render('register', { error: 'Passwords don`t match!', oldData: { username } });
+        res.render('register', { title: 'Register', error: 'Passwords don`t match!', oldData: { username } });
     }
 
     try {
@@ -38,7 +38,7 @@ router.post('/register', isGuest(), async (req, res) => {
             errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
         }
 
-        res.render('register', { error: errorMSG, oldData: { username } });
+        res.render('register', { title: 'Register', error: errorMSG, oldData: { username } });
     }
 });
 
@@ -55,7 +55,7 @@ router.post('/login', isGuest(), async (req, res) => {
         res.locals.isLogged = true;
         res.redirect('/');
     } catch (error) {
-        res.render('login', { error: error.message, oldData: username });
+        res.render('login', { title: 'Login', error: error.message, oldData: { username } });
     }
 
 });

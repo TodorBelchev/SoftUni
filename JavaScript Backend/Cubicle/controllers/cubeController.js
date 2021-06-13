@@ -17,8 +17,9 @@ router.post('/create', async (req, res) => {
         await cubeServices.create(data);
         res.status(201).redirect('/');
     } catch (error) {
-        console.log(error);
-        res.status(500).end()
+        req.body[`select${req.body.difficultyLevel}`] = true;
+        const errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        res.render('create', { title: 'Create', error: errorMSG, oldData: req.body });
     }
 });
 
