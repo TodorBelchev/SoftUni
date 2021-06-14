@@ -21,12 +21,15 @@ router.get('/:id/details', async (req, res) => {
         title: 'Details',
         hotel,
         isCreator: req.user && hotel.owner == req.user._id,
-        isBooked: req.user && hotel.usersBooked.includes(req.user._id)
+        isBooked: req.user && hotel.usersBooked.some(x => x._id == req.user._id)
     };
 
-    console.log(hotel);
-
     res.render('details', ctx);
+});
+
+router.get('/:id/book', async (req, res) => {
+    await hotelService.book(req.params.id, req.user._id);
+    res.redirect(`/hotel/${req.params.id}/details`);
 });
 
 module.exports = router;

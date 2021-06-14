@@ -13,8 +13,17 @@ async function getOneById(id) {
     return await Hotel.findById(id).lean();
 }
 
+async function book(id, userId) {
+    const hotel = await Hotel.findById(id);
+    if (!hotel.usersBooked.includes(userId)) {
+        hotel.usersBooked.push(userId);
+    }
+    return hotel.save();
+}
+
 module.exports = {
     getAll,
     create,
-    getOneById
+    getOneById,
+    book
 }

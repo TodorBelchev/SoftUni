@@ -19,7 +19,7 @@
             {{#if isBooked}}
             <p><span class="green">You already have booked a room</span> </p>
             {{else}}
-            <a href="/hotel/:id/book" class="book">Book</a>
+            <a href="/hotel/{{hotel._id}}/book" class="book">Book</a>
             {{/if}}
             {{/if}}
         </div>
