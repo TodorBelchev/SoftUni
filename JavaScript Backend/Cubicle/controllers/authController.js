@@ -27,7 +27,6 @@ router.post('/register', isGuest(), async (req, res) => {
         await authService.register(username, password);
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
-        res.locals.isLogged = true;
         res.redirect('/');
     } catch (error) {
         let errorMSG = '';
@@ -52,7 +51,6 @@ router.post('/login', isGuest(), async (req, res) => {
 
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
-        res.locals.isLogged = true;
         res.redirect('/');
     } catch (error) {
         res.render('login', { title: 'Login', error: error.message, oldData: { username } });

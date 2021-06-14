@@ -5,7 +5,7 @@ const User = require('../models/User');
 const { secret } = require('../config').development;
 
 const login = async (username, password) => {
-    let user = await User.findOne({ username }).lean();
+    const user = await User.findOne({ username }).lean();
 
     if (user == null) throw new Error('User not found!');
 
@@ -18,7 +18,7 @@ const login = async (username, password) => {
 };
 
 const register = async (username, password) => {
-    user = new User({ username, password });
+    const user = new User({ username, password });
 
     return await user.save();
 };
