@@ -152,10 +152,10 @@ END
 CREATE PROCEDURE usp_transfer_money(
     from_account_id INT, to_account_id INT, money_amount DECIMAL(19, 4))
 BEGIN
-    IF money_amount > 0 
-        AND from_account_id <> to_account_id 
+    IF `money_amount` > 0 
+        AND from_account_id <> to_account_id
         AND (SELECT a.id 
-            FROM `accounts` AS a 
+            FROM accounts AS a 
             WHERE a.id = to_account_id) IS NOT NULL
         AND (SELECT a.id 
             FROM `accounts` AS a 
@@ -222,6 +222,17 @@ CREATE TABLE `logs` (
     `new_sum` DECIMAL(19, 4) NOT NULL
 );
 
+CREATE TRIGGER `tr_balance_updated`
+AFTER UPDATE ON `accounts`
+FOR EACH ROW
+BEGIN
+    IF OLD.`balance` <> NEW.`balance` THEN
+        INSERT INTO `logs` 
+            (`account_id`, `old_sum`, `new_sum`)
+        VALUES (OLD.`id`, OLD.`balance`, NEW.`balance`);
+    END IF;
+END;
+
 CREATE TRIGGER `tr_notification_emails`
 AFTER INSERT ON `logs`
 FOR EACH ROW
@@ -232,4 +243,4 @@ BEGIN
         NEW.`account_id`,
         CONCAT('Balance change for account: ', NEW.`account_id`), 
         CONCAT('On ', DATE_FORMAT(NOW(), '%b %d %Y at %r'), ' your balance was changed from ', ROUND(NEW.`old_sum`, 2), ' to ', ROUND(NEW.`new_sum`, 2), '.'));
-END
+END;
