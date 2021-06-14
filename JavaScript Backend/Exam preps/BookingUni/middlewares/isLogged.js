@@ -8,7 +8,6 @@ module.exports = () => (req, res, next) => {
         req.user = decoded;
         res.locals = decoded;
         res.locals.isLogged = true;
-        console.log(req.locals);
     } catch (error) {
         res.clearCookie(cookie_name);
     }
