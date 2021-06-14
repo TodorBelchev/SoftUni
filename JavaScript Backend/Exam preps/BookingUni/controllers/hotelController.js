@@ -16,6 +16,7 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/:id/details', async (req, res) => {
+    if (!req.user) return res.redirect('/auth/login');
     const hotel = await hotelService.getOneById(req.params.id);
     const ctx = {
         title: 'Details',
@@ -30,6 +31,27 @@ router.get('/:id/details', async (req, res) => {
 router.get('/:id/book', async (req, res) => {
     await hotelService.book(req.params.id, req.user._id);
     res.redirect(`/hotel/${req.params.id}/details`);
+});
+
+router.get('/:id/edit', async (req, res) => {
+    const hotel = await hotelService.getOneById(req.params.id);
+    res.render('edit', { title: 'Edit', hotel });
+});
+
+router.post('/:id/edit', async (req, res) => {
+    const newData = {
+        name: req.body.hotel.trim(),
+        city: req.body.city.trim(),
+        freeRooms: Number(req.body.freeRooms),
+        imgURL: req.body.imgURL.trim()
+    }
+    await hotelService.edit(newData, req.params.id);
+    res.redirect(`/hotel/${req.params.id}/details`);
+});
+
+router.get('/:id/delete', async (req, res) => {
+    await hotelService.deleteHotel(req.params.id);
+    res.redirect('/');
 });
 
 module.exports = router;
