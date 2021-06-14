@@ -22,6 +22,10 @@ router.post('/login', isGuest(), async (req, res) => {
             throw new Error('All fields are required!');
         }
 
+        if (password.trim().length < 5) {
+            throw new Error('Password must be at least 5 characters long!');
+        }
+
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
         res.redirect('/');
@@ -46,7 +50,7 @@ router.post('/register', isGuest(), async (req, res) => {
         let errorMSG = '';
 
         if (error.name === 'MongoError' && error.code === 11000) {
-            errorMSG = 'Username already exists!'
+            errorMSG = 'Username or email already exists!'
         } else {
             errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
         }

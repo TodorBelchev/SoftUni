@@ -11,9 +11,16 @@ router.get('/create', isAuth(), (req, res) => {
 });
 
 router.post('/create', isAuth(), async (req, res) => {
-    const data = Object.assign({}, req.body, { owner: req[cookie_name]._id });
-    await hotelService.create(data);
-    res.status(201).redirect('/');
+
+    try {
+        const data = Object.assign({}, req.body, { owner: req[cookie_name]._id });
+        await hotelService.create(data);
+        res.status(201).redirect('/');
+    } catch (error) {
+        const errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        res.render('create', { title: 'Create', error: errorMSG, oldData: req.body });
+    }
+
 });
 
 router.get('/:id/details', isAuth(), async (req, res) => {
@@ -46,8 +53,15 @@ router.post('/:id/edit', isAuth(), isCreator(), async (req, res) => {
         freeRooms: Number(req.body.freeRooms),
         imgURL: req.body.imgURL.trim()
     }
-    await hotelService.edit(newData, req.params.id);
-    res.redirect(`/hotel/${req.params.id}/details`);
+    try {
+        await hotelService.edit(newData, req.params.id);
+        res.redirect(`/hotel/${req.params.id}/details`);
+    } catch (error) {
+        const errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        newData._id = req.params.id;
+        res.render(`edit`, { title: 'Edit', error: errorMSG, hotel: newData });
+    }
+
 });
 
 router.get('/:id/delete', isAuth(), isCreator(), async (req, res) => {
