@@ -5,7 +5,8 @@ const config = {
         port: process.env.PORT || 3000,
         db_connection: 'mongodb://localhost/booking',
         cookie_name: 'user',
-        secret: 'very strong secret'
+        secret: 'very strong secret',
+        salt_rounds: 10
     },
     production: {}
 };

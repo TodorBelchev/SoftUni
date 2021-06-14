@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+const { salt_rounds } = require('../config');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -23,6 +26,16 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Hotel'
     }]
+});
+
+userSchema.pre('save', async function(next){
+    try {
+        const hashed = await bcrypt.hash(this.password, salt_rounds);
+        this.password = hashed;
+        next();
+    } catch (error) {
+        throw new Error(error.message);
+    }
 });
 
 const User = mongoose.model('User', userSchema);

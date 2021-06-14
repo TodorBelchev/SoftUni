@@ -6,6 +6,7 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     const hotels = await hotelService.getAll();
+    console.log(res.locals);
     res.render('home', { title: 'Home', hotels });
 });
 
