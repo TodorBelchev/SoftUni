@@ -1,0 +1,13 @@
+const env = process.env.NODE_ENV || 'development';
+
+const config = {
+    development: {
+        port: process.env.PORT || 3000,
+        db_connection: 'mongodb://localhost/booking',
+        cookie_name: 'user',
+        secret: 'very strong secret'
+    },
+    production: {}
+};
+
+module.exports = config[env];
