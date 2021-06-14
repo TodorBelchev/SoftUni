@@ -2,20 +2,21 @@ const { Router } = require('express');
 
 const hotelService = require('../services/hotelService');
 const { cookie_name } = require('../config');
+const { isAuth, isCreator } = require('../middlewares/guards');
 
 const router = Router();
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth(), (req, res) => {
     res.render('create', { title: 'Create' });
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth(), async (req, res) => {
     const data = Object.assign({}, req.body, { owner: req[cookie_name]._id });
     await hotelService.create(data);
     res.status(201).redirect('/');
 });
 
-router.get('/:id/details', async (req, res) => {
+router.get('/:id/details', isAuth(), async (req, res) => {
     if (!req.user) return res.redirect('/auth/login');
     const hotel = await hotelService.getOneById(req.params.id);
     const ctx = {
@@ -28,17 +29,17 @@ router.get('/:id/details', async (req, res) => {
     res.render('details', ctx);
 });
 
-router.get('/:id/book', async (req, res) => {
+router.get('/:id/book', isAuth(), async (req, res) => {
     await hotelService.book(req.params.id, req.user._id);
     res.redirect(`/hotel/${req.params.id}/details`);
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', isAuth(), isCreator(), async (req, res) => {
     const hotel = await hotelService.getOneById(req.params.id);
     res.render('edit', { title: 'Edit', hotel });
 });
 
-router.post('/:id/edit', async (req, res) => {
+router.post('/:id/edit', isAuth(), isCreator(), async (req, res) => {
     const newData = {
         name: req.body.hotel.trim(),
         city: req.body.city.trim(),
@@ -49,7 +50,7 @@ router.post('/:id/edit', async (req, res) => {
     res.redirect(`/hotel/${req.params.id}/details`);
 });
 
-router.get('/:id/delete', async (req, res) => {
+router.get('/:id/delete', isAuth(), isCreator(), async (req, res) => {
     await hotelService.deleteHotel(req.params.id);
     res.redirect('/');
 });

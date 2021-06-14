@@ -2,18 +2,19 @@ const { Router } = require('express');
 
 const authService = require('../services/authService');
 const { cookie_name } = require('../config');
+const { isGuest, isAuth } = require('../middlewares/guards');
 
 const router = Router();
 
-router.get('/login', (req, res) => {
+router.get('/login', isGuest(), (req, res) => {
     res.render('login', { title: 'Login' });
 });
 
-router.get('/register', (req, res) => {
+router.get('/register', isGuest(), (req, res) => {
     res.render('register', { title: 'Register' });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', isGuest(), async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -29,7 +30,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest(), async (req, res) => {
     const { email, username, password, rePassword } = req.body;
 
     if (password !== rePassword) {
@@ -54,7 +55,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isAuth(), (req, res) => {
     res.clearCookie(cookie_name);
     res.redirect('/');
 });
