@@ -27,7 +27,12 @@ async function register(email, username, password) {
     return user.save();
 }
 
+async function getUserDetailsById(id) {
+    return await User.findById(id).populate('bookedHotels').lean();
+}
+
 module.exports = {
     login,
-    register
+    register,
+    getUserDetailsById
 }

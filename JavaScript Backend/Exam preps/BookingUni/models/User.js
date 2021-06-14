@@ -17,9 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Password is required!'],
-        minLength: [5, 'Password must be at least 5 characters long!'],
-        match: [/^[a-zA-Z0-9]+$/, 'Password must consist only english letters and digits!']
+        required: [true, 'Password is required!']
     },
     bookedHotels: [{
         type: mongoose.Types.ObjectId,
@@ -31,7 +29,7 @@ const userSchema = new mongoose.Schema({
     }]
 });
 
-userSchema.pre('save', async function(next){
+userSchema.pre('save', async function (next) {
     try {
         const hashed = await bcrypt.hash(this.password, salt_rounds);
         this.password = hashed;

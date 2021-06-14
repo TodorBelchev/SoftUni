@@ -1,4 +1,5 @@
 const Hotel = require('../models/Hotel');
+const User = require('../models/User');
 
 async function getAll() {
     return await Hotel.find({}).sort({ freeRooms: 'desc' }).lean();
@@ -15,11 +16,13 @@ async function getOneById(id) {
 
 async function book(id, userId) {
     const hotel = await Hotel.findById(id);
+    const user = await User.findById(userId);
     if (!hotel.usersBooked.includes(userId) && hotel.freeRooms > 0) {
         hotel.usersBooked.push(userId);
         hotel.freeRooms = hotel.freeRooms - 1;
+        user.bookedHotels.push(id);
     }
-    return hotel.save();
+    return Promise.all([hotel.save(), user.save()]);
 }
 
 async function edit(data, id) {

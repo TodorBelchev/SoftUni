@@ -1,0 +1,25 @@
+<section id="viewhotelDetails">
+    <div class="profile"><img src="/img/profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <div class="flex">
+            <p>Username: </p>
+            <p>{{userData.username}}</p>
+        </div>
+        <div class="flex">
+            <p>Email: </p>
+            <p>{{userData.email}}</p>
+        </div>
+        <div class="flex">
+            <p>Reservations: </p>
+            {{#if userData.bookedHotels}}
+            <p>
+                <span>{{userData.bookedHotels}}</span>
+            </p>
+            {{else}}
+            <p>
+                <span>No booked hotels yet!</span>
+            </p>
+            {{/if}}
+        </div>
+    </div>
+</section>

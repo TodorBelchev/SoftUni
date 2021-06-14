@@ -40,8 +40,15 @@ router.post('/register', isGuest(), async (req, res) => {
     if (password !== rePassword) {
         res.render('register', { title: 'Register', error: 'Passwords don`t match!', oldData: { username, email } });
     }
-
+    
     try {
+        if (password !== rePassword) {
+            throw new Error('Passwords don`t match!');
+        }
+        if (password.trim().length < 5 || !password.match(/^[a-zA-Z0-9]+$/)) {
+            throw new Error('Password must be at least 5 characters long and consist english letters and digits!');
+        }
+
         await authService.register(email, username, password);
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
@@ -51,12 +58,20 @@ router.post('/register', isGuest(), async (req, res) => {
 
         if (error.name === 'MongoError' && error.code === 11000) {
             errorMSG = 'Username or email already exists!'
-        } else {
+        } else if (error.errors) {
             errorMSG = Object.values(error.errors).map(x => x.properties.message)[0];
+        } else {
+            errorMSG = error.message;
         }
 
         res.render('register', { title: 'Register', error: errorMSG, oldData: { username, email } });
     }
+});
+
+router.get('/profile/:id', async (req, res) => {
+    const userData = await authService.getUserDetailsById(req.params.id);
+    userData.bookedHotels = userData.bookedHotels.map(x => x.name).join(', ');
+    res.render('profile', { title: 'Profile', userData });
 });
 
 router.get('/logout', isAuth(), (req, res) => {
