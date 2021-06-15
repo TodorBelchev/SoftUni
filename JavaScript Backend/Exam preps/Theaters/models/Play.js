@@ -21,7 +21,7 @@ const playSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     creator: {
         type: mongoose.Types.ObjectId,

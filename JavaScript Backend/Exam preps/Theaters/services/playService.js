@@ -9,8 +9,13 @@ const getById = async (id) => {
     return Play.findById(id).lean();
 };
 
-const getLatestThree = async () => {
-    return Play.find({}).sort({ createdAt: 'desc' }).limit(3).lean();
+const getAllByDateDesc = async () => {
+    return Play.find({ isPublic: true }).sort({ createdAt: 'desc' }).lean();
+
+};
+
+const getMostLikedThree = async () => {
+    return Play.find({}).sort({ userLikes: 'desc' }).limit(3).lean();
 };
 
 const like = async (id, userId) => {
@@ -32,7 +37,8 @@ const deletePlay = async (id) => {
 module.exports = {
     create,
     getById,
-    getLatestThree,
+    getMostLikedThree,
+    getAllByDateDesc,
     like,
     edit,
     deletePlay
