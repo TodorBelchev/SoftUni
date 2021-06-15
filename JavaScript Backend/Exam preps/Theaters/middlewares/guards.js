@@ -1,3 +1,5 @@
+const playService = require('../services/playService');
+
 function isAuth() {
     return (req, res, next) => {
         if (req.user !== undefined) {
@@ -18,9 +20,20 @@ function isGuest() {
     };
 };
 
+const isCreator = () => async (req, res, next) => {
+    const play = await playService.getById(req.params.id);
+    const isCreator = req.user && play.creator == req.user._id;
+
+    if (!isCreator) {
+        res.redirect('/');
+        return;
+    } 
+    next();
+}
 
 
 module.exports = {
     isAuth,
-    isGuest
+    isGuest,
+    isCreator
 }

@@ -10,7 +10,7 @@ const getById = async (id) => {
 }
 
 const getAll = async () => {
-    return await Play.find({}).lean();
+    return await Play.find({}).sort({ createdAt: 'desc'}).limit(3).lean();
 }
 
 module.exports = {

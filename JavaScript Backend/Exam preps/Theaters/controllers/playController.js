@@ -24,7 +24,13 @@ router.post('/create', async (req, res) => {
 
 router.get('/:id/details', async (req, res) => {
     const play = await playService.getById(req.params.id);
-    res.render('details', { title: 'Details', play})
+    const ctx = {
+        title: 'Details',
+        play,
+        isCreator: req.user && play.creator == req.user._id,
+        isLiked: req.user && play.usersLiked.some(x => x._id == req.user._id)
+    }
+    res.render('details', ctx);
 });
 
 module.exports = router;
