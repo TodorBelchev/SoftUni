@@ -22,9 +22,11 @@
         </ul>
     </nav>
 
-    {{#if error}}
+    {{#if errors}}
     <section class="notifications error">
-        <p>{{error}}</p>
+        {{#each errors}}
+        <p>{{this}}</p>
+        {{/each}}
     </section>
     {{/if}}
 

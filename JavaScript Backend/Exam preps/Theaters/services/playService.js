@@ -15,7 +15,7 @@ const getAllByDateDesc = async () => {
 };
 
 const getMostLikedThree = async () => {
-    return Play.find({}).sort({ userLikes: 'desc' }).limit(3).lean();
+    return Play.find({}).sort({ usersLiked: 'desc' }).limit(3).lean();
 };
 
 const like = async (id, userId) => {
