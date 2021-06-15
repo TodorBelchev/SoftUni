@@ -9,10 +9,10 @@ router.get('/', async (req, res) => {
     let template = '';
     if (req.user) {
         template = 'userHome';
-        plays = await playService.getAll();
+        plays = await playService.getLatestThree();
     } else {
         template = 'guestHome';
-        plays = await playService.getAll();
+        plays = await playService.getLatestThree();
     }
     plays = plays.map(x => Object.assign(x, { likes: x.usersLiked.length}));
     res.render(template, { title: 'Home', plays });

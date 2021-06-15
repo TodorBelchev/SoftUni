@@ -14,8 +14,8 @@
             <div class="buttons">
 
             {{#if isCreator}}
-                <a class="btn delete" href="">Delete</a>
-                <a class="btn edit" href="">Edit</a>
+                <a class="btn delete" href="/play/{{play._id}}/delete">Delete</a>
+                <a class="btn edit" href="/play/{{play._id}}/edit">Edit</a>
             {{else}}
                 {{#if isLiked}}
                 <span class="liked">You have already liked this play!</span>
