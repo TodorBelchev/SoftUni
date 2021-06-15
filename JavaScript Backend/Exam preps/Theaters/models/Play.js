@@ -19,8 +19,9 @@ const playSchema = new mongoose.Schema({
         default: false
     },
     createdAt: {
-        type: String,
-        required: true
+        type: Date,
+        required: true,
+        default: Date.now()
     },
     usersLiked: [{
         type: mongoose.Types.ObjectId,
@@ -28,6 +29,6 @@ const playSchema = new mongoose.Schema({
     }]
 });
 
-const Play = playSchema.model('Play', playSchema);
+const Play = mongoose.model('Play', playSchema);
 
 module.exports = Play;

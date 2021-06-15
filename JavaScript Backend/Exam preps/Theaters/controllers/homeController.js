@@ -3,7 +3,9 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', async (req, res) => {
-    res.render('guestHome', { title: 'Home' });
+    let template = 'guestHome';
+    req.user ? template = 'userHome' : '';
+    res.render(template, { title: 'Home' });
 });
 
 module.exports = router;
