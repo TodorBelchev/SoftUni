@@ -35,26 +35,22 @@ router.post('/login', isGuest(), async (req, res) => {
 });
 
 router.post('/register', isGuest(), async (req, res) => {
-    const { email, username, password, rePassword } = req.body;
+    const { username, password, repeatPassword } = req.body;
 
-    if (password !== rePassword) {
-        res.render('register', { title: 'Register', error: 'Passwords don`t match!', oldData: { username, email } });
-    }
-    
     try {
-        if (password !== rePassword) {
+        if (password !== repeatPassword) {
             throw new Error('Passwords don`t match!');
         }
         if (password.trim().length < 5 || !password.match(/^[a-zA-Z0-9]+$/)) {
             throw new Error('Password must be at least 5 characters long and consist english letters and digits!');
         }
 
-        await authService.register(email, username, password);
+        await authService.register(username, password);
         const token = await authService.login(username, password);
         res.cookie(cookie_name, token);
         res.redirect('/');
     } catch (error) {
-        res.render('register', { title: 'Register', error: error.message, oldData: { username, email } });
+        res.render('register', { title: 'Register', error: error.message, oldData: { username } });
     }
 });
 

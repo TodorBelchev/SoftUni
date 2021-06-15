@@ -3,33 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Express Exam</title>
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
 
-    <div id="container">
+    <nav>
+        <a>Theater</a>
+        <ul>
+            <li><a href="/">Home </a></li>
+            {{#if isLogged}}
+            <li><a href="/auth/logout">Logout</a></li>
+            {{else}}
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/register">Register</a></li>
+            {{/if}}
+        </ul>
+    </nav>
 
-        <nav>
-            <div class="left-container">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Add +</a></li>
-                </ul>
-            </div>
-            <div class="right-container">
-                <a href="" class="log-out">{{name}}</a>
-                <a href="" class="log-out">Logout</a>
-            </div>
-        </nav>
+    {{#if error}}
+    <section class="notifications error">
+        <p>{{error}}</p>
+    </section>
+    {{/if}}
 
-        {{{body}}}
+    {{{body}}}
 
-        </section>
-
-        <footer>@SoftUni - JS Back-end - BookingUni 2020</footer>
-    </div>
+    <footer>
+        <div>© 2020
+            <a href="https://softuni.bg/courses/js-back-end">JS Back-End</a>
+        </div>
+    </footer>
 
 </body>
 
