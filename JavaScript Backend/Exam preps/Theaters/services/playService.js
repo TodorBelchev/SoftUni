@@ -9,9 +9,14 @@ const getById = async (id) => {
     return Play.findById(id).lean();
 };
 
-const getAllByDateDesc = async () => {
-    return Play.find({ isPublic: true }).sort({ createdAt: 'desc' }).lean();
-
+const getAllByDateDesc = async (query) => {
+    if (query && query.date) {
+        return Play.find({ isPublic: true }).sort({ createdAt: 'asc' }).lean();
+    } else if (query && query.likes) {
+        return Play.find({ isPublic: true }).sort({ usersLiked: 'desc' }).lean();
+    } else {
+        return Play.find({ isPublic: true }).sort({ createdAt: 'desc' }).lean();
+    }
 };
 
 const getMostLikedThree = async () => {

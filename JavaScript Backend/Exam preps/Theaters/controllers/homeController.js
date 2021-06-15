@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     let template = '';
     if (req.user) {
         template = 'userHome';
-        plays = await playService.getAllByDateDesc();
+        plays = await playService.getAllByDateDesc(req.query);
     } else {
         template = 'guestHome';
         plays = await playService.getMostLikedThree();
