@@ -133,3 +133,78 @@ FROM
     `products` AS p ON ps.`product_id` = p.`id`
 GROUP BY s.`name`
 ORDER BY `product_count` DESC , `avg` DESC , s.`id` ASC;
+
+-- 8. Specific employee
+SELECT 
+    CONCAT(e.`first_name`, ' ', e.`last_name`) AS `Full_name`,
+    s.`name` AS `Store_name`,
+    a.`name` AS `address`,
+    e.`salary`
+FROM
+    `employees` AS e
+        LEFT JOIN
+    `stores` AS s ON e.`store_id` = s.`id`
+        LEFT JOIN
+    `addresses` AS a ON s.`address_id` = a.`id`
+WHERE
+    e.`salary` < 4000
+        AND a.`name` LIKE '%5%'
+        AND CHAR_LENGTH(s.`name`) > 8
+HAVING `Full_name` LIKE '%n';
+
+-- 9. Find all information of stores
+SELECT 
+	REVERSE(s.`name`) AS `reversed_name`,
+	CONCAT(UPPER(t.`name`), '-', a.`name`) AS `full_address`,
+	COUNT(e.`id`) AS `employees_count`
+FROM `stores` AS s
+LEFT JOIN `employees` AS e ON s.`id` = e.`store_id`
+LEFT JOIN `addresses` AS a ON s.`address_id` = a.`id`
+LEFT JOIN `towns` AS t ON a.`town_id` = t.`id`
+GROUP BY s.`id`
+HAVING `employees_count` >= 1
+ORDER BY `full_address` ASC;
+
+-- 10. Find name of top paid employee by store name
+CREATE FUNCTION udf_top_paid_employee_by_store(store_name VARCHAR(50))
+RETURNS VARCHAR(200)
+DETERMINISTIC
+	RETURN(SELECT 
+    CONCAT(e.`first_name`,
+            ' ',
+            e.`middle_name`,
+            '. ',
+            e.`last_name`,
+            ' works in store for ',
+            TIMESTAMPDIFF(YEAR,
+                DATE(e.`hire_date`),
+                '2020-10-18'),
+            ' years') AS `full_info`
+FROM
+    `employees` AS e
+        JOIN
+    `stores` AS s ON e.`store_id` = s.`id`
+WHERE
+    s.`name` = store_name
+ORDER BY e.`salary` DESC
+LIMIT 1);
+
+-- 11. Update product price by address
+CREATE PROCEDURE udp_update_product_price (address_name VARCHAR (50))
+BEGIN
+	IF LEFT(address_name, 1) = 0
+		THEN UPDATE `products` AS p
+			JOIN `products_stores` AS ps ON p.`id` = ps.`product_id`
+			JOIN `stores` AS s ON ps.`store_id` = s.`id`
+			JOIN `addresses` AS a ON s.`address_id` = a.`id`
+			SET p.`price` = p.`price` + 100
+			WHERE a.`name` = address_name;
+	ELSE 
+		UPDATE `products` AS p
+		JOIN `products_stores` AS ps ON p.`id` = ps.`product_id`
+		JOIN `stores` AS s ON ps.`store_id` = s.`id`
+		JOIN `addresses` AS a ON s.`address_id` = a.`id`
+		SET p.`price` = p.`price` + 200
+		WHERE a.`name` = address_name;
+	END IF;
+END
