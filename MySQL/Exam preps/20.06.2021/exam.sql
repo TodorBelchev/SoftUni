@@ -66,3 +66,53 @@ CREATE TABLE `cars_drivers`(
     FOREIGN KEY (`driver_id`)
     REFERENCES `drivers`(`id`)
 );
+
+-- 02. Insert
+INSERT INTO `clients`
+(`full_name`, `phone_number`)
+SELECT
+	CONCAT(d.`first_name`, ' ', d.`last_name`), 
+    CONCAT('(088) 9999', d.`id` * 2)
+FROM `drivers` AS d
+WHERE d.`id` BETWEEN 10 AND 20;
+
+-- 03. Update
+UPDATE `cars` 
+SET 
+    `condition` = 'C'
+WHERE
+    `mileage` >= 800000
+        OR `mileage` IS NULL AND `year` <= 2010
+        AND `make` NOT IN ('Mercedes-Benz');
+
+-- 04. Delete
+DELETE c FROM `clients` AS c
+        LEFT JOIN
+    `courses` AS co ON c.`id` = co.`client_id` 
+WHERE
+    co.`id` IS NULL
+    AND CHAR_LENGTH(c.`full_name`);
+
+-- 05. Cars
+SELECT 
+    `make`, `model`, `condition`
+FROM
+    `cars`
+ORDER BY `id` ASC;
+
+-- 06. Drivers and Cars
+SELECT 
+    d.`first_name`,
+    d.`last_name`,
+    c.`make`,
+    c.`model`,
+    c.`mileage`
+FROM
+    `cars` AS c
+        JOIN
+    `cars_drivers` AS cd ON c.`id` = cd.`car_id`
+        JOIN
+    `drivers` AS d ON cd.`driver_id` = d.`id`
+WHERE
+    c.`mileage` IS NOT NULL
+ORDER BY c.`mileage` DESC , d.`first_name` ASC;
