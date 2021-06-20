@@ -116,3 +116,88 @@ FROM
 WHERE
     c.`mileage` IS NOT NULL
 ORDER BY c.`mileage` DESC , d.`first_name` ASC;
+
+-- 07. Number of courses
+SELECT 
+    c.`id` AS `car_id`,
+    c.`make`,
+    c.`mileage`,
+    COUNT(co.`id`) AS `count_of_courses`,
+    ROUND(AVG(co.`bill`), 2) AS `avg_bill`
+FROM
+    `cars` AS c
+        LEFT JOIN
+    `courses` AS co ON c.`id` = co.`car_id`
+GROUP BY c.`id`
+HAVING `count_of_courses` != 2
+ORDER BY `count_of_courses` DESC , `car_id` ASC;
+
+-- 08. Regular clients
+SELECT 
+    c.`full_name`,
+    COUNT(c.`id`) AS `count_of_cars`,
+    SUM(co.`bill`) AS `total_sum`
+FROM
+    `clients` AS c
+        JOIN
+    `courses` AS co ON c.`id` = co.`client_id`
+        JOIN
+    `cars` AS ca ON co.`car_id` = ca.`id`
+WHERE
+    c.`full_name` LIKE '_a%'
+GROUP BY c.`id`
+HAVING `count_of_cars` > 1
+ORDER BY c.`full_name`;
+
+-- 09. Full info for courses
+SELECT 
+    a.`name`,
+    IF(HOUR(c.`start`) BETWEEN 6 AND 20, 'Day', 'Night') AS `day_time`,
+    c.`bill`,
+    cl.`full_name`,
+    ca.`make`,
+    ca.`model`,
+    cat.`name`
+FROM
+    `addresses` AS a
+        JOIN
+    `courses` AS c ON a.`id` = c.`from_address_id`
+        JOIN
+    `cars` AS ca ON c.`car_id` = ca.`id`
+        JOIN
+    `categories` AS cat ON ca.`category_id` = cat.`id`
+        JOIN
+    `clients` AS cl ON c.`client_id` = cl.`id`
+ORDER BY c.`id`;
+
+-- 10. Find all courses by client’s phone number
+CREATE FUNCTION udf_courses_by_client (phone_num VARCHAR (20))
+RETURNS INT
+	RETURN(SELECT 
+		COUNT(*)
+				FROM `clients` AS c
+				JOIN `courses` AS co ON c.`id` = co.`client_id`
+				WHERE c.`phone_number` = phone_num);
+
+-- 11. Full info for address
+CREATE PROCEDURE udp_courses_by_address (address_name VARCHAR(100))
+BEGIN
+SELECT
+	a.`name`,
+    cl.`full_name`,
+    CASE 
+		WHEN c.`bill` <= 20 THEN 'Low'
+        WHEN c.`bill` <= 30 THEN 'Medium'
+        ELSE 'High'
+	END AS `level_of_bill`,
+    ca.`make`,
+    ca.`condition`,
+    cat.`name`
+FROM `addresses` AS a
+JOIN `courses` AS c ON c.`from_address_id` = a.`id`
+JOIN `clients` AS cl ON c.`client_id` = cl.`id`
+JOIN `cars` AS ca ON c.`car_id` = ca.`id`
+JOIN `categories` AS cat ON ca.`category_id` = cat.`id`
+WHERE a.`name` = address_name
+ORDER BY ca.`make` ASC, cl.`full_name` ASC;
+END
