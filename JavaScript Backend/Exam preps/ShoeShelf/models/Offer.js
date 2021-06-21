@@ -18,6 +18,10 @@ const offerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         required: true,

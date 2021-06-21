@@ -9,7 +9,12 @@ const getAll = () => {
     return Offer.find({}).lean();
 };
 
+const getById = (id) => {
+    return Offer.findById(id).lean();
+};
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    getById
 }
