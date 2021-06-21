@@ -5,7 +5,7 @@ const User = require('../models/User');
 const { secret, salt_rounds } = require('../config');
 
 const login = async (username, password) => {
-    const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`) } }).lean();
+    const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`, 'i') } }).lean();
 
     if (user == null) {
         throw new Error('User not found!');
@@ -17,7 +17,7 @@ const login = async (username, password) => {
         throw new Error('Invalid password!');
     }
 
-    const token = jwt.sign({ username, _id: user._id }, secret);
+    const token = jwt.sign({ username: user.username, _id: user._id }, secret);
     return token;
 }
 
