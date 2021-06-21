@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const { secret, salt_rounds } = require('../config');
+const { listenerCount } = require('../models/User');
 
 const login = async (username, password) => {
     const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`) } }).lean();
@@ -22,14 +23,14 @@ const login = async (username, password) => {
 }
 
 const register = async (username, password) => {
-    const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`) } }).lean();
+    let user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`) } }).lean();
 
     if (user != null) {
         throw new Error('Username already exists!');
     }
 
     const hashedPass = await bcrypt.hash(password, salt_rounds);
-    const user = new User({ username, password: hashedPass });
+    user = new User({ username, password: hashedPass });
 
     return user.save();
 }

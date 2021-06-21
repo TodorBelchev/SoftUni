@@ -56,7 +56,7 @@ router.post('/register',
     body('password')
         .trim()
         .custom((value, { req }) => {
-            if (value && value !== req.body.repeatPassword) {
+            if (value && value !== req.body.rePass) {
                 throw new Error('Passwords don`t match!');
             }
             return true;
