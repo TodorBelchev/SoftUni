@@ -10,11 +10,26 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     try {
-        await courseService.create(req.body);
+        const data = {
+            title: req.body.title,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            duration: req.body.duration,
+            creator: req.user._id
+        }
+        await courseService.create(data);
         res.redirect('/');
     } catch (error) {
         console.log(error.message);
     }
 });
+
+router.get('/:id/details', async (req, res) => {
+    const course = await courseService.getOne(req.params.id);
+    course.isCreator = course.creator == req.user._id;
+    course.isEnrolled = course.enrolledUsers.includes(req.user._id);
+    res.render('course/details', { title: 'Details', course });
+});
+
 
 module.exports = router;
