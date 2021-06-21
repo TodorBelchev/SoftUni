@@ -8,7 +8,13 @@ const getAll = () => {
     return Course.find({}).sort({ createdAt: 'asc' }).lean();
 }
 
+const create = (data) => {
+    const course = new Course(data);
+    return course.save();
+}
+
 module.exports = {
     getTopThreeEnrolled,
-    getAll
+    getAll,
+    create
 }
