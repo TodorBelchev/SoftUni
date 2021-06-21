@@ -37,5 +37,31 @@ router.get('/:id/enroll', async (req, res) => {
     res.redirect(`/course/${courseId}/details`);
 });
 
+router.get('/:id/edit', async (req, res) => {
+    const course = await courseService.getOne(req.params.id);
+    res.render('course/edit', { title: 'Edit', course });
+});
+
+router.post('/:id/edit', async (req, res) => {
+    try {
+        const courseId = req.params.id;
+        const data = {
+            title: req.body.title,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            duration: req.body.duration,
+            creator: req.user._id
+        }
+        await courseService.edit(courseId, data);
+        res.redirect(`/course/${courseId}/details`);
+    } catch (error) {
+        console.log(error.message);
+    }
+});
+
+router.get('/:id/delete', async (req, res) => {
+    await courseService.deleteCourse(req.params.id);
+    res.redirect('/');
+});
 
 module.exports = router;

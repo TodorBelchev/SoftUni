@@ -13,8 +13,8 @@ const create = (data) => {
     return course.save();
 }
 
-const getOne = (id) => {
-    return Course.findOne({ _id: id }).lean();
+const getOne = (courseId) => {
+    return Course.findOne({ _id: courseId }).lean();
 }
 
 const enroll = async (courseId, userId) => {
@@ -23,10 +23,22 @@ const enroll = async (courseId, userId) => {
     return course.save();
 };
 
+const edit = async (courseId, data) => {
+    const course = await Course.findById(courseId);
+    Object.assign(course, data);
+    return course.save();
+};
+
+const deleteCourse = async (courseId) => {
+    return Course.deleteOne({ _id: courseId });
+};
+
 module.exports = {
     getTopThreeEnrolled,
     getAll,
     create,
     getOne,
-    enroll
+    enroll,
+    edit,
+    deleteCourse
 }
