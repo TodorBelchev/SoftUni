@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required!']
-    }
+    },
+    enrolledCourses: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Course'
+    }]
 });
 
 const User = mongoose.model('User', userSchema);
