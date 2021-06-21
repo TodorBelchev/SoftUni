@@ -7,7 +7,7 @@ const create = (data) => {
 };
 
 const getAll = () => {
-    return Offer.find({}).lean();
+    return Offer.find({}).sort({ buyers: 'desc' }).lean();
 };
 
 const getById = (id) => {

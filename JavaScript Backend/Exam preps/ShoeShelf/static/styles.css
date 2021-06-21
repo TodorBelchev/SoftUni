@@ -252,7 +252,7 @@ main .container p a:hover, .form-info a {
     text-decoration: none;
 }
 
-main p.message {
+p.message {
     width: 100%;
     text-align: center;
     color: darkred;

@@ -36,11 +36,19 @@
             </ul>
         </nav>
     </header>
+
+    {{#if errors}}
+    <section >
+        {{#each errors}}
+        <p class="message">{{this}}</p>
+        {{/each}}
+    </section>
+    {{/if}}
+
     <main>
-
         {{{body}}}
-
     </main>
+
     <footer>
         <p><a href="https://softuni.bg">Software University</a> - JS Back End @ 2020</p>
     </footer>

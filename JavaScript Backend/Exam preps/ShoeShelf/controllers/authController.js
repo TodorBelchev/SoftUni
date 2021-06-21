@@ -19,10 +19,10 @@ router.post('/login',
     isGuest(),
     body('email')
         .trim()
-        .isLength({ min: 5 }).withMessage('Username must be at least 5 characters long!'),
+        .isEmail().withMessage('Invalid email!'),
     body('password')
         .trim()
-        .isLength({ min: 5 }).withMessage('Password must be at least 5 characters long!')
+        .isLength({ min: 3 }).withMessage('Password must be at least 3 characters long!')
         .isAlphanumeric().withMessage('Password must consist only english letters and digits!'),
     async (req, res) => {
         const { email, password } = req.body;
@@ -46,10 +46,10 @@ router.post('/register',
     isGuest(),
     body('email')
         .trim()
-        .isLength({ min: 5 }).withMessage('Username must be at least 5 characters long!'),
+        .isEmail().withMessage('Invalid email!'),
     body('password')
         .trim()
-        .isLength({ min: 5 }).withMessage('Password must be at least 5 characters long!')
+        .isLength({ min: 3 }).withMessage('Password must be at least 3 characters long!')
         .isAlphanumeric().withMessage('Password must consist only english letters and digits!'),
     body('password')
         .trim()
@@ -64,7 +64,6 @@ router.post('/register',
 
         try {
             const errors = validationResult(req).array().map(x => x.msg);
-            console.log(errors);
 
             if (errors.length > 0) {
                 throw new Error(errors.join('\n'));
