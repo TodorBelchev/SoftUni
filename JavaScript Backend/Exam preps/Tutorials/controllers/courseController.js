@@ -27,8 +27,14 @@ router.post('/create', async (req, res) => {
 router.get('/:id/details', async (req, res) => {
     const course = await courseService.getOne(req.params.id);
     course.isCreator = course.creator == req.user._id;
-    course.isEnrolled = course.enrolledUsers.includes(req.user._id);
+    course.isEnrolled = course.enrolledUsers.some(x => x._id == req.user._id);
     res.render('course/details', { title: 'Details', course });
+});
+
+router.get('/:id/enroll', async (req, res) => {
+    const courseId = req.params.id;
+    await courseService.enroll(courseId, req.user._id);
+    res.redirect(`/course/${courseId}/details`);
 });
 
 

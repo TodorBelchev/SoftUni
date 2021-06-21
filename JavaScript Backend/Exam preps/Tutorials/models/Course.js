@@ -23,6 +23,10 @@ const courseSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
+    creator: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
     enrolledUsers: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'
