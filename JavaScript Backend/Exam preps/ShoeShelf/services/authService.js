@@ -19,7 +19,7 @@ const login = async (email, password) => {
 
     const token = jwt.sign({ email: user.email, _id: user._id }, secret);
     return token;
-}
+};
 
 const register = async (email, password) => {
     let user = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } }).lean();
@@ -32,10 +32,15 @@ const register = async (email, password) => {
     user = new User({ email, password: hashedPass });
 
     return user.save();
-}
+};
+
+const getUserById = (id) => {
+    return User.findById(id).populate('bought').lean();
+};
 
 
 module.exports = {
     login,
-    register
+    register,
+    getUserById
 }
