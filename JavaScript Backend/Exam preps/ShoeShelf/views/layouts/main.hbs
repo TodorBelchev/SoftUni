@@ -3,34 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Login Page</title>
 </head>
 
 <body>
-
-    <div id="container">
-
+    <header>
         <nav>
-            <div class="left-container">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Add +</a></li>
-                </ul>
-            </div>
-            <div class="right-container">
-                <a href="" class="log-out">{{name}}</a>
-                <a href="" class="log-out">Logout</a>
-            </div>
+            <ul>
+                {{#if isLogged}}
+                <li>
+                    <a href="/sneaker/create">Create new offer</a>
+                </li>
+                <li>
+                    <a href="/">
+                        <img src="/sneakers.png" alt="sneakers image">
+                    </a>
+                </li>
+                <li>Welcome, {{email}} |
+                    <a href="/auth/logout">Logout</a>
+                </li>
+                {{else}}
+                <li class="site-logo">Shoe</li>
+                <li>
+                    <a href="/">
+                        <img src="/sneakers.png" alt="sneakers image">
+                    </a>
+                </li>
+                <li class="site-logo">Shelf</li>
+                {{/if}}
+            </ul>
         </nav>
+    </header>
+    <main>
 
         {{{body}}}
 
-        </section>
-
-        <footer>@SoftUni - JS Back-end - BookingUni 2020</footer>
-    </div>
-
+    </main>
+    <footer>
+        <p><a href="https://softuni.bg">Software University</a> - JS Back End @ 2020</p>
+    </footer>
 </body>
 
 </html>

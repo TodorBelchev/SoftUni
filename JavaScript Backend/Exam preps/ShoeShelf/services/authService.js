@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { secret, salt_rounds } = require('../config');
 
-const login = async (username, password) => {
-    const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`, 'i') } }).lean();
+const login = async (email, password) => {
+    const user = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } }).lean();
 
     if (user == null) {
         throw new Error('User not found!');
@@ -17,19 +17,19 @@ const login = async (username, password) => {
         throw new Error('Invalid password!');
     }
 
-    const token = jwt.sign({ username: user.username, _id: user._id }, secret);
+    const token = jwt.sign({ email: user.email, _id: user._id }, secret);
     return token;
 }
 
-const register = async (username, password) => {
-    let user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`, 'i') } }).lean();
+const register = async (email, password) => {
+    let user = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } }).lean();
 
     if (user != null) {
         throw new Error('Username already exists!');
     }
 
     const hashedPass = await bcrypt.hash(password, salt_rounds);
-    user = new User({ username, password: hashedPass });
+    user = new User({ email, password: hashedPass });
 
     return user.save();
 }
