@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required!']
-    }
+    },
+    bought: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Offer'
+    }]
 });
 
 const User = mongoose.model('User', userSchema);

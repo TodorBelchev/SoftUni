@@ -1,4 +1,5 @@
 const Offer = require('../models/Offer');
+const User = require('../models/User');
 
 const create = (data) => {
     const offer = new Offer(data);
@@ -23,10 +24,19 @@ const deleteOffer = (id) => {
     return Offer.deleteOne({ _id: id });
 };
 
+const buy = async (userId, offerId) => {
+    const user = await User.findById(userId);
+    const offer = await Offer.findById(offerId);
+    user.bought.push(offerId);
+    offer.buyers.push(userId);
+    return Promise.all([user.save(), offer.save()]);
+};
+
 module.exports = {
     create,
     getAll,
     getById,
     edit,
-    deleteOffer
+    deleteOffer,
+    buy
 }
