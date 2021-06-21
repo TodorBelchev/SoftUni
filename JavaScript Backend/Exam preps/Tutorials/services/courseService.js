@@ -13,7 +13,7 @@ const create = (data) => {
     return course.save();
 }
 
-const getOne = (courseId) => {
+const getOneById = (courseId) => {
     return Course.findOne({ _id: courseId }).lean();
 }
 
@@ -33,12 +33,17 @@ const deleteCourse = async (courseId) => {
     return Course.deleteOne({ _id: courseId });
 };
 
+const getAllByName = async (name) => {
+    return Course.find({ title: new RegExp(`${name}`, 'i') }).sort({ createdAt: 'asc' }).lean();
+};
+
 module.exports = {
     getTopThreeEnrolled,
     getAll,
     create,
-    getOne,
+    getOneById,
     enroll,
     edit,
-    deleteCourse
+    deleteCourse,
+    getAllByName
 }

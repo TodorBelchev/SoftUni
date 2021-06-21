@@ -1,4 +1,4 @@
-// const playService = require('../services/playService');
+const courseService = require('../services/courseService');
 
 const isAuth = () => {
     return (req, res, next) => {
@@ -21,8 +21,8 @@ const isGuest = () => {
 };
 
 const isCreator = () => async (req, res, next) => {
-    // const play = await playService.getById(req.params.id);
-    // const isCreator = req.user && play.creator == req.user._id;
+    const course = await courseService.getOneById(req.params.id);
+    const isCreator = req.user && course.creator == req.user._id;
 
     if (!isCreator) {
         res.redirect('/');

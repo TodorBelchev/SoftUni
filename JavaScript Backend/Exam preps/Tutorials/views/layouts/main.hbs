@@ -38,7 +38,9 @@
 
         {{#if errors}}
         <section class="notifications">
-            <p class="notification-message">Message...</p>
+            {{#each errors}}
+            <p class="notification-message">{{this}}</p>
+            {{/each}}
         </section>
         {{/if}}
 
