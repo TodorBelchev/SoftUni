@@ -1,7 +1,5 @@
-/* main  */
-
-main {
-    width: 50%;
+:host {
+    flex-basis: 60%;
 }
 
 /* theme list item */
