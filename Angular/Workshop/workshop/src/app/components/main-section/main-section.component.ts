@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemesService } from 'src/app/services/themes.service';
 
 @Component({
   selector: 'app-main-section',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-section.component.css']
 })
 export class MainSectionComponent implements OnInit {
-
-  constructor() { }
+  themes: any[];
+  constructor(
+    private themeService: ThemesService
+  ) {
+    this.themes = [];
+  }
 
   ngOnInit(): void {
+    this.themeService.getAll().subscribe(data => {
+      this.themes = data as any;
+    });
   }
 
 }

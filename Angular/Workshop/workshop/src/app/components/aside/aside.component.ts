@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-aside',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aside.component.css']
 })
 export class AsideComponent implements OnInit {
-
-  constructor() { }
+  posts: any[];
+  constructor(
+    private postService: PostsService
+  ) {
+    this.posts = [];
+  }
 
   ngOnInit(): void {
+    this.postService.getLatest().subscribe(data =>
+      this.posts = (data as [])
+    );
   }
 
 }
