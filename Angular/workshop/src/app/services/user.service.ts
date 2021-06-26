@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  token: any;
   constructor(
-    private storage: StorageService,
     private http: HttpClient
   ) {
+    this.token = null;
   }
 
-  login(username: string, password: string): boolean {
-    const user = this.http.post('http://localstorage/api/register', { username, password });
-    this.storage.setItem('user', user);
-    return true;
+  async login(data: object): Promise<string> {
+    const response: any = await this.http.post('http://localhost:3000/api/login', data).toPromise();
+    return response;
   }
 
-  register(username: string, password: string): boolean {
-    const user = this.http.post('http://localstorage/api/register', { username, password });
-    this.storage.setItem('user', user);
-    return true;
+  async register(data: object): Promise<string> {
+    const response: any = await this.http.post('http://localhost:3000/api/register', data).toPromise();
+    return response;
   }
+
 }

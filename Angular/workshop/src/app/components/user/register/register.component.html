@@ -1,63 +1,75 @@
-<form class="register" action="" method="post">
+<div class="container">
+    <form class="register" (ngSubmit)="onSubmit()" #f="ngForm">
 
-    <fieldset>
-        <h2>Registration Form</h2>
+        <fieldset>
+            <h2>Registration Form</h2>
 
-        <!-- username -->
-        <p class="field field-icon">
-            <label for="username"><span><fa-icon [icon]="faUser"></fa-icon></span></label>
-            <input class="input-error" type="text" name="username" id="username" placeholder="Johny">
-        </p>
-        <p class="error">
-            Username is required!
-        </p>
+            <!-- username -->
+            <p class="field field-icon">
+                <label for="username"><span>
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </span></label>
+                <input ngModel class="input-error" type="text" name="username" id="username" placeholder="Johny">
+            </p>
+            <p class="error">
+                Username is required!
+            </p>
 
-        <!-- email -->
-        <p class="field field-icon">
-            <label for="email"><span><fa-icon [icon]="faEnvelope"></fa-icon></span></label>
-            <input type="email" name="email" id="email" placeholder="john.doe@gmail.com">
-        </p>
-        <!-- <p class="error">
+            <!-- email -->
+            <p class="field field-icon">
+                <label for="email"><span>
+                        <fa-icon [icon]="faEnvelope"></fa-icon>
+                    </span></label>
+                <input ngModel type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+            </p>
+            <!-- <p class="error">
             Email is required!
         </p>
         <p class="error">
             Email is not valid!
         </p> -->
 
-        <!-- telephone -->
-        <p class="field field-icon">
-            <label for="tel"><span><fa-icon [icon]="faPhone"></fa-icon></span></label>
-            <select name="select-tel" id="select-tel" class="tel">
-                <option value="00359">+359</option>
-            </select>
-            <input type="text" name="tel" id="tel" placeholder="885 888 888">
-        </p>
+            <!-- telephone -->
+            <p class="field field-icon">
+                <label for="tel"><span>
+                        <fa-icon [icon]="faPhone"></fa-icon>
+                    </span></label>
+                <select name="select-tel" id="select-tel" class="tel">
+                    <option value="00359">+359</option>
+                </select>
+                <input ngModel type="text" name="tel" id="tel" placeholder="885 888 888">
+            </p>
 
-        <!-- password -->
-        <p class="field field-icon">
-            <label for="password"><span><fa-icon [icon]="faLock"></fa-icon></span></label>
-            <input type="password" name="password" id="password" placeholder="******">
-        </p>
-        <!-- <p class="error">
+            <!-- password -->
+            <p class="field field-icon">
+                <label for="password"><span>
+                        <fa-icon [icon]="faLock"></fa-icon>
+                    </span></label>
+                <input ngModel type="password" name="password" id="password" placeholder="******">
+            </p>
+            <!-- <p class="error">
             Password is required!
         </p>
         <p class="error">
             Password must be at least 4 characters!
         </p> -->
 
-        <!-- rePassword -->
-        <p class="field field-icon">
-            <label for="rePassword"><span><fa-icon [icon]="faLock"></fa-icon></span></label>
-            <input type="password" name="rePassword" id="rePassword" placeholder="******">
-        </p>
-        <!-- <p class="error">Repeat Password does not match password!</p> -->
+            <!-- rePassword -->
+            <p class="field field-icon">
+                <label for="rePassword"><span>
+                        <fa-icon [icon]="faLock"></fa-icon>
+                    </span></label>
+                <input ngModel type="password" name="rePassword" id="rePassword" placeholder="******">
+            </p>
+            <!-- <p class="error">Repeat Password does not match password!</p> -->
 
-        <button disabled>Create Account</button>
+            <button>Create Account</button>
 
-        <p class="text-center">
-            Have an account?
-            <a routerLink="/login">Log In</a>
-        </p>
+            <p class="text-center">
+                Have an account?
+                <a routerLink="/login">Log In</a>
+            </p>
 
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>

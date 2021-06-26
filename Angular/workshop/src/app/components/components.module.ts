@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MainSectionComponent } from './main-section/main-section.component';
@@ -24,6 +25,7 @@ import { RegisterComponent } from './user/register/register.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     FontAwesomeModule
   ]
 })
