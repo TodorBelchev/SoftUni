@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainSectionComponent } from './main-section/main-section.component';
 import { HomeComponent } from './home/home.component';
 import { AsideComponent } from './aside/aside.component';
+import { ThemesComponent } from './themes/themes.component';
 
 
 
@@ -10,7 +11,8 @@ import { AsideComponent } from './aside/aside.component';
   declarations: [
     MainSectionComponent,
     HomeComponent,
-    AsideComponent
+    AsideComponent,
+    ThemesComponent
   ],
   imports: [
     CommonModule
