@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   isLogged: boolean = true;
-  constructor() { }
+  constructor(
+    private storage: StorageService
+  ) { }
 
   ngOnInit(): void {
+    this.isLogged = this.storage.getItem('user') !== null;
   }
 
 }
