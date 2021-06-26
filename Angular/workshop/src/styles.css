@@ -2,7 +2,6 @@
 @import url('layout.css');
 @import url('typography.css');
 @import url('responsive.css');
-
 body {
     max-width: 1366px;
     margin: auto;
@@ -28,6 +27,14 @@ button:hover {
     cursor: pointer;
 }
 
+.container {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
 
 /* mini-navbar */
 

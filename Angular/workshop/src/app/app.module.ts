@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ComponentsModule } from './components/components.module';
 import { CoreModule } from './core/core.module';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     CoreModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
