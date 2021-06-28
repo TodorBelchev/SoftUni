@@ -17,6 +17,9 @@ import { HomeComponent } from './home/home.component';
     RouterModule,
     FormsModule,
     FontAwesomeModule
+  ],
+  exports: [
+    HomeComponent
   ]
 })
 export class ComponentsModule { }

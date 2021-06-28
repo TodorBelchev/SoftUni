@@ -2,18 +2,19 @@
     <div class="theme-name-wrapper">
         <div class="theme-name">
             <a href="#" class="normal">
-                <h2></h2>
+                <h2>{{theme.themeName}}</h2>
             </a>
             <div class="columns">
                 <div>
-                    <p>Date: <time></time></p>
+                    <p>Date: <time>{{theme.created_at}}</time></p>
                     <div class="nick-name">
-                        <p>Username: <span></span></p>
+                        <p>Username: <span>{{theme.userId.username}}</span></p>
                     </div>
                 </div>
                 <div class="subscribers">
-                    <!-- <button class="subscribe">Subscribe</button> -->
-                    <p>Subscribers: <span></span></p>
+                    <button *ngIf="!isSub" class="subscribe">Subscribe</button>
+                    <button *ngIf="isSub" class="unsubscribe">Unsubscribe</button>
+                    <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                 </div>
             </div>
         </div>

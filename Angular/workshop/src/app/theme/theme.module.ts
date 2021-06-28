@@ -4,6 +4,7 @@ import { ThemeListComponent } from './theme-list/theme-list.component';
 import { ThemeItemComponent } from './theme-item/theme-item.component';
 import { ThemesComponent } from './themes/themes.component';
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ]
 })
 export class ThemeModule { }

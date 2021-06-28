@@ -30,7 +30,7 @@ button:hover {
 .container {
     width: 90%;
     margin: auto;
-    padding-bottom: 4.5em;
+    padding-bottom: 1.5em;
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
