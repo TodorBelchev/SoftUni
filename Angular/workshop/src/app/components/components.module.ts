@@ -5,16 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,

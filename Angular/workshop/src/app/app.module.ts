@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 import { ThemeModule } from './theme/theme.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ThemeModule } from './theme/theme.module';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
-    ThemeModule
+    ThemeModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
