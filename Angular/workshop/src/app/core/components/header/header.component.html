@@ -19,7 +19,7 @@
                     <a routerLink="/profile">{{user.username}}'s profile</a>
                 </li>
                 <li>
-                    <a routerLink="/logout">Logout</a>
+                    <a (click)="logoutHandler()">Logout</a>
                 </li>
             </ul>
         </div>

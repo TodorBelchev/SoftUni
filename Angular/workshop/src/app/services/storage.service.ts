@@ -19,4 +19,8 @@ export class StorageService {
     }
     return item;
   }
+
+  removeItem(key: string): void {
+    this.localStorage.removeItem(key);
+  }
 }
