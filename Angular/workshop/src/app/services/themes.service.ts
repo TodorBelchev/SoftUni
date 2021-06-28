@@ -14,4 +14,8 @@ export class ThemesService {
   getAll() {
     return this.http.get(this.url);
   }
+
+  getById(id: string) {
+    return this.http.get(this.url + '/' + id);
+  }
 }

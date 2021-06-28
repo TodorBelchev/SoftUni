@@ -15,12 +15,18 @@ export class ThemeItemComponent implements OnInit, AfterContentChecked {
     this.isSub = false
   }
 
+  get isLogged(): boolean {
+    return this.storage.getItem('user') !== null;
+  }
+
   ngOnInit(): void {
-    
+
   }
 
   ngAfterContentChecked(): void {
-    this.isSub = this.theme.subscribers.includes(this.storage.getItem('user')._id);
+    if (this.isLogged) {
+      this.isSub = this.theme.subscribers.includes(this.storage.getItem('user')._id);
+    }
   }
 
 }

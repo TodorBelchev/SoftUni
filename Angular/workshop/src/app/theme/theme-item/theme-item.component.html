@@ -1,7 +1,7 @@
 <div class="theme-container">
     <div class="theme-name-wrapper">
         <div class="theme-name">
-            <a href="#" class="normal">
+            <a routerLink="/{{theme._id}}/details" class="normal">
                 <h2>{{theme.themeName}}</h2>
             </a>
             <div class="columns">
@@ -11,7 +11,7 @@
                         <p>Username: <span>{{theme.userId.username}}</span></p>
                     </div>
                 </div>
-                <div class="subscribers">
+                <div *ngIf="isLogged" class="subscribers">
                     <button *ngIf="!isSub" class="subscribe">Subscribe</button>
                     <button *ngIf="isSub" class="unsubscribe">Unsubscribe</button>
                     <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>

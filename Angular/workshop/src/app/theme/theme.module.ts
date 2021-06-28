@@ -5,6 +5,9 @@ import { ThemeItemComponent } from './theme-item/theme-item.component';
 import { ThemesComponent } from './themes/themes.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
+import { RouterModule } from '@angular/router';
+import { DetailsComponent } from './details/details.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -12,12 +15,15 @@ import { ComponentsModule } from '../components/components.module';
   declarations: [
     ThemeItemComponent,
     ThemeListComponent,
-    ThemesComponent
+    ThemesComponent,
+    DetailsComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    RouterModule
   ]
 })
 export class ThemeModule { }
