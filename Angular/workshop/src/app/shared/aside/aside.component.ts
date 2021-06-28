@@ -7,6 +7,7 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./aside.component.css']
 })
 export class AsideComponent implements OnInit {
+
   posts: any[];
   constructor(
     private postService: PostsService

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainSectionComponent } from './main-section.component';
+import { ThemeListComponent } from './theme-list.component';
 
-describe('MainSectionComponent', () => {
-  let component: MainSectionComponent;
-  let fixture: ComponentFixture<MainSectionComponent>;
+describe('ThemeListComponent', () => {
+  let component: ThemeListComponent;
+  let fixture: ComponentFixture<ThemeListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainSectionComponent ]
+      declarations: [ ThemeListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainSectionComponent);
+    fixture = TestBed.createComponent(ThemeListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ThemesService } from 'src/app/services/themes.service';
 
 @Component({
-  selector: 'app-main-section',
-  templateUrl: './main-section.component.html',
-  styleUrls: ['./main-section.component.css']
+  selector: 'app-theme-list',
+  templateUrl: './theme-list.component.html',
+  styleUrls: ['./theme-list.component.css']
 })
-export class MainSectionComponent implements OnInit {
+export class ThemeListComponent implements OnInit {
+
   themes: any[];
   constructor(
     private themeService: ThemesService

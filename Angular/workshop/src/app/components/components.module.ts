@@ -4,10 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { MainSectionComponent } from './main-section/main-section.component';
 import { HomeComponent } from './home/home.component';
-import { AsideComponent } from './aside/aside.component';
-import { ThemesComponent } from './themes/themes.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 
@@ -15,10 +12,7 @@ import { RegisterComponent } from './user/register/register.component';
 
 @NgModule({
   declarations: [
-    MainSectionComponent,
     HomeComponent,
-    AsideComponent,
-    ThemesComponent,
     LoginComponent,
     RegisterComponent
   ],

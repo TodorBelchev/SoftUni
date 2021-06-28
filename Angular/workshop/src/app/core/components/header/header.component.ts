@@ -27,7 +27,6 @@ export class HeaderComponent implements AfterContentChecked {
       this.router.navigateByUrl('/');
     } catch (error) {
       console.log(error.message);
-      
     }
   }
 

@@ -9,6 +9,7 @@ import { ComponentsModule } from './components/components.module';
 import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
+import { ThemeModule } from './theme/theme.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppComponent } from './app.component';
     ComponentsModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ThemeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
