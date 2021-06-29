@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ export class UserService {
     this.token = null;
   }
 
-  login(data: object) {
+  login(data: object): Observable<any> {
     return this.http.post('http://localhost:3000/api/login', data, { withCredentials: true });
   }
 
   async register(data: object): Promise<string> {
-    const response: any = await this.http.post('http://localhost:3000/api/register', data).toPromise();
+    const response: any = await this.http.post('http://localhost:3000/api/register', data, { withCredentials: true }).toPromise();
     return response;
   }
 

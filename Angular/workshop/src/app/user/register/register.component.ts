@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router'; 
 import { faEnvelope, faUser, faPhone, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit, AfterViewInit {
+export class RegisterComponent implements OnInit {
   @ViewChild('f') form!: NgForm;
   faEnvelope = faEnvelope;
   faUser = faUser;
@@ -25,14 +25,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-
-  }
-
   async onSubmit() {
     try {
-      let token = await this.userService.register(this.form.value);
-      this.storage.setItem('user', token);
+      let user = await this.userService.register(this.form.value);
+      this.storage.setItem('user', user);
       this.router.navigateByUrl('/');
     } catch (error) {
       console.log(error.message);

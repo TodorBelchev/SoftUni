@@ -4,13 +4,15 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { InvalidComponent } from './components/invalid/invalid.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    InvalidComponent
   ],
   imports: [
     RouterModule,

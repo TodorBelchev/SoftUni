@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
   @ViewChild('f') form!: NgForm;
   faLock = faLock;
   constructor(
@@ -21,10 +21,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-
   }
 
   onSubmit() {
