@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { InvalidComponent } from './core/components/invalid/invalid.component';
+import { AuthService } from './services/auth.service';
 import { CreateComponent } from './theme/create/create.component';
 import { DetailsComponent } from './theme/details/details.component';
 import { ThemesComponent } from './theme/themes/themes.component';
@@ -15,8 +16,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: ':id/details', component: DetailsComponent },
-  { path: 'theme/create', component: CreateComponent },
-  { path: ':id/profile', component: ProfileComponent },
+  { path: 'theme/create', component: CreateComponent, canActivate: [AuthService] },
+  { path: ':id/profile', component: ProfileComponent, canActivate: [AuthService] },
   { path: '**', component: InvalidComponent }
 ];
 

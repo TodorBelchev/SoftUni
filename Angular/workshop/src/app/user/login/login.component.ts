@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.userService.login(this.form.value).subscribe({
       next: (res) => {
+        this.userService.setLogged();
         this.storage.setItem('user', res);
         this.router.navigateByUrl('/');
       },

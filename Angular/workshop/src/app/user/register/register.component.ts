@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   async onSubmit() {
     try {
       let user = await this.userService.register(this.form.value);
+      this.userService.setLogged();
       this.storage.setItem('user', user);
       this.router.navigateByUrl('/');
     } catch (error) {
