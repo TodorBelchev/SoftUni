@@ -8,6 +8,8 @@ import { ComponentsModule } from '../components/components.module';
 import { RouterModule } from '@angular/router';
 import { DetailsComponent } from './details/details.component';
 import { CommentComponent } from './comment/comment.component';
+import { CreateComponent } from './create/create.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,13 +19,15 @@ import { CommentComponent } from './comment/comment.component';
     ThemeListComponent,
     ThemesComponent,
     DetailsComponent,
-    CommentComponent
+    CommentComponent,
+    CreateComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ComponentsModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class ThemeModule { }

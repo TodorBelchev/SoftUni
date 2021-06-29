@@ -18,4 +18,8 @@ export class ThemesService {
   getById(id: string) {
     return this.http.get(this.url + '/' + id);
   }
+
+  createTheme(theme: object) {
+    return this.http.post(this.url, theme, { withCredentials: true });
+  }
 }

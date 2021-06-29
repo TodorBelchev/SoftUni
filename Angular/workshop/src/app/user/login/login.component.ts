@@ -27,13 +27,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   }
 
-  async onSubmit() {
-    try {
-      let token = await this.userService.login(this.form.value);
-      this.storage.setItem('user', token);
-      this.router.navigateByUrl('/');
-    } catch (error) {
-      console.log(error.message);
-    }
+  onSubmit() {
+    this.userService.login(this.form.value).subscribe({
+      next: (res) => {
+        this.storage.setItem('user', res);
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        console.log(err.message);
+      }
+    });
   }
 }

@@ -12,9 +12,8 @@ export class UserService {
     this.token = null;
   }
 
-  async login(data: object): Promise<string> {
-    const response: any = await this.http.post('http://localhost:3000/api/login', data).toPromise();
-    return response;
+  login(data: object) {
+    return this.http.post('http://localhost:3000/api/login', data, { withCredentials: true });
   }
 
   async register(data: object): Promise<string> {
