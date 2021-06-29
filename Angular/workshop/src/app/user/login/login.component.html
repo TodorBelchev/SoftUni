@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="login" (ngSubmit)="onSubmit()" #f="ngForm">
+    <form class="login" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
 
         <fieldset>
             <h2>Login Form</h2>
@@ -8,27 +8,29 @@
                 <label for="email"><span>
                         <fa-icon [icon]="faLock"></fa-icon>
                     </span></label>
-                <input ngModel class="input-error" type="email" name="email" id="email" placeholder="john.doe@domain.com">
+                <input formControlName="email" class="input-error" type="email" name="email" id="email"
+                    placeholder="john.doe@domain.com">
             </p>
-            <p class="error">
+            <p class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.required">
                 Email is required!
             </p>
-            <!-- <p class="error">
-            Email is not valid!
-        </p> -->
+            <p class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.pattern">
+                Email is not valid!
+            </p>
 
             <p class="field field-icon">
                 <label for="password"><span>
                         <fa-icon [icon]="faLock"></fa-icon>
                     </span></label>
-                <input ngModel type="password" name="password" id="password" placeholder="******">
+                <input formControlName="password" type="password" name="password" id="password"
+                    placeholder="******">
             </p>
-            <!-- <p class="error">
-            Password is required!
-        </p>
-        <p class="error">
-            Password must be at least 4 characters!
-        </p> -->
+            <p class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.required">
+                Password is required!
+            </p>
+            <p class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.minlength">
+                Password must be at least 5 characters!
+            </p>
 
             <button>Login</button>
 

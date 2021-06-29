@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
@@ -12,19 +12,37 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('f') form!: NgForm;
   faLock = faLock;
+  loginForm: FormGroup;
   constructor(
     private userService: UserService,
     private storage: StorageService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[A-Za-z0-9\.]{6,}@gmail\.(bg|com)$')
+        ]
+      ],
+      password: [
+        '',
+        [
+          Validators.minLength(5),
+          Validators.required
+        ]
+      ]
+    })
+  }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this.userService.login(this.form.value).subscribe({
+    this.userService.login(this.loginForm.value).subscribe({
       next: (res) => {
         this.userService.setLogged();
         this.storage.setItem('user', res);
