@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ export class UserService {
   token: any;
   isLogged: boolean;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private storage: StorageService
   ) {
     this.token = null;
-    this.isLogged = false;
+    this.isLogged = storage.getItem('user') !== null;
   }
 
   login(data: object): Observable<any> {
