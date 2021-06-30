@@ -8,7 +8,7 @@ import { PostsService } from 'src/app/services/posts.service';
 })
 export class AsideComponent implements OnInit {
 
-  posts: any[];
+  posts: any;
   constructor(
     private postService: PostsService
   ) {
@@ -17,7 +17,7 @@ export class AsideComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getLatest().subscribe(data =>
-      this.posts = (data as [])
+      this.posts = (data)
     );
   }
 

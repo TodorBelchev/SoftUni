@@ -34,6 +34,7 @@ export class UserService {
 
   async logout(token: string): Promise<string> {
     const response: any = await this.http.post('http://localhost:3000/api/logout', token).toPromise();
+    this.isLogged = false;
     return response;
   }
 

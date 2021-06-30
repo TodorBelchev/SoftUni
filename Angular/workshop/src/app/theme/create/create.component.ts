@@ -13,12 +13,15 @@ export class CreateComponent implements OnInit {
   constructor(
     private themeService: ThemesService,
     private router: Router
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
+    console.log(this.form.value);
+    
     this.themeService.createTheme(this.form.value).subscribe({
       next: () => {
         this.router.navigateByUrl('/themes');
@@ -27,5 +30,9 @@ export class CreateComponent implements OnInit {
         console.log(err.message);
       }
     });
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/');
   }
 }

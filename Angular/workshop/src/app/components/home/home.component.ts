@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +7,15 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isLogged: boolean = true;
+  isLogged: boolean;
   constructor(
-    private storage: StorageService
-  ) { }
+    private userService: UserService
+  ) { 
+    this.isLogged = false;
+  }
 
   ngOnInit(): void {
-    this.isLogged = this.storage.getItem('user') !== null;
+    this.isLogged = this.userService.getIsLogged();
   }
 
 }
