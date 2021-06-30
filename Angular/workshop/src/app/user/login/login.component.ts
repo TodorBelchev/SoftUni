@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   faLock = faLock;
   loginForm: FormGroup;
   constructor(
@@ -31,14 +31,10 @@ export class LoginComponent implements OnInit {
       password: [
         '',
         [
-          Validators.minLength(5),
-          Validators.required
+          Validators.minLength(5)
         ]
       ]
     })
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit() {

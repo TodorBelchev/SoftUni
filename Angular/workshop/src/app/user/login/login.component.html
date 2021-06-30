@@ -32,7 +32,7 @@
                 Password must be at least 5 characters!
             </p>
 
-            <button>Login</button>
+            <button [disabled]="loginForm.invalid">Login</button>
 
             <p class="text-center">
                 Have an account?
