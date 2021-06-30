@@ -38,4 +38,8 @@ export class UserService {
     return response;
   }
 
+  updateProfile(data: object) {
+    return this.http.put('http://localhost:3000/api/users/profile/', data, { withCredentials: true });
+  }
+
 }

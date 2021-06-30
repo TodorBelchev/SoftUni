@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/shared/interfaces/user';
 
@@ -9,6 +10,7 @@ import { IUser } from 'src/app/shared/interfaces/user';
 })
 export class ProfileComponent implements OnInit {
   user: IUser = {
+    _id: '',
     themes: [],
     posts: [],
     tel: '',
@@ -17,7 +19,8 @@ export class ProfileComponent implements OnInit {
     password: ''
   };
   constructor(
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router
   ) { 
   }
 
@@ -26,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onEditClick(): void {
-    
+    this.router.navigateByUrl(`${this.user._id}/profile/edit`);
   }
 
 }

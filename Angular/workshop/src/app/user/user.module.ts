@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

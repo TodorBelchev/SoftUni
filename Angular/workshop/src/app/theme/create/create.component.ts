@@ -20,8 +20,6 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
-    
     this.themeService.createTheme(this.form.value).subscribe({
       next: () => {
         this.router.navigateByUrl('/themes');

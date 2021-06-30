@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="profile">
+        <img src="../../../assets/profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
+            <div class="flex">
+                <p>Username: </p>
+                <input formControlName="username" type="text" name="username" id="username" value="{{user.username}}">
+            </div>
+            <p class="error" *ngIf="editForm.get('username')?.touched && editForm.get('username')?.errors?.required">
+                Email is required!
+            </p>
+            <p class="error" *ngIf="editForm.get('username')?.touched && editForm.get('username')?.errors?.minlength">
+                Username must be at least 5 characters long!
+            </p>
+            <div class="flex">
+                <p>Email: </p>
+                <input formControlName="email" type="email" name="email" id="email" value="{{user.email}}">
+            </div>
+            <p class="error" *ngIf="editForm.get('email')?.touched && editForm.get('email')?.errors?.required">
+                Email is required!
+            </p>
+            <p class="error" *ngIf="editForm.get('email')?.touched && editForm.get('email')?.errors?.pattern">
+                Invalid email!
+            </p>
+            <div class="flex">
+                <p>Phone: </p>
+                <div>
+                    <select name="select-tel" id="select-tel" class="tel">
+                        <option value="00359">+359</option>
+                    </select>
+                    <input formControlName="tel" type="text" name="tel" id="tel" value="{{user.tel}}">
+                </div>
+            </div>
+            <button class="red-button">Cancel</button>
+            <button class="green-button">Save</button>
+        </form>
+    </div>
+</div>
