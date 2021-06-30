@@ -12,8 +12,8 @@
                     </div>
                 </div>
                 <div *ngIf="isLogged" class="subscribers">
-                    <button *ngIf="!isSub" class="subscribe">Subscribe</button>
-                    <button *ngIf="isSub" class="unsubscribe">Unsubscribe</button>
+                    <button *ngIf="!isSub" class="subscribe" (click)="onSubscribe()">Subscribe</button>
+                    <button *ngIf="isSub" class="unsubscribe" (click)="onUnsubscribe()">Unsubscribe</button>
                     <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                 </div>
             </div>

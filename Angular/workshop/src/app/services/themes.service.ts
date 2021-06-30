@@ -22,4 +22,12 @@ export class ThemesService {
   createTheme(theme: object) {
     return this.http.post(this.url, theme, { withCredentials: true });
   }
+
+  subscribeToTheme(id: string, data: object) {
+    return this.http.put(this.url + '/' + id, data, { withCredentials: true });
+  }
+
+  unsubscribeToTheme(id: string, data: object) {
+    return this.http.put(this.url + '/' + id, data, { withCredentials: true });
+  }
 }
