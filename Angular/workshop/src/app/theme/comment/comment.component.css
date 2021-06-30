@@ -70,10 +70,10 @@
     padding-left: 0.5em;
 }
 
-.footer .fas.fa-thumbs-up {
+.green {
     color: green;
 }
 
-.footer .fas.fa-thumbs-down {
+.red {
     color: red;
 }

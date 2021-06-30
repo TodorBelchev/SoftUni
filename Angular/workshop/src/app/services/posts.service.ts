@@ -14,4 +14,12 @@ export class PostsService {
   getLatest() {
     return this.http.get(this.url);
   }
+
+  like(postId: string, likes: []) {
+    return this.http.put('http://localhost:3000/api/likes/' + postId, likes, { withCredentials: true });
+  }
+
+  removeLike(postId: string) {
+    return this.http.delete('http://localhost:3000/api/likes/' + postId, { withCredentials: true });
+  }
 }

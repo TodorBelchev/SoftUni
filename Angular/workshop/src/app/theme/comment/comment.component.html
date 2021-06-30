@@ -11,8 +11,8 @@
         </div>
     </div>
     <div class="footer">
-    <!-- <i class="fas fa-thumbs-up"></i>
-    <i class="fas fa-thumbs-down"></i> -->
+        <fa-icon class="green" (click)="onLikeClick()" [icon]="faThumbsUp" *ngIf="!isLiked"></fa-icon>
+        <fa-icon class="red" (click)="onDislikeClick()" [icon]="faThumbsDown" *ngIf="isLiked"></fa-icon>
         <p><span>{{comment.likes.length}}</span> likes</p>
     </div>
 </div>

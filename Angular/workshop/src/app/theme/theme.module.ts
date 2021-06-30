@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateComponent } from './create/create.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     ComponentsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ]
 })
 export class ThemeModule { }
