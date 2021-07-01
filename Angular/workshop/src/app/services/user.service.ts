@@ -14,7 +14,7 @@ export class UserService {
     private storage: StorageService
   ) {
     this.token = null;
-    this.isLogged = storage.getItem('user') !== null;
+    this.isLogged = this.storage.getItem('user') !== null;
   }
 
   login(data: object): Observable<any> {
