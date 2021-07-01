@@ -21,10 +21,10 @@
         <app-comment *ngFor="let comment of theme.posts" [comment]="comment"></app-comment>
 
         <div *ngIf="isLogged" class="answer-comment">
-            <p><span>currentUser</span> comment:</p>
+            <p><span>{{username}}</span> comment:</p>
             <div class="answer">
-                <form>
-                    <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
+                <form #f="ngForm" (ngSubmit)="onSubmit()">
+                    <textarea ngModel name="postText" id="comment" cols="30" rows="10"></textarea>
                     <button>Post</button>
                 </form>
             </div>

@@ -22,4 +22,8 @@ export class PostsService {
   removeLike(postId: string) {
     return this.http.delete('http://localhost:3000/api/likes/' + postId, { withCredentials: true });
   }
+
+  createPost(id: string, data: object) {
+    return this.http.post('http://localhost:3000/api/themes/' + id, data, { withCredentials: true });
+  }
 }

@@ -46,7 +46,7 @@ export class ThemeItemComponent implements OnInit, AfterContentChecked {
 
   onSubscribe(): void {
     this.theme.subscribers.push(this.user._id);
-    this.themeService.subscribeToTheme(this.theme._id, this.theme).subscribe({
+    this.themeService.subscribeToTheme(this.theme._id).subscribe({
       next: () => {
         this.isSub = true;
       },
@@ -59,7 +59,7 @@ export class ThemeItemComponent implements OnInit, AfterContentChecked {
   onUnsubscribe(): void {
     const index = this.theme.subscribers.indexOf(this.user._id);
     this.theme.subscribers.splice(index, 1);
-    this.themeService.unsubscribeToTheme(this.theme._id, this.theme).subscribe({
+    this.themeService.unsubscribeToTheme(this.theme._id).subscribe({
       next: () => {
         this.isSub = false;
       },
