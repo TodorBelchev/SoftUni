@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AsideComponent } from './aside/aside.component';
 import { ShortenTextPipe } from './shorten-text.pipe';
 import { TimeDiffPipe } from './time-diff.pipe';
+import { FormatDatePipe } from './format-date.pipe';
 
 
 
@@ -10,7 +11,8 @@ import { TimeDiffPipe } from './time-diff.pipe';
   declarations: [
     AsideComponent,
     ShortenTextPipe,
-    TimeDiffPipe
+    TimeDiffPipe,
+    FormatDatePipe
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { TimeDiffPipe } from './time-diff.pipe';
   exports: [
     AsideComponent,
     ShortenTextPipe,
-    TimeDiffPipe
+    TimeDiffPipe,
+    FormatDatePipe
   ]
 })
 export class SharedModule { }
