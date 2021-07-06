@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 import { ThemesService } from 'src/app/services/themes.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,6 +15,7 @@ export class ThemeItemComponent implements OnInit, AfterContentChecked {
   isSub: boolean;
   user: IUser;
   isLogged: boolean;
+  private userSub: Subscription = new Subscription();
   constructor(
     private storage: StorageService,
     private themeService: ThemesService,
@@ -33,6 +35,9 @@ export class ThemeItemComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    // this.userSub = this.userService.user.subscribe((user: IUser) => {
+    //   this.user = user;
+    // })
     this.user = this.storage.getItem('user');
     this.isLogged = this.userService.getIsLogged();
     if (this.isLogged) {

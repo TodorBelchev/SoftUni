@@ -47,15 +47,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.storage.getItem('user');
+    this.user = this.userService.getUserData() as IUser;
     this.editForm.get('username')?.setValue(this.user.username);
     this.editForm.get('email')?.setValue(this.user.email);
     this.editForm.get('tel')?.setValue(this.user.tel);
   }
 
   onSubmit(): void {
-    console.log(this.editForm.value);
-    
     this.userService.updateProfile(this.editForm.value).subscribe({
       next: (user) => {
         this.storage.setItem('user', user);

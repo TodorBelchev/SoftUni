@@ -1,6 +1,6 @@
-import { AfterContentChecked, Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage.service';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,30 +8,35 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterContentChecked {
+export class HeaderComponent implements OnInit, OnDestroy {
   user: any = {};
+  isLogged: boolean = false;
+  userSub: Subscription = new Subscription();
   constructor(
-    private storage: StorageService,
     private userService: UserService,
     private router: Router
   ) { }
 
-  get isLogged(): boolean {
-    return this.storage.getItem('user') != null;
+  logoutHandler(): void {
+    this.userService.logout(this.user.username).subscribe(
+      res => {
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log(error);
+      })
   }
 
-  async logoutHandler(): Promise<any> {
-    try {
-      await this.userService.logout(this.user.username);
-      this.storage.removeItem('user');
-      this.router.navigateByUrl('/');
-    } catch (error) {
-      console.log(error.message);
-    }
+  ngOnInit(): void {
+    this.isLogged = this.userService.getIsLogged();
+    this.userSub = this.userService.user.subscribe(user => {
+      this.isLogged = !!user;
+      this.user = user;
+    });
   }
 
-  ngAfterContentChecked(): void {
-    this.user = this.storage.getItem('user');
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 
 }

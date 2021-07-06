@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/shared/interfaces/user';
 
 @Component({
@@ -19,13 +19,13 @@ export class ProfileComponent implements OnInit {
     password: ''
   };
   constructor(
-    private storage: StorageService,
-    private router: Router
-  ) { 
+    private router: Router,
+    private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {
-    this.user = this.storage.getItem('user');
+    this.user = this.userService.getUserData() as IUser;
   }
 
   onEditClick(): void {

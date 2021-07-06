@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEnvelope, faUser, faPhone, faLock } from '@fortawesome/free-solid-svg-icons';
-import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { rePassMatchValidatorFactory } from 'src/app/shared/validators';
 
@@ -20,7 +19,6 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private storage: StorageService,
     private fb: FormBuilder
   ) {
     const passwordControl = fb.control('', [Validators.required, Validators.minLength(5)]);
@@ -53,14 +51,13 @@ export class RegisterComponent {
   }
 
   async onSubmit() {
-    try {
-      let user = await this.userService.register(this.registerForm.value);
-      this.userService.setLogged();
-      this.storage.setItem('user', user);
-      this.router.navigateByUrl('/');
-    } catch (error) {
-      console.log(error.message);
-    }
+    this.userService.register(this.registerForm.value)
+      .subscribe(data => {
+        this.router.navigateByUrl('/');
+      },
+        error => {
+          console.log(error);
+        })
   }
 
 }

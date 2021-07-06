@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
-import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class LoginComponent {
   loginForm: FormGroup;
   constructor(
     private userService: UserService,
-    private storage: StorageService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -38,15 +36,14 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.userService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        this.userService.setLogged();
-        this.storage.setItem('user', res);
+    this.userService.login(this.loginForm.value).subscribe(
+      data => {
         this.router.navigateByUrl('/');
       },
-      error: (err) => {
-        console.log(err.message);
+      error => {
+        console.log(error);
       }
-    });
+    );
   }
+
 }
