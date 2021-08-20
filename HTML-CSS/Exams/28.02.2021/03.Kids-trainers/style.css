@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+body {
+    margin: 0 auto;
+    /* font-family: Helvetica, sans-serif; */
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    background: #41bead;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    width: 100px;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+}
+
+.nav-list-item {
+    margin-left: 20px;
+}
+
+.nav-list-item a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero {
+    margin: 60px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-card {
+    flex-basis: 45%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-right: 50px;
+}
+
+.card-content {
+    flex-basis: 70%;
+}
+
+.card-content-title,
+.hero-list-title {
+    margin: 0 auto 10px auto;
+    color: #41bead;
+}
+
+.card-content-job {
+    margin-top: 5px;
+    color: gray;
+    font-size: 12px;
+}
+
+.teachers {
+    background: #ffb402;
+    height: 230px;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+    color: white;
+}
+
+.teachers-title,
+.teachers-content {
+    max-width: 700px;
+}
+
+.teachers-title {
+    margin: 40px auto 20px auto;
+    font-size: 1.5rem;
+}
+
+.teachers-content {
+    margin: 0 auto 30px auto;
+    font-family: Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+.hero-card-img {
+    width: 130px;
+    height: 130px;
+    border: 6px solid #41bead;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.hero-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 70%;
+    margin-top: 200px;
+}
+
+.hero-list-item {
+    text-align: center;
+}
+
+.hero-list-title {
+    margin-top: 20px;
+}
+
+.join {
+    height: 350px;
+    background: #66b9f8;
+    overflow: auto;
+    text-align: center;
+    color: white;
+    border-top: 10px solid #92cdfb;
+}
+
+.join-title {
+    margin-top: 50px;
+    font-size: 1.5rem;
+}
+
+.join-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.join-form {
+    margin-top: 40px;
+}
+
+.join-form-input {
+    padding: 15px;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    background: #66b9f8;
+    margin-right: 30px;
+}
+
+.join-form-input::placeholder {
+    color: white;
+}
+
+.join-form-input.submit {
+    background: #ffb402;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    box-shadow: 0px 4px 7px 0px rgb(0 0 0 / 50%);
+}
+
+footer {
+    border-top: 10px solid #919191;
+    background: #565656;
+    overflow: auto;
+    color: white;
+    height: 180px;
+}
+
+.footer-title {
+    text-transform: uppercase;
+    margin: 30px 0 20px 0;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list-item {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    margin: 5px 0;
+}
+
+.links-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.footer-list.icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.footer-list.icons i {
+    margin-right: 20px;
+    font-size: 2rem;
+}
