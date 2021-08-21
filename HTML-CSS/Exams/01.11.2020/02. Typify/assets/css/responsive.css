@@ -1,0 +1,93 @@
+@media (max-width: 600px) {
+    .wrapper .inner {
+        width: 100%;
+    }
+
+    .features {
+        flex-direction: column;
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .feature {
+        width: 100%;
+        margin: 0 auto;
+        padding: 2em 1em 0.1em 1em;
+    }
+
+    .grid-form {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .wrapper > .inner.narrow {
+        width: 100%;
+    }
+
+    .grid-form .form-control.narrow {
+        width: 100%;
+    }
+
+    .form-control input,
+    .form-control textarea {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .grid-form .actions {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .grid-form input[type="submit"] {
+        width: 100%;
+    }
+
+    .wrapper {
+        padding: 1em 0 0.5em 0;
+    }
+
+    .footer {
+        padding: 1em 0 1em 0;
+    }
+
+    .footer .copyright {
+        margin: unset;
+    }
+
+    .banner {
+        padding: 3em 0 3em 0;
+    }
+
+    .banner h2 {
+        font-size: 1em;
+        padding: 1.1em;
+        width: 95%;
+    }
+
+    .banner p {
+        font-size: 0.9em;
+    }
+
+    .actions {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    ul.actions li:last-child {
+        width: 100%;
+    }
+
+    .banner .button.special {
+        width: 100%;
+        display: inline-block;
+    }
+
+    header h2 {
+        font-size: 1.2rem;
+    }
+
+    header.major {
+        margin-bottom: 0;
+    }
+}
