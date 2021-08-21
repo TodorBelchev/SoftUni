@@ -1,0 +1,172 @@
+body {
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo {
+    text-transform: uppercase;
+    flex-basis: 14%;
+    position: relative;
+}
+
+.logo::after {
+    content: "";
+    margin-left: 20px;
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    background: black;
+}
+
+.moto {
+    text-transform: uppercase;
+    margin: 25px 0 15px 30px;
+    flex-basis: 18%;
+}
+
+.nav-list {
+    text-transform: uppercase;
+    flex-basis: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.nav-list-item {
+    background: lightgray;
+    padding: 15px 20px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-list-item:hover {
+    background: #e24e2a;
+    color: white;
+}
+
+.hero-img {
+    width: 100%;
+    height: 490px;
+    object-fit: cover;
+}
+
+.hero-heading {
+    background: #e24e2a;
+    color: rgb(216, 216, 216);
+    overflow: auto;
+    height: 150px;
+    margin-top: -4px;
+}
+
+.hero-heading-content {
+    margin: 39px auto;
+    max-width: 920px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.focus {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.hero-benefits,
+.services {
+    height: 500px;
+    background: #383838;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-benefits-item,
+.services-item {
+    flex-basis: 20%;
+    margin: 50px;
+    text-align: center;
+}
+
+.hero-benefits-item-title,
+.services-item-title {
+    color: white;
+    font-weight: lighter;
+}
+
+.hero-benefits-item-content,
+.services-item-content {
+    color: #9b9b9b;
+    padding-top: 20px;
+    border-top: 1px solid #9b9b9b;
+}
+
+i {
+    font-size: 4rem;
+    background: #e24e2a;
+    padding: 20px;
+    color: white;
+}
+
+.explore {
+    height: 300px;
+    text-align: center;
+    overflow: auto;
+}
+
+.explore-title {
+    margin: 70px 0 0 0;
+    font-size: 2rem;
+    color: #383838;
+}
+
+.explore-content {
+    color: #9b9b9b;
+    margin-top: 5px;
+}
+
+.explore-btn {
+    background: #1b9772;
+    border: none;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 18px 40px;
+    cursor: pointer;
+}
+
+.services {
+    height: 300px;
+}
+
+.services-item-content {
+    border: none;
+}
+
+footer {
+    background: #1b9772;
+    overflow: auto;
+    height: 200px;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faded {
+    opacity: 0.5;
+}
+
+footer p span:not(.faded) {
+    opacity: 1;
+}

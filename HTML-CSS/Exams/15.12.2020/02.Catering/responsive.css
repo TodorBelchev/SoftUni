@@ -1,0 +1,32 @@
+@media (max-width: 600px) {
+    .w3-right.w3-hide-small,
+    .w3-col.m6.w3-padding-large.w3-hide-small {
+        display: none;
+    }
+
+    .w3-col.m6.w3-padding-large,
+    .w3-col.l6.w3-padding-large {
+        width: 100%;
+    }
+
+    .w3-row.w3-padding-64 {
+        padding-top: 46px;
+    }
+
+    header img {
+        height: 215px;
+    }
+
+    header h1.w3-xxlarge {
+        font-size: 25px;
+        margin: revert;
+    }
+
+    article h1 {
+        font-size: 30px;
+    }
+
+    h4 {
+        letter-spacing: 2px;
+    }
+}
