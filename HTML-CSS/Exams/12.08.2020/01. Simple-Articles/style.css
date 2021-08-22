@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&display=swap");
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 1200px;
+    margin: 200px auto;
+    font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.articles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+}
+
+.article {
+    flex-basis: 47%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+    height: 310px;
+}
+
+.article.info {
+    background: #e3f3fd;
+}
+
+.article-list {
+    list-style: none;
+    padding: 0;
+}
+
+.article-list li {
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.article-list li::before {
+    content: "\2714\0020";
+    margin-right: 10px;
+    color: #44a9f8;
+}
+
+.article-title {
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+.article.payment {
+    border: 5px solid #44a9f8;
+    text-align: center;
+}
+
+.payment-title {
+    margin: 40px 0 40px 0;
+}
+
+.price {
+    font-size: 2.2rem;
+    font-weight: bolder;
+    color: #44a9f8;
+}
+
+.payment-title {
+    font-size: 1rem;
+}
+
+.enroll-btn {
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: white;
+    background: #44a9f8;
+    padding: 10px 35px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    font-weight: bold;
+}

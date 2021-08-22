@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&display=swap");
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.hero {
+    height: 440px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    background-image: url("./images/hero-certificates.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.15;
+}
+
+nav {
+    position: absolute;
+    width: 1050px;
+    height: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 80px;
+    height: 35px;
+    flex-basis: 15%;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 50%;
+}
+
+.nav-list li:nth-child(7) {
+    background: #42abf8;
+    border-radius: 50%;
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 0 12px 2px rgba(66, 171, 248, 0.2);
+}
+
+.hero-main {
+    width: 950px;
+    margin: 130px auto 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.hero-main-certificates {
+    flex-basis: 58%;
+    background: #29394b;
+    z-index: 2;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+}
+
+.hero-main-img-wrapper {
+    flex-basis: 15%;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+.hero-main-img-wrapper img:nth-child(1) {
+    width: 140px;
+}
+
+.hero-main-img-wrapper img:nth-child(2) {
+    width: 160px;
+}
+
+.hero-main-certificates-title {
+    margin-top: 0;
+}
+
+.hero-main-certificates-content {
+    font-size: 14px;
+}
+
+.hero-main-disclaimer {
+    flex-basis: 100%;
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 25px;
+    color: #29394b;
+}
+
+.diploma {
+    text-align: center;
+    max-width: 1000px;
+    margin: 80px auto 0 auto;
+    color: #29394b;
+}
+
+.diploma-title {
+    letter-spacing: 1px;
+}
+
+.benefits {
+    text-align: left;
+    background: #f4f5f7;
+    padding: 20px;
+}
+
+.benefit {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+}
+
+.diploma-disclaimer {
+    font-size: 14px;
+    text-align: left;
+}
+
+.diploma-explore {
+    max-width: 1000px;
+    height: 210px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 70px;
+}
+
+.diploma-explore::before {
+    content: "";
+    background-image: linear-gradient(rgba(95, 128, 199, 0.411), rgba(95, 128, 199, 0.411)),
+        url("./images/sign-up-prompt-background.jpg");
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.diploma-explore-title {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    letter-spacing: 1px;
+}
+
+.diploma-explore-content {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    width: 70%;
+    font-size: 14px;
+}
+
+.diploma-actions {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 320px;
+}
+
+.diploma-actions::after {
+    content: "";
+    height: 100%;
+    width: 2px;
+    background: white;
+    position: absolute;
+    left: 43%;
+}
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 30px;
+    text-transform: uppercase;
+}
+
+.btn--apply {
+    color: #42abf8;
+}
+
+.btn--curr {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+footer {
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+    border-top: 1px solid #acacac;
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.logo-wrapper img {
+    flex-basis: 11%;
+    margin-right: 20px;
+}
+
+.logo-wrapper p {
+    font-size: 12px;
+    color: rgb(194, 194, 194);
+}
+
+.footer-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 50%;
+    list-style: none;
+    font-size: 14px;
+}
+
+.footer-list a {
+    text-decoration: none;
+    color: rgb(92, 92, 92);
+}
