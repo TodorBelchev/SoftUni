@@ -109,34 +109,3 @@ body {
     font-size: 20px;
 }
 
-footer {
-    background: rgba(0, 17, 54, 0.85);
-    width: 100%;
-    display: flex;
-    font-size: 1.5rem;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 0;
-    padding: 1rem 5rem 1rem 3rem;
-    margin: 0%;
-}
-
-a {
-    text-decoration: none;
-}
-
-footer a:hover {
-    font-weight: normal;
-    background-color: rgba(129, 115, 115, 0.466);
-}
-
-footer {
-    position: fixed;
-    opacity: 0.8;
-    bottom: 0;
-    height: 40px;
-    font-size: 20px;
-    width: 100%;
-    color: white;
-    padding: 0.7em 1em;
-}

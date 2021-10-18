@@ -1,0 +1,38 @@
+.no-data-container {
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    background-color: white;
+}
+
+.no-data {
+    font-size: 24px;
+    font-style: italic;
+}
+
+.top-houses {
+    text-align: center;
+    position: relative;
+    padding-bottom: 3%;
+    background: white;
+}
+
+.top-houses > h1 {
+    font-size: 33px;
+    font-weight: 700;
+    margin-top: 30px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    color: rgba(42, 42, 46, 0.85);
+}
+
+.houses {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-evenly;
+    width: 100%;
+}

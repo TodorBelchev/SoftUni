@@ -1,0 +1,39 @@
+.background-image {
+    padding: 50px 0 250px 0;
+}
+
+.home-container {
+    display: flex;
+    text-align: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex: 1;
+    margin-top: 11em;
+}
+
+.info > h1 {
+    font-size: 3.3rem;
+    margin: 12px 0 0px;
+    position: relative;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    padding: 0;
+    letter-spacing: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(234, 236, 250);
+}
+
+.info > h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0;
+    letter-spacing: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(234, 236, 250);
+}
