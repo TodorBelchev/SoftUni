@@ -5,6 +5,7 @@ import Home from './pages/Home';
 
 import './App.css';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Login></Login>
+        </Route>
+        <Route path="/register">
+          <Register></Register>
         </Route>
       </Switch>
     </Layout>
