@@ -6,7 +6,7 @@ import { UserContext } from '../../../store/user-context';
 import classes from './Header.module.css';
 
 const Header = () => {
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const logoutHandler = (e) => {
         e.preventDefault();

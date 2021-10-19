@@ -7,7 +7,8 @@ const config = {
         SECRET: 'very strong secret',
         SALT_ROUNDS: 10,
         CORS: {
-            origin: ['http://localhost:3000']
+            origin: ['http://localhost:3000'],
+            credentials: true
         }
     },
     production: {}
