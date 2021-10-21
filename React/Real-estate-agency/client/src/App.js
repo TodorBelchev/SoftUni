@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Create from './pages/Create';
 
 import './App.css';
+import Listings from './pages/Listings';
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path="/create-offer">
           <Create></Create>
+        </Route>
+        <Route path="/listings">
+          <Listings></Listings>
         </Route>
       </Switch>
     </Layout>

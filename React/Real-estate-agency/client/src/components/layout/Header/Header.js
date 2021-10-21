@@ -19,7 +19,7 @@ const Header = () => {
                 <ul>
                     {/* <!-- Guest users and Logged users --> */}
                     <li>
-                        <NavLink to="/">Housing for rent</NavLink>
+                        <NavLink to="/listings">Housing for rent</NavLink>
                     </li>
                     {/* <!-- Guest users --> */}
                     {!user.username && <li>

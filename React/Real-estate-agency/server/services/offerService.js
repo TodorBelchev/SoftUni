@@ -5,6 +5,11 @@ const createOffer = (homeName, propertyType, year, city, homeImage, description,
     return offer.save();
 };
 
+const getAll = () => {
+    return Offer.find({});
+};
+
 module.exports = {
-    createOffer
+    createOffer,
+    getAll
 }
