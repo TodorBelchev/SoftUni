@@ -8,6 +8,7 @@ import Create from './pages/Create';
 
 import './App.css';
 import Listings from './pages/Listings';
+import Details from './pages/Details';
 
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/listings">
           <Listings></Listings>
+        </Route>
+        <Route path="/:id/details">
+          <Details></Details>
         </Route>
       </Switch>
     </Layout>

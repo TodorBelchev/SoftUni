@@ -9,7 +9,25 @@ const getAll = () => {
     return Offer.find({});
 };
 
+const getById = (id) => {
+    return Offer.findById(id).populate('rentedUsers', '-password');
+}
+
+const rent = async (id, tenantId) => {
+    try {
+        const offer = await Offer.findById(id);
+        offer.rentedUsers.push(tenantId);
+        offer.availablePieces--;
+        await offer.save();
+        return offer.populate('rentedUsers', '-password');
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
     createOffer,
-    getAll
+    getAll,
+    getById,
+    rent
 }

@@ -8,6 +8,7 @@ const AllOffers = () => {
     const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    console.log(offers);
     const fetchOffers = useCallback(async () => {
         setIsLoading(true);
         try {
@@ -33,7 +34,15 @@ const AllOffers = () => {
             <h1>Apartments for recents</h1>
             {isLoading && <div>Loading...</div>}
 
-            {!isLoading && offers && offers.map(CardOffer)}
+            {!isLoading && offers && offers.map(x => (
+                <CardOffer
+                    key={x._id}
+                    description={x.description}
+                    homeName={x.homeName}
+                    _id={x._id.toString()}
+                    homeImage={x.homeImage}
+                />
+            ))}
 
             {!isLoading && offers.length === 0 && <div className={classes['no-data-listing']}>
                 <p>There are no housing offers found...</p>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Card from '../Card/Card';
 
@@ -7,19 +7,27 @@ import classes from './TopHouses.module.css';
 const TopHouses = () => {
     const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => {
+
+    const loadTopOffers = useCallback(async () => {
         setIsLoading(true);
-        fetch('http://localhost:3030/api/offers/top')
-            .then(res => res.json())
-            .then(data => {
-                setOffers(data);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.log(err.message)
-                setIsLoading(false);
-            });
+        try {
+            const response = await fetch('http://localhost:3030/api/offers/top');
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data);
+            }
+
+            setOffers(data);
+        } catch (error) {
+            // show notification
+        }
+        setIsLoading(false);
     }, []);
+
+    useEffect(() => {
+        loadTopOffers();
+    }, [loadTopOffers]);
 
 
     return (
@@ -30,7 +38,6 @@ const TopHouses = () => {
 
                 {offers.length > 0 && offers.map(Card)}
 
-                {/* <!-- If there are still no offers for housing in the database display: --> */}
                 {offers.length <= 0 && <div className={classes['no-data-container']}>
                     <p className={classes['no-data']}>There are no housing offers found...</p>
                 </div>}
