@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
+import Notification from '../../notification/Notification';
 
 import classes from './RegisterForm.module.css';
 
@@ -10,6 +11,7 @@ const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
+    const [error, setError] = useState(null);
     const { login } = useContext(UserContext);
     const history = useHistory();
 
@@ -44,7 +46,7 @@ const RegisterForm = () => {
             if (password.trim() !== rePassword.trim()) {
                 throw new Error('Passwords must match!');
             }
-            
+
             const response = await fetch('http://localhost:3030/api/user/register', {
                 method: 'POST',
                 headers: {
@@ -62,12 +64,13 @@ const RegisterForm = () => {
             login(data);
             history.replace('/');
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
 
     return (
         <section>
+            {error && <Notification message={error} />}
             <div className={classes.boxs}>
                 <div className={classes['card-image']}>
                     <h2 className={classes['card-heading']}>Create your account</h2>

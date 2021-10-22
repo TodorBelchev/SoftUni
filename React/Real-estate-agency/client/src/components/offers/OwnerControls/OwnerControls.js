@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import Notification from '../../notification/Notification';
 
 import classes from './OwnerControls.module.css';
 
 const OwnerControls = (props) => {
+    const [error, setError] = useState(null);
     const history = useHistory();
     const deleteHandler = async (e) => {
         e.preventDefault();
@@ -23,12 +26,13 @@ const OwnerControls = (props) => {
                 throw new Error(data);
             }
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     };
 
     return (
         <>
+            {error && <Notification message={error} />}
             <NavLink to={`/${props.offer._id}/edit`} className={classes.edit}>Edit</NavLink>
             <NavLink to={`/${props.offer._id}/delete`} className={classes.remove} onClick={deleteHandler}>Delete</NavLink>
         </>

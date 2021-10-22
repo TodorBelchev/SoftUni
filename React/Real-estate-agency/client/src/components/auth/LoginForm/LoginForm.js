@@ -2,12 +2,14 @@ import { useContext, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
+import Notification from '../../notification/Notification';
 
 import classes from './LoginForm.module.css';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
     const { login } = useContext(UserContext);
     const history = useHistory();
 
@@ -26,7 +28,7 @@ const LoginForm = () => {
             if (username.trim().length < 5 || password.trim().length < 4) {
                 throw new Error('Username must be at least 5 characters and password at least 4 characters long!');
             }
-            
+
             const response = await fetch('http://localhost:3030/api/user/login', {
                 method: 'POST',
                 headers: {
@@ -44,12 +46,13 @@ const LoginForm = () => {
             login(data);
             history.replace('/');
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
 
     return (
         <section>
+            {error && <Notification message={error} />}
             <div className={classes.boxs}>
                 <div className={classes['card-image']}>
                     <h2 className={classes['card-heading']}>Login</h2>

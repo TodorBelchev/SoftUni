@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import Notification from '../../notification/Notification';
 
 import classes from './EditOffer.module.css';
 
@@ -12,6 +13,7 @@ const EditOffer = () => {
     const [description, setDescription] = useState('');
     const [availablePieces, setAvailablePieces] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const history = useHistory();
     const params = useParams();
     const { id } = params;
@@ -44,7 +46,7 @@ const EditOffer = () => {
             setDescription(data.description);
             setAvailablePieces(data.availablePieces);
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
         setIsLoading(false);
     }, []);
@@ -94,12 +96,13 @@ const EditOffer = () => {
 
             history.replace(`/${id}/details`);
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
 
     return (
         <section>
+            {error && <Notification message={error} />}
             {isLoading && <div>Loading...</div>}
             {!isLoading && <div className={classes['create-container']}>
                 <div className={classes['box-image']}></div>

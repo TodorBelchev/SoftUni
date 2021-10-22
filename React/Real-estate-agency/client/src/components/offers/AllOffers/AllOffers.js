@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import Notification from '../../notification/Notification';
 import CardOffer from '../OfferCard/OfferCard';
 
 import classes from './AllOffers.module.css';
@@ -7,6 +8,7 @@ import classes from './AllOffers.module.css';
 const AllOffers = () => {
     const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const fetchOffers = useCallback(async () => {
         setIsLoading(true);
@@ -19,7 +21,7 @@ const AllOffers = () => {
 
             setOffers(data);
         } catch (error) {
-            // set error and show notification
+            setError(error.message);
         }
         setIsLoading(false);
     }, []);
@@ -30,6 +32,7 @@ const AllOffers = () => {
 
     return (
         <section className={classes['all-listings']}>
+            {error && <Notification message={error} />}
             <h1>Apartments for recents</h1>
             {isLoading && <div>Loading...</div>}
 

@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
+import Notification from '../../notification/Notification';
 import OwnerControls from '../OwnerControls/OwnerControls';
 
 import classes from './OfferDetails.module.css';
@@ -9,6 +10,7 @@ import classes from './OfferDetails.module.css';
 const OfferDetails = () => {
     const [offer, setOffer] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const { user } = useContext(UserContext);
     const params = useParams();
     const { id } = params;
@@ -27,7 +29,7 @@ const OfferDetails = () => {
 
             setOffer(data);
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
         setIsLoading(false);
     }, []);
@@ -56,12 +58,13 @@ const OfferDetails = () => {
 
             setOffer(data);
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
 
     return (
         <section>
+            {error && <Notification message={error} />}
             {!isLoading && offer && <div className={classes.wrapper}>
                 <div className={classes['product-img']}>
                     <img src={offer.homeImage} alt="house" />

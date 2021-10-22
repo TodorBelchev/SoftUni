@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { useHistory } from 'react-router';
+import Notification from '../../notification/Notification';
+
 import classes from './CreateOffer.module.css';
 
 const CreateOffer = () => {
+    const [error, setError] = useState(null);
     const history = useHistory();
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -40,11 +44,12 @@ const CreateOffer = () => {
 
             history.replace('/listings');
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
     return (
         <section>
+            {error && <Notification message={error} />}
             <div className={classes['create-container']}>
                 <div className={classes['box-image']}></div>
                 <h2 className={classes['box-heading']}> Add new home</h2>

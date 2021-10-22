@@ -1,11 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
+import Notification from '../../notification/Notification';
 
 import classes from './Header.module.css';
 
 const Header = () => {
+    const [error, setError] = useState(null);
     const { user, logout } = useContext(UserContext);
     const history = useHistory();
 
@@ -19,11 +21,12 @@ const Header = () => {
             logout();
             history.replace('/');
         } catch (error) {
-            // show notification
+            setError(error.message);
         }
     }
     return (
         <header>
+            {error && <Notification message={error} />}
             <nav className={classes.nav}>
                 <NavLink to="/">Home</NavLink>
                 <ul>
