@@ -1,7 +1,8 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
+import OwnerControls from '../OwnerControls/OwnerControls';
 
 import classes from './OfferDetails.module.css';
 
@@ -83,8 +84,7 @@ const OfferDetails = () => {
                     {/* <!-- if there is no registered user, do not display buttons--> */}
                     {user.username && <div className={classes['product-btn']}>
                         {/* <!-- Only for registered user and creator of the housing offer--> */}
-                        {isOwner && <NavLink to={`/${offer._id}/edit`} className={classes.edit}>Edit</NavLink>}
-                        {isOwner && <NavLink to={`/${offer._id}/delete`} className={classes.remove}>Delete</NavLink>}
+                        {isOwner && <OwnerControls offer={offer} />}
 
                         {/* <!-- logged in user with available pieces--> */}
                         {!isOwner

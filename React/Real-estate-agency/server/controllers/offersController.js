@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { createOffer, getAll, getById, rent } = require('../services/offerService');
+const { createOffer, getAll, getById, rent, deleteById } = require('../services/offerService');
 const { decodeToken } = require('../middlewares');
 
 const router = Router();
@@ -69,6 +69,16 @@ router.get('/:id', async (req, res) => {
     try {
         const offer = await getById(req.params.id);
         res.status(200).send(offer);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+});
+
+router.delete('/:id', async(req, res) => {
+    try {
+        const response = await deleteById(req.params.id);
+        res.status(200).send(response);
     } catch (error) {
         console.log(error);
         res.status(400).send(error);

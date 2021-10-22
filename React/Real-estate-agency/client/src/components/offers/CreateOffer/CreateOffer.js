@@ -38,7 +38,7 @@ const CreateOffer = () => {
                 throw new Error(data.message);
             }
 
-            history.replace('/housings');
+            history.replace('/listings');
         } catch (error) {
             // show notification
         }

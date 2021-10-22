@@ -13,6 +13,10 @@ const getById = (id) => {
     return Offer.findById(id).populate('rentedUsers', '-password');
 }
 
+const deleteById = (id) => {
+    return Offer.findByIdAndDelete(id);
+}
+
 const rent = async (id, tenantId) => {
     try {
         const offer = await Offer.findById(id);
@@ -29,5 +33,6 @@ module.exports = {
     createOffer,
     getAll,
     getById,
-    rent
+    rent,
+    deleteById
 }

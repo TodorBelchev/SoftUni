@@ -1,0 +1,23 @@
+.edit {
+    background-color: rgba(86, 124, 194, 0.911);
+}
+
+.edit:hover {
+    background-color: rgba(65, 92, 143, 0.911);
+}
+
+.rentHome {
+    background-color: rgba(86, 124, 194, 0.911);
+}
+
+.rentHome:hover {
+    background-color: rgba(65, 92, 143, 0.911);
+}
+
+.remove {
+    background-color: rgb(199, 136, 109);
+}
+
+.remove:hover {
+    background-color: rgb(177, 119, 95);
+}
