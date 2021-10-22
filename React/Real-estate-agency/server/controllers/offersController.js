@@ -75,7 +75,19 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
+    try {
+        const offer = await getById(req.params.id);
+        Object.assign(offer, req.body);
+        await offer.save();
+        res.status(200).send(offer);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+});
+
+router.delete('/:id', async (req, res) => {
     try {
         const response = await deleteById(req.params.id);
         res.status(200).send(response);

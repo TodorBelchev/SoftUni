@@ -9,6 +9,7 @@ import Create from './pages/Create';
 import './App.css';
 import Listings from './pages/Listings';
 import Details from './pages/Details';
+import Edit from './pages/Edit';
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/:id/details">
           <Details></Details>
+        </Route>
+        <Route path="/:id/edit">
+          <Edit></Edit>
         </Route>
       </Switch>
     </Layout>

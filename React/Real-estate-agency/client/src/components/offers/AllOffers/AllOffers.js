@@ -8,7 +8,6 @@ const AllOffers = () => {
     const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log(offers);
     const fetchOffers = useCallback(async () => {
         setIsLoading(true);
         try {
