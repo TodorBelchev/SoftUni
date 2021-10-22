@@ -7,13 +7,14 @@ import classes from './AllOffers.module.css';
 
 const AllOffers = () => {
     const [offers, setOffers] = useState([]);
+    const [search, setSearch] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchOffers = useCallback(async () => {
+    const fetchOffers = useCallback(async (search = '') => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:3030/api/offers');
+            const response = await fetch('http://localhost:3030/api/offers?propertyType=' + search);
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data);
@@ -26,6 +27,15 @@ const AllOffers = () => {
         setIsLoading(false);
     }, []);
 
+    const searchChangeHandler = (e) => {
+        setSearch(e.target.value);
+    }
+
+    const searchHandler = (e) => {
+        e.preventDefault();
+        fetchOffers(search);
+    }
+
     useEffect(() => {
         fetchOffers();
     }, [fetchOffers]);
@@ -33,8 +43,22 @@ const AllOffers = () => {
     return (
         <section className={classes['all-listings']}>
             {error && <Notification message={error} />}
-            <h1>Apartments for recents</h1>
+            <h1>Apartments for rent</h1>
             {isLoading && <div>Loading...</div>}
+
+            <div className={classes['search-container']}>
+                <form className={classes.search} onSubmit={searchHandler}>
+                    <input
+                        type="search"
+                        name="propertyType"
+                        id="propertyType"
+                        placeholder="Search here..."
+                        value={search}
+                        onChange={searchChangeHandler}
+                    />
+                    <button type="submit">Search</button>
+                </form>
+            </div>
 
             {!isLoading && offers && offers.map(x => (
                 <CardOffer

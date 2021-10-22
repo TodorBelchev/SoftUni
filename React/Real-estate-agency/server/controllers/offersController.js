@@ -57,7 +57,7 @@ router.post('/create', decodeToken(), async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const offers = await getAll();
+        const offers = await getAll(req.query.propertyType);
         res.status(200).send(offers);
     } catch (error) {
         console.log(error);

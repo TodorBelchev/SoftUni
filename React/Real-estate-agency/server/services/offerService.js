@@ -1,3 +1,4 @@
+const { options } = require('../controllers/offersController');
 const Offer = require('../models/Offer');
 
 const createOffer = (homeName, propertyType, year, city, homeImage, description, availablePieces, owner) => {
@@ -5,8 +6,8 @@ const createOffer = (homeName, propertyType, year, city, homeImage, description,
     return offer.save();
 };
 
-const getAll = () => {
-    return Offer.find({});
+const getAll = (propertyTypeSearch) => {
+    return Offer.find({ propertyType: { $regex: propertyTypeSearch, $options: 'i' } });
 };
 
 const getLastThree = () => {
