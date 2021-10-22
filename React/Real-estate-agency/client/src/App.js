@@ -10,6 +10,8 @@ import './App.css';
 import Listings from './pages/Listings';
 import Details from './pages/Details';
 import Edit from './pages/Edit';
+import AuthGuard from './guards/AuthGuard';
+import NotFound from './components/404/NotFound';
 
 
 function App() {
@@ -20,13 +22,17 @@ function App() {
           <Home></Home>
         </Route>
         <Route path="/login">
-          <Login></Login>
+          <AuthGuard>
+            <Login></Login>
+          </AuthGuard>
         </Route>
         <Route path="/register">
           <Register></Register>
         </Route>
         <Route path="/create-offer">
-          <Create></Create>
+          <AuthGuard>
+            <Create />
+          </AuthGuard>
         </Route>
         <Route path="/listings">
           <Listings></Listings>
@@ -35,7 +41,12 @@ function App() {
           <Details></Details>
         </Route>
         <Route path="/:id/edit">
-          <Edit></Edit>
+          <AuthGuard>
+            <Edit />
+          </AuthGuard>
+        </Route>
+        <Route path="*">
+          <NotFound></NotFound>
         </Route>
       </Switch>
     </Layout>

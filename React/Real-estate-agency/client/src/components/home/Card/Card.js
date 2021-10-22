@@ -1,9 +1,17 @@
+import { NavLink } from 'react-router-dom';
+
+import classes from './Card.module.css';
+
 const Card = (props) => {
     return (
-        <div className="card-home">
-            <h2>House Take Away</h2>
-            <div className="cta-container"><a href="/" className="details-link">Details</a></div>
-            <div className="card_image"><img src="./static/images/house2.jpg" alt="house" /></div>
+        <div className={classes['card-home']}>
+            <div className={classes['card-image']}>
+                <img src={props.offer.homeImage} alt="house" />
+            </div>
+            <h2>{props.offer.homeName}</h2>
+            <div className={classes.cta}>
+                <NavLink to={`/${props.offer._id}/details`} className={classes['details-link']}>Details</NavLink>
+            </div>
         </div>
     );
 }

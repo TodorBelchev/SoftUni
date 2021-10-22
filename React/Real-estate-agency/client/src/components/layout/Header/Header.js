@@ -1,16 +1,26 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import { UserContext } from '../../../store/user-context';
 
 import classes from './Header.module.css';
 
 const Header = () => {
-    const { user } = useContext(UserContext);
+    const { user, logout } = useContext(UserContext);
+    const history = useHistory();
 
-    const logoutHandler = (e) => {
+    const logoutHandler = async (e) => {
         e.preventDefault();
-        console.log(e);
+        try {
+            await fetch('http://localhost:3030/api/user/logout', {
+                credentials: 'include'
+            });
+
+            logout();
+            history.replace('/');
+        } catch (error) {
+            // show notification
+        }
     }
     return (
         <header>

@@ -36,7 +36,9 @@ const TopHouses = () => {
             {isLoading && <div>Loading...</div>}
             {!isLoading && <div className={classes.houses}>
 
-                {offers.length > 0 && offers.map(Card)}
+                {offers.length > 0 && offers.map(x => (
+                    <Card key={x._id} offer={x} />
+                ))}
 
                 {offers.length <= 0 && <div className={classes['no-data-container']}>
                     <p className={classes['no-data']}>There are no housing offers found...</p>

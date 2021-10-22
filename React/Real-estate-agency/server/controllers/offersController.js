@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { createOffer, getAll, getById, rent, deleteById } = require('../services/offerService');
+const { createOffer, getAll, getById, rent, deleteById, getLastThree } = require('../services/offerService');
 const { decodeToken } = require('../middlewares');
 
 const router = Router();
@@ -58,6 +58,16 @@ router.post('/create', decodeToken(), async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const offers = await getAll();
+        res.status(200).send(offers);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+});
+
+router.get('/top', async (req, res) => {
+    try {
+        const offers = await getLastThree();
         res.status(200).send(offers);
     } catch (error) {
         console.log(error);

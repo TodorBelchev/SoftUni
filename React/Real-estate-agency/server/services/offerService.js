@@ -9,6 +9,10 @@ const getAll = () => {
     return Offer.find({});
 };
 
+const getLastThree = () => {
+    return Offer.find({}).limit(3);
+}
+
 const getById = (id) => {
     return Offer.findById(id).populate('rentedUsers', '-password');
 }
@@ -34,5 +38,6 @@ module.exports = {
     getAll,
     getById,
     rent,
-    deleteById
+    deleteById,
+    getLastThree
 }
