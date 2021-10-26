@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffd9b0;
+    font-family: "Poppins", "Helvetica", sans-serif;
+}
+
+.book {
+    max-width: 1820px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    padding: 50px 86px 50px 91px;
+    color: #fff;
+    background: #111;
+    flex: 0 0 33%;
+    align-self: stretch;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.form input {
+    display: block;
+    color: #fff;
+    width: 100%;
+    background: #000;
+    margin-bottom: 42px;
+    font-size: 19px;
+    padding: 5px 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #fff;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 45px;
+    margin-bottom: 67px;
+}
+
+.book article {
+    height: 885px;
+    flex: 0 0 46%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    overflow: hidden;
+}
+
+.book img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form .btn {
+    width: 44%;
+    border: none;
+    padding: 20px;
+    background: #edb77d;
+    border-radius: 5px;
+}
