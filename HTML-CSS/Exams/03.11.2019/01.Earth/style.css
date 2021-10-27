@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: "Open Sans", "Helvetica", sans-serif;
+}
+
+.earth {
+    margin: 100px auto;
+    max-width: 800px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.earth-heading {
+    background: #000;
+    padding: 16px 0 12px 12px;
+}
+
+.earth-heading-title {
+    color: #07f0ee;
+    font-size: 48px;
+    letter-spacing: 1px;
+}
+
+.earth-heading-subtitle {
+    color: rgb(201, 201, 201);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-top: -5px;
+}
+
+.earth-content {
+    display: flex;
+    padding: 30px 18px 25px;
+}
+
+.earth-content-img {
+    min-width: 288px;
+    padding: 6px 18px;
+    border: 1px solid #000;
+}
+
+.earth-content-img img {
+    width: 100%;
+}
+
+.earth-content-img figcaption {
+    font-size: 15px;
+    letter-spacing: 2px;
+    line-height: 19px;
+    color: rgb(22, 22, 22);
+}
+
+.earth-content-text {
+    padding: 15px 24px 15px 26px;
+    font-size: 19px;
+    letter-spacing: 3px;
+    line-height: 27px;
+}
+
+.earth-footer-title {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 26px;
+    padding: 5px 10px;
+}
+
+.earth-footer-content {
+    background: #d9ebeb;
+    padding: 20px 24px;
+    font-size: 23px;
+    letter-spacing: 1px;
+}
+
+.earth-footer-content p {
+    margin-bottom: -6px;
+}
