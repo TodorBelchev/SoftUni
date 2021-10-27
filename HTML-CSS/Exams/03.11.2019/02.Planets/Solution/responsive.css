@@ -1,0 +1,37 @@
+@media all and (max-width: 1000px) {
+    .pair {
+        flex-direction: column;
+    }
+
+    .planet {
+        width: 100%;
+        margin: 25px 0;
+    }
+
+    footer nav {
+        flex-direction: column;
+    }
+
+    .primary footer nav a:nth-child(even) {
+        border: none;
+    }
+}
+
+@media all and (max-width: 850px) {
+    .news ul {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .news ul li {
+        text-align: center;
+    }
+
+    .news ul h2 {
+        font-size: 18px;
+    }
+
+    header h1 {
+        font-size: 36px;
+    }
+}
