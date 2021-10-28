@@ -1,0 +1,26 @@
+@media all and (max-width: 768px) {
+    .wrapper > header p {
+        font-size: 0.6em;
+    }
+
+    .wrapper.style2 {
+        padding: 1rem;
+    }
+
+    .gallery {
+        flex-direction: column;
+    }
+
+    .gallery > * {
+        width: 100%;
+    }
+
+    .spotlight > * {
+        width: 100%;
+    }
+
+    .spotlight .inner {
+        padding: 1rem;
+        text-align: center;
+    }
+}
