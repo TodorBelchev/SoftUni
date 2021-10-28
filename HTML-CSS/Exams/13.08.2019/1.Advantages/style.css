@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
+
+html {
+    font-family: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.advantages {
+    margin: 64px auto;
+    max-width: 920px;
+    position: relative;
+    overflow: auto;
+}
+
+.advantages-title {
+    font-size: 16px;
+    background: #42abf8;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.advantages-content {
+    margin-top: 35px;
+}
+
+.advantage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px;
+    font-size: 12px;
+    margin-bottom: 3px;
+    background: #f4f5f7;
+}
+
+.advantage i {
+    color: #23be5e;
+    font-size: 20px;
+    margin-right: 32px;
+}
