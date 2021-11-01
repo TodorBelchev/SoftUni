@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500&display=swap");
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: "Raleway", "Helvetica", sans-serif;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero {
+    background: #efefef;
+    padding: 20px 20px 0;
+    margin-top: 30px;
+}
+
+.hero-nav {
+    padding: 8px 17px;
+}
+
+.hero-nav-menu {
+    display: flex;
+    margin-left: auto;
+    justify-content: flex-end;
+}
+
+.hero-nav-menu-btn {
+    border: none;
+    font-size: 14px;
+}
+
+.hero-nav-menu-icon {
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.hero-inner {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 90px 0;
+    position: relative;
+}
+
+.hero-inner::after {
+    content: "";
+    height: 75px;
+    width: 1px;
+    background: #000;
+    position: absolute;
+    left: 0;
+    bottom: 167px;
+}
+
+.hero-content {
+    flex: 0 0 38%;
+}
+
+.hero-content-title {
+    margin-top: 79px;
+}
+
+.hero-content-title,
+.about-content-title,
+.featured-content-title,
+.contacts-title {
+    font-weight: 100;
+    font-size: 40px;
+}
+
+.hero-content-title span,
+.about-content-title span,
+.featured-content-title span,
+.contacts-title span {
+    font-weight: 600;
+}
+
+.hero-content-text {
+    margin-top: 34px;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 25px;
+    font-weight: 500;
+}
+
+.hero-img {
+    flex: 0 0 55%;
+    margin-bottom: -3px;
+}
+
+.hero-img img {
+    width: 100%;
+}
+
+.about {
+    padding: 20px 90px 70px;
+    margin-top: 27px;
+    background: #efefef;
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-img {
+    flex: 0 0 37%;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.about-img img {
+    width: 100%;
+}
+
+.about-content {
+    flex: 0 0 55%;
+}
+
+.about-content-title {
+    letter-spacing: 1px;
+    margin: 92px 0 0 102px;
+    position: relative;
+}
+
+.about-content-title::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 1px;
+    background: #000;
+    left: -100px;
+    top: 50%;
+}
+
+.about-content-text {
+    margin-top: 29px;
+    font-style: italic;
+    line-height: 25px;
+    padding-right: 49px;
+}
+
+.about-content-social {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 41px;
+}
+
+.about-content-social-item {
+    background: gray;
+    margin-right: 21px;
+    min-width: 30px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-content-social-item i {
+    color: #fff;
+}
+
+.focus {
+    margin-top: 30px;
+    display: flex;
+    max-height: 600px;
+}
+
+.focus img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.featured {
+    margin-top: 30px;
+    background: #efefef;
+    padding: 30px 110px 105px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.featured::after {
+    content: "";
+    height: 65px;
+    width: 1px;
+    background: #000;
+    position: absolute;
+    left: 110px;
+    bottom: 166px;
+}
+
+.featured-img {
+    flex: 0 0 55%;
+    margin-top: 72px;
+}
+
+.featured-img img {
+    width: 100%;
+}
+
+.featured-content {
+    flex: 0 0 34%;
+}
+
+.featured-content-title {
+    margin-top: 128px;
+    letter-spacing: 1px;
+}
+
+.featured-content-text {
+    margin-top: 35px;
+    font-style: italic;
+    line-height: 24px;
+    font-size: 15px;
+}
+
+.gallery {
+    margin-top: 30px;
+    background: #efefef;
+    padding: 150px 140px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gallery-item {
+    flex: 0 0 40%;
+    display: flex;
+}
+
+.gallery img {
+    width: 100%;
+}
+
+.gallery-item:last-child {
+    position: absolute;
+    width: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.contacts {
+    margin-top: 30px;
+    background: #efefef;
+    text-align: center;
+    padding: 20px 223px 40px;
+}
+
+.contacts-title {
+    margin-top: 46px;
+    letter-spacing: 2px;
+}
+
+.contacts-text {
+    margin-top: 35px;
+    font-style: italic;
+    line-height: 23px;
+}
+
+.contacts-form {
+    display: flex;
+    max-width: 600px;
+    margin: 43px auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contacts-form-input {
+    padding: 11px 0 11px 13px;
+    font-size: 17px;
+    background: #efefef;
+    outline: none;
+    border: 1px solid #000;
+}
+
+.contacts-form-input--half {
+    flex: 0 0 47%;
+}
+
+.contacts-form-textarea {
+    flex: 0 0 100%;
+    margin-top: 29px;
+    padding: 13px 17px;
+    font-size: 17px;
+    max-height: 113px;
+    background: #efefef;
+    border: 1px solid #000;
+}
+
+.contacts-form-input::placeholder,
+.contacts-form-textarea::placeholder {
+    color: rgb(24, 24, 24);
+}
+
+.contacts-form-btn {
+    width: 100%;
+    margin-top: 30px;
+    border: none;
+    background: #000;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 11px;
+}
+
+.footer {
+    background: #efefef;
+    padding-bottom: 18px;
+    margin-bottom: 30px;
+}
+
+.footer-text {
+    text-align: center;
+    font-size: 12px;
+}
