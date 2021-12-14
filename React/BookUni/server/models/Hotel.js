@@ -10,7 +10,7 @@ const hotelSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imgURL: {
+    imgUrl: {
         type: String,
         required: true
     },
@@ -18,10 +18,13 @@ const hotelSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    usersBooked: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
-    }],
+    usersBooked: {
+        type: [{
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        }],
+        default: []
+    },
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'

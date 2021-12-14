@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
         res.status(200).send(payload);
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send({ message: error.message });
     }
 });
 
@@ -75,7 +75,7 @@ router.post('/register', async (req, res) => {
         res.status(200).send(payload);
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send({ message: error.message });
     }
 });
 
