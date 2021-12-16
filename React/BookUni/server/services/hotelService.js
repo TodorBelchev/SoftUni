@@ -15,16 +15,21 @@ const getHotelByName = (name) => {
 const createHotel = (hotelData) => {
     const hotel = new Hotel(hotelData);
     return hotel.save();
-}
+};
 
 const editHotel = (_id, hotelData) => {
     return Hotel.findOneAndUpdate({ _id }, hotelData)
 };
+
+const deleteHotel = (id) => {
+    return Hotel.findByIdAndDelete(id);
+}
 
 module.exports = {
     getHotels,
     getHotelById,
     getHotelByName,
     createHotel,
-    editHotel
+    editHotel,
+    deleteHotel
 }

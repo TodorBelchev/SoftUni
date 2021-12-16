@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import useHttp from '../../../hooks/useHttp';
 import hotelService from '../../../services/hotelService';
 import { UserContext } from '../../../context/userContext';
 
 const HotelDetails = () => {
+    const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState({});
@@ -20,6 +21,15 @@ const HotelDetails = () => {
             (res) => setHotel(res)
         );
     }, []);
+
+    const deleteClickHandler = (e) => {
+        e.preventDefault();
+
+        sendRequest(
+            hotelService.deleteHotel(hotelId),
+            () => navigate('/')
+        );
+    };
 
     return (
         <section id="viewhotelDetails">
@@ -40,7 +50,7 @@ const HotelDetails = () => {
                     {isOwner &&
                         <>
                             <NavLink to={`/hotel/${hotel._id}/edit`} className="edit">Edit</NavLink>
-                            <NavLink to={`/hotel/${hotel._id}/delete`} className="remove">Delete</NavLink>
+                            <NavLink onClick={deleteClickHandler} to={`/hotel/${hotel._id}/delete`} className="remove">Delete</NavLink>
                         </>}
                 </div>
 

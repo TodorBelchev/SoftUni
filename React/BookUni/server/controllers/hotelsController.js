@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { getHotelById, getHotelByName, editHotel, createHotel, getHotels } = require('../services/hotelService');
+const { getHotelById, getHotelByName, editHotel, createHotel, getHotels, deleteHotel } = require('../services/hotelService');
 const { validateHotel } = require('../validators');
 const { isLoggedIn } = require('../middlewares');
 

@@ -15,8 +15,16 @@ const getHotels = () => fetch(`${baseUrl}/hotels`);
 
 const getById = (id) => fetch(`${baseUrl}/hotels/${id}`);
 
+const deleteHotel = (id) => {
+    return fetch(`${baseUrl}/hotels/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
+    });
+};
+
 export default {
     create,
     getHotels,
-    getById
+    getById,
+    deleteHotel
 }
