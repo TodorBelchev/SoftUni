@@ -11,6 +11,9 @@ const create = (name, city, freeRooms, imgUrl) => {
     });
 };
 
+const getHotels = () => fetch(`${baseUrl}/hotels`);
+
 export default {
-    create
+    create,
+    getHotels
 }

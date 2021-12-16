@@ -1,10 +1,20 @@
 const { Router } = require('express');
 
-const { getHotelById, getHotelByName, editHotel, createHotel } = require('../services/hotelService');
+const { getHotelById, getHotelByName, editHotel, createHotel, getHotels } = require('../services/hotelService');
 const { validateHotel } = require('../validators');
 const { isLoggedIn } = require('../middlewares');
 
 const router = Router();
+
+router.get('/', async (req, res) => {
+    try {
+        const hotels = await getHotels();
+        res.status(200).send(hotels);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({ message: error.message });
+    }
+});
 
 router.get('/:id', async (req, res) => {
     try {

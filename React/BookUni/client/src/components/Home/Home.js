@@ -1,19 +1,30 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import hotelService from '../../services/hotelService';
+import useHttp from '../../hooks/useHttp';
+import HotelCard from "../hotel/HotelCard/HotelCard";
 
 const Home = () => {
+    const [hotels, setHotels] = useState([]);
+    const { sendRequest, isLoading } = useHttp();
+
+    useEffect(() => {
+        sendRequest(
+            hotelService.getHotels(),
+            (res) => setHotels(res)
+        );
+    }, []);
+
     return (
         <section id="viewCatalog" className="background-img">
-            <div className="added-hotels">
-                <NavLink to="" className="added-hotel">
-                    <img src="https://image.freepik.com/free-vector/flat-hotel-building_23-2148162501.jpg" alt=""
-                        className="picture-added-hotel" />
-                    <h3>Hilton Toronto</h3>
-                    <span>Free rooms: 42</span>
-                </NavLink>
-            </div>
-            {/* <div className="guest">
-                There are no Hotels found...
-            </div> */}
+            {hotels.length > 0 && !isLoading &&
+                <div className="added-hotels">
+                    {hotels.map(x => <HotelCard key={x._id} hotel={x} />)}
+                </div>}
+            {hotels.length === 0 && !isLoading &&
+                <div className="guest">
+                    There are no Hotels found...
+                </div>}
         </section>
     )
 };

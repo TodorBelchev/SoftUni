@@ -1,5 +1,9 @@
 const Hotel = require('../models/Hotel');
 
+const getHotels = () => {
+    return Hotel.find({}).sort({ freeRooms: 'desc' });
+};
+
 const getHotelById = (id) => {
     return Hotel.findById(id);
 };
@@ -18,6 +22,7 @@ const editHotel = (_id, hotelData) => {
 };
 
 module.exports = {
+    getHotels,
     getHotelById,
     getHotelByName,
     createHotel,
