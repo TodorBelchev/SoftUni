@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { getHotelById, getHotelByName, editHotel } = require('../services/hotelService');
+const { getHotelById, getHotelByName, editHotel, createHotel } = require('../services/hotelService');
 const { validateHotel } = require('../validators');
 const { isLoggedIn } = require('../middlewares');
 
@@ -19,11 +19,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', isLoggedIn(), async (req, res) => {
     try {
         const hotelData = {
-            name: req.params.name.trim(),
-            city: req.params.city.trim(),
-            imgUrl: req.params.imgUrl.trim(),
-            freeRooms: Number(req.params.freeRooms.trim()),
-            hotel: await getHotelByName(name),
+            name: req.body.name.trim(),
+            city: req.body.city.trim(),
+            imgUrl: req.body.imgUrl.trim(),
+            freeRooms: Number(req.body.freeRooms.trim()),
             owner: req.decoded.id
         }
         const hotel = await getHotelByName(hotelData.name);
@@ -44,10 +43,10 @@ router.post('/', isLoggedIn(), async (req, res) => {
 router.put('/:id', isLoggedIn(), async (req, res) => {
     try {
         const hotelData = {
-            name: req.params.name.trim(),
-            city: req.params.city.trim(),
-            imgUrl: req.params.imgUrl.trim(),
-            freeRooms: Number(req.params.freeRooms.trim()),
+            name: req.body.name.trim(),
+            city: req.body.city.trim(),
+            imgUrl: req.body.imgUrl.trim(),
+            freeRooms: Number(req.body.freeRooms.trim()),
             hotel: await getHotelByName(name)
         }
 

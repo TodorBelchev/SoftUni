@@ -6,6 +6,7 @@ const register = (email, username, password) => {
         headers: {
             'content-type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ email, username, password })
     });
 };
@@ -16,6 +17,7 @@ const login = (username, password) => {
         headers: {
             'content-type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password })
     })
 };
