@@ -15,7 +15,7 @@ const UserProvider = props => {
         setUser(user);
     }
     const logout = () => {
-        setUser({});
+        setUser(initialState);
     }
 
     return (

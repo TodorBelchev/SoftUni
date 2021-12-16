@@ -23,7 +23,7 @@ const editHotel = (_id, hotelData) => {
 
 const deleteHotel = (id) => {
     return Hotel.findByIdAndDelete(id);
-}
+};
 
 module.exports = {
     getHotels,
@@ -31,5 +31,5 @@ module.exports = {
     getHotelByName,
     createHotel,
     editHotel,
-    deleteHotel
+    deleteHotel,
 }

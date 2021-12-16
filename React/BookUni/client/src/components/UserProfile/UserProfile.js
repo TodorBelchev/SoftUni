@@ -4,6 +4,7 @@ import { UserContext } from '../../context/userContext';
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
+
     return (
         <section id="viewhotelDetails">
             <div className="profile">

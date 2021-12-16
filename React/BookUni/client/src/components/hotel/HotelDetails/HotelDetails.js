@@ -31,6 +31,15 @@ const HotelDetails = () => {
         );
     };
 
+    const bookHotelHandler = (e) => {
+        e.preventDefault();
+
+        sendRequest(
+            hotelService.book(hotelId, user._id),
+            (res) => setHotel(res)
+        );
+    };
+
     return (
         <section id="viewhotelDetails">
             <h2>Details</h2>
@@ -46,7 +55,7 @@ const HotelDetails = () => {
                     <p><span >Free rooms: {hotel.freeRooms}</span> </p>
                     {isBooked && <p><span className="green">You already have booked a room</span> </p>}
 
-                    {!isOwner && user._id && <NavLink to={`/hotel/${hotel._id}/book`} className="book">Book</NavLink>}
+                    {!isOwner && user._id && !isBooked && <NavLink onClick={bookHotelHandler} to={`/hotel/${hotel._id}/book`} className="book">Book</NavLink>}
                     {isOwner &&
                         <>
                             <NavLink to={`/hotel/${hotel._id}/edit`} className="edit">Edit</NavLink>

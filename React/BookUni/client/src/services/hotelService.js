@@ -33,10 +33,17 @@ const deleteHotel = (id) => {
     });
 };
 
+const book = (id) => {
+    return fetch(`${baseUrl}/hotels/${id}/book`, {
+        credentials: 'include'
+    });
+};
+
 export default {
     create,
     getHotels,
     getById,
     edit,
-    deleteHotel
+    deleteHotel,
+    book
 }

@@ -78,5 +78,17 @@ router.delete('/:id', isLoggedIn(), async (req, res) => {
     }
 });
 
+router.get('/:id/book', isLoggedIn(), async (req, res) => {
+    try {
+        const hotel = await getHotelById(req.params.id);
+        hotel.usersBooked.push(req.decoded.id);
+        await hotel.save();
+        res.status(200).send(hotel);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({ message: error.message });
+    }
+});
+
 
 module.exports = router;
