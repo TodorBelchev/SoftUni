@@ -13,7 +13,10 @@ const create = (name, city, freeRooms, imgUrl) => {
 
 const getHotels = () => fetch(`${baseUrl}/hotels`);
 
+const getById = (id) => fetch(`${baseUrl}/hotels/${id}`);
+
 export default {
     create,
-    getHotels
+    getHotels,
+    getById
 }

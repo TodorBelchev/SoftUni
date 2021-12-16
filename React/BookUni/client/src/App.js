@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import Login from './components/auth/Login/Login';
 import Register from './components/auth/Register/Register';
 import AddHotel from './components/hotel/AddHotel/AddHotel';
+import HotelDetails from './components/hotel/HotelDetails/HotelDetails';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route path='/add' element={<AddHotel />} />
+						<Route path='/hotel/:hotelId' element={<HotelDetails />} />
 					</Routes>
 				</Layout>
 			</UserProvider>
