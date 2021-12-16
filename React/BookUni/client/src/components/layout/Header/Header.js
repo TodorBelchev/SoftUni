@@ -1,10 +1,26 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../../context/userContext';
+import useHttp from '../../../hooks/useHttp';
+import userService from '../../../services/userService';
 
 const Header = () => {
+    const navigate = useNavigate();
     const { user, logout } = useContext(UserContext);
+    const { sendRequest } = useHttp();
+
+    const onLogoutClick = (e) => {
+        e.preventDefault();
+        sendRequest(
+            userService.logout(),
+            () => {
+                logout();
+                navigate('/');
+            }
+        );
+    };
+
     return (
         <nav>
             <div className="left-container">
@@ -20,7 +36,7 @@ const Header = () => {
             </div>
             {user.email && user.username && <div className="right-container">
                 <NavLink to="/user" className="log-out">{`{{ ${user.username} }}`}</NavLink>
-                <NavLink to="/logout" className="log-out">Logout</NavLink>
+                <NavLink onClick={onLogoutClick} to="/logout" className="log-out">Logout</NavLink>
             </div>}
         </nav>
     )

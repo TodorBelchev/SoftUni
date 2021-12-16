@@ -17,7 +17,6 @@ const Register = () => {
         sendRequest(
             userService.register(email, username, password),
             (res) => {
-                console.log(res);
                 login(res);
                 navigate('/', { replace: true });
             }

@@ -8,7 +8,7 @@ const register = (email, username, password) => {
         },
         body: JSON.stringify({ email, username, password })
     });
-}
+};
 
 const login = (username, password) => {
     return fetch(`${baseURL}/user/login`, {
@@ -18,9 +18,16 @@ const login = (username, password) => {
         },
         body: JSON.stringify({ username, password })
     })
+};
+
+const logout = () => {
+    return fetch(`${baseURL}/user/logout`, {
+        credentials: 'include'
+    });
 }
 
 export default {
     register,
-    login
+    login,
+    logout
 }
