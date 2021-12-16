@@ -57,11 +57,10 @@ router.put('/:id', isLoggedIn(), async (req, res) => {
             city: req.body.city.trim(),
             imgUrl: req.body.imgUrl.trim(),
             freeRooms: Number(req.body.freeRooms.trim()),
-            hotel: await getHotelByName(name)
         }
 
         validateHotel(hotelData);
-        const hotel = await editHotel(hotelData);
+        const hotel = await editHotel(req.params.id, hotelData);
         res.status(200).send(hotel);
     } catch (error) {
         console.log(error);

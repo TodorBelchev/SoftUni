@@ -53,7 +53,6 @@ const HotelDetails = () => {
                             <NavLink onClick={deleteClickHandler} to={`/hotel/${hotel._id}/delete`} className="remove">Delete</NavLink>
                         </>}
                 </div>
-
             </div>
         </section>
     )
