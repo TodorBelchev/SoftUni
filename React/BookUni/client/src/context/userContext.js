@@ -2,8 +2,15 @@ import React, { useState } from "react";
 
 export const UserContext = React.createContext();
 
+const initialState = {
+    _id: '',
+    email: '',
+    username: '',
+    bookedHotels: []
+};
+
 const UserProvider = props => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(initialState);
     const login = (user) => {
         setUser(user);
     }

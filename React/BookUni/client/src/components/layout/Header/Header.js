@@ -35,7 +35,7 @@ const Header = () => {
                 </ul>}
             </div>
             {user.email && user.username && <div className="right-container">
-                <NavLink to="/user" className="log-out">{`{{ ${user.username} }}`}</NavLink>
+                <NavLink to={`/user/${user._id}`} className="log-out">{`{{ ${user.username} }}`}</NavLink>
                 <NavLink onClick={onLogoutClick} to="/logout" className="log-out">Logout</NavLink>
             </div>}
         </nav>
