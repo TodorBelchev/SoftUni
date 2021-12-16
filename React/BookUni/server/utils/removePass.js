@@ -2,7 +2,7 @@ const removePass = (user) => {
     return {
         _id: user._id,
         username: user.username,
-        name: user.name,
+        email: user.email,
     }
 }
 

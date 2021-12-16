@@ -69,7 +69,7 @@ router.post('/register', async (req, res) => {
         }
 
         const hashedPass = await bcrypt.hash(password, SALT_ROUNDS);
-        user = await createUser(username, name, hashedPass);
+        user = await createUser(username, email, hashedPass);
         const payload = removePass(user);
         res.cookie(COOKIE_NAME, payload, { httpOnly: true });
         res.status(200).send(payload);
