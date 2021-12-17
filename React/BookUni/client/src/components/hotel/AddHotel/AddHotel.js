@@ -1,11 +1,14 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useHttp from '../../../hooks/useHttp';
 import hotelService from '../../../services/hotelService';
+import { UserContext } from '../../../context/userContext';
 
 const AddHotel = () => {
     const navigate = useNavigate();
     const { sendRequest } = useHttp();
+    const { onAddedHotel } = useContext(UserContext)
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -13,7 +16,10 @@ const AddHotel = () => {
         // validate inputs
         sendRequest(
             hotelService.create(name, city, freeRooms, imgUrl),
-            () => navigate('/')
+            (res) => {
+                onAddedHotel(res._id);
+                navigate('/');
+            }
         )
     };
 

@@ -7,23 +7,23 @@ import hotelService from '../../../services/hotelService';
 const EditHotel = () => {
     const navigate = useNavigate();
     const { sendRequest } = useHttp();
-    const { hotelId } = useParams();
+    const { id } = useParams();
     const [hotel, setHotel] = useState({});
 
     useEffect(() => {
         sendRequest(
-            hotelService.getById(hotelId),
+            hotelService.getById(id),
             (res) => setHotel(res)
         );
-    }, []);
+    }, [sendRequest, id]);
 
     const submitHandler = (e) => {
         e.preventDefault();
         const { name, city, freeRooms, imgUrl } = Object.fromEntries(new FormData(e.currentTarget));
         // validate inputs
         sendRequest(
-            hotelService.edit(hotelId, name, city, freeRooms, imgUrl),
-            () => navigate(`/hotel/${hotelId}`)
+            hotelService.edit(id, name, city, freeRooms, imgUrl),
+            () => navigate(`/hotel/${id}`)
         );
     };
 

@@ -7,7 +7,7 @@ import { UserContext } from '../../../context/userContext';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { error, isLoading, sendRequest } = useHttp();
+    const { sendRequest } = useHttp();
     const { login } = useContext(UserContext);
 
     const submitHandler = (e) => {

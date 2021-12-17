@@ -28,8 +28,10 @@ const logout = () => {
     });
 }
 
-export default {
+const userService = {
     register,
     login,
     logout
 }
+
+export default userService;

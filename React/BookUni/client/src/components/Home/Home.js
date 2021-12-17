@@ -13,7 +13,7 @@ const Home = () => {
             hotelService.getHotels(),
             (res) => setHotels(res)
         );
-    }, []);
+    }, [sendRequest]);
 
     return (
         <section id="viewCatalog" className="background-img">

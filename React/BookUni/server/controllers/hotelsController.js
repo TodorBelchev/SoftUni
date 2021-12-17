@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const { getHotelById, getHotelByName, editHotel, createHotel, getHotels, deleteHotel } = require('../services/hotelService');
+const  { getById } = require('../services/userService');
 const { validateHotel } = require('../validators');
 const { isLoggedIn } = require('../middlewares');
 
@@ -42,7 +43,10 @@ router.post('/', isLoggedIn(), async (req, res) => {
         }
 
         validateHotel(hotelData);
+        const user = await getById(req.decoded.id);
         const result = await createHotel(hotelData);
+        user.offeredHotels.push(result._id);
+        await user.save();
         res.status(201).send(result);
     } catch (error) {
         console.log(error);
@@ -82,6 +86,7 @@ router.get('/:id/book', isLoggedIn(), async (req, res) => {
     try {
         const hotel = await getHotelById(req.params.id);
         hotel.usersBooked.push(req.decoded.id);
+        hotel.freeRooms--;
         await hotel.save();
         res.status(200).send(hotel);
     } catch (error) {

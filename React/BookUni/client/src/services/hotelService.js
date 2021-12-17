@@ -39,7 +39,7 @@ const book = (id) => {
     });
 };
 
-export default {
+const hotelService = {
     create,
     getHotels,
     getById,
@@ -47,3 +47,5 @@ export default {
     deleteHotel,
     book
 }
+
+export default hotelService;

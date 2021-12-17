@@ -6,7 +6,11 @@ const getByUsername = (username) => {
 
 const getByEmail = (email) => {
     return User.findOne({ email });
-}
+};
+
+const getById = (id) => {
+    return User.findById(id);
+};
 
 const createUser = (username, email, password) => {
     const user = new User({ username, email, password });
@@ -16,5 +20,6 @@ const createUser = (username, email, password) => {
 module.exports = {
     getByUsername,
     getByEmail,
+    getById,
     createUser
 }

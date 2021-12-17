@@ -7,8 +7,8 @@ import { UserContext } from '../../../context/userContext';
 
 const HotelDetails = () => {
     const navigate = useNavigate();
-    const { user } = useContext(UserContext);
-    const { hotelId } = useParams();
+    const { user, onBookHotel } = useContext(UserContext);
+    const { id } = useParams();
     const [hotel, setHotel] = useState({});
     const { sendRequest } = useHttp();
 
@@ -17,16 +17,16 @@ const HotelDetails = () => {
 
     useEffect(() => {
         sendRequest(
-            hotelService.getById(hotelId),
+            hotelService.getById(id),
             (res) => setHotel(res)
         );
-    }, []);
+    }, [sendRequest, id]);
 
     const deleteClickHandler = (e) => {
         e.preventDefault();
 
         sendRequest(
-            hotelService.deleteHotel(hotelId),
+            hotelService.deleteHotel(id),
             () => navigate('/')
         );
     };
@@ -35,8 +35,11 @@ const HotelDetails = () => {
         e.preventDefault();
 
         sendRequest(
-            hotelService.book(hotelId, user._id),
-            (res) => setHotel(res)
+            hotelService.book(id, user._id),
+            (res) => {
+                setHotel(res);
+                onBookHotel(id);
+            }
         );
     };
 
@@ -55,7 +58,11 @@ const HotelDetails = () => {
                     <p><span >Free rooms: {hotel.freeRooms}</span> </p>
                     {isBooked && <p><span className="green">You already have booked a room</span> </p>}
 
-                    {!isOwner && user._id && !isBooked && <NavLink onClick={bookHotelHandler} to={`/hotel/${hotel._id}/book`} className="book">Book</NavLink>}
+                    {!isOwner &&
+                        user._id &&
+                        !isBooked &&
+                        hotel.freeRooms > 0 &&
+                        <NavLink onClick={bookHotelHandler} to={`/hotel/${hotel._id}/book`} className="book">Book</NavLink>}
                     {isOwner &&
                         <>
                             <NavLink to={`/hotel/${hotel._id}/edit`} className="edit">Edit</NavLink>
