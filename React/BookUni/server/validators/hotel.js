@@ -1,14 +1,14 @@
 const validateHotel = (hotelData) => {
-    if (hotelData.name.length === 0) {
-        throw new Error('Name is required!');
+    if (hotelData.name.length < 4) {
+        throw new Error('Name must be at least 4 characters long!');
     }
 
-    if (hotelData.city.length === 0) {
-        throw new Error('City is required!');
+    if (hotelData.city.length < 3) {
+        throw new Error('City must be at least 3 characters long!');
     }
 
-    if (hotelData.imgUrl.length === 0) {
-        throw new Error('Image URL is required!');
+    if (!hotelData.imgUrl.match(/https?/)) {
+        throw new Error('Invalid image URL!');
     }
 
     if (hotelData.freeRooms < 1 || hotelData.freeRooms > 100) {

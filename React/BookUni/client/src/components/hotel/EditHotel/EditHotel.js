@@ -4,9 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useHttp from '../../../hooks/useHttp';
 import hotelService from '../../../services/hotelService';
 
+import Notification from '../../Notification/Notification';
+
 const EditHotel = () => {
     const navigate = useNavigate();
-    const { sendRequest } = useHttp();
+    const { sendRequest, error, setError } = useHttp();
     const { id } = useParams();
     const [hotel, setHotel] = useState({});
 
@@ -20,7 +22,27 @@ const EditHotel = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         const { name, city, freeRooms, imgUrl } = Object.fromEntries(new FormData(e.currentTarget));
-        // validate inputs
+        
+        if (name.trim().length < 4) {
+            setError('Name must be at least 4 characters long!');
+            return;
+        }
+
+        if (city.trim().length < 3) {
+            setError('City must be at least 3 characters long!');
+            return;
+        }
+
+        if (!imgUrl.trim().match(/https?/)) {
+            setError('Invalid image URL!');
+            return;
+        }
+
+        if (freeRooms <0 || freeRooms > 100) {
+            setError('Free rooms must be between 1 and 100!');
+            return;
+        }
+
         sendRequest(
             hotelService.edit(id, name, city, freeRooms, imgUrl),
             () => navigate(`/hotel/${id}`)
@@ -29,6 +51,7 @@ const EditHotel = () => {
 
     return (
         <section id="viewAddhotel">
+             {error && <Notification text={error} />}
             <h2>Edit hotel</h2>
             <form id="formAddhotel" onSubmit={submitHandler}>
                 <label htmlFor="name">Hotel name:</label>

@@ -24,7 +24,8 @@ const useHttp = () => {
     return {
         isLoading,
         error,
-        sendRequest
+        sendRequest,
+        setError
     }
 }
 

@@ -5,15 +5,27 @@ import useHttp from '../../../hooks/useHttp';
 import userService from '../../../services/userService';
 import { UserContext } from '../../../context/userContext';
 
+import Notification from '../../Notification/Notification';
+
 const Register = () => {
     const navigate = useNavigate();
-    const { sendRequest } = useHttp();
+    const { sendRequest, error, setError } = useHttp();
     const { login } = useContext(UserContext);
 
     const submitHandler = (e) => {
         e.preventDefault();
         const { email, username, password, rePassword } = Object.fromEntries(new FormData(e.currentTarget));
-        // Validate inputs and show error if not so
+
+        if (username.trim().length < 5 || password.trim().length < 5) {
+            setError('Username and password must be at least 5 characters long!');
+            return;
+        }
+
+        if (password.trim() !== rePassword.trim()) {
+            setError('Passwords don\'t match!');
+            return;
+        }
+
         sendRequest(
             userService.register(email, username, password),
             (res) => {
@@ -25,6 +37,7 @@ const Register = () => {
 
     return (
         <section id="viewRegister">
+            {error && <Notification text={error} />}
             <h2>Create your account:</h2>
             <form id="formRegister" onSubmit={submitHandler}>
                 <label htmlFor="email">Email:</label>

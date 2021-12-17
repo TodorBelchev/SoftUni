@@ -13,12 +13,12 @@ router.post('/login', async (req, res) => {
         const username = req.body.username.trim();
         const password = req.body.password.trim();
 
-        if (username.trim().length < 1) {
-            throw new Error('Username is required!');
+        if (username.trim().length < 5) {
+            throw new Error('Username must be at least 5 characters long!');
         }
 
-        if (password.trim().length < 6) {
-            throw new Error('Password must be at least 6 characters long!');
+        if (password.trim().length < 5) {
+            throw new Error('Password must be at least 5 characters long!');
         }
 
         const user = await getByUsername(username);
@@ -53,12 +53,12 @@ router.post('/register', async (req, res) => {
             throw new Error('Invalid email!');
         }
 
-        if (username.length < 1) {
-            throw new Error('Username is required!');
+        if (username.trim().length < 5) {
+            throw new Error('Username must be at least 5 characters long!');
         }
 
-        if (password.length < 6) {
-            throw new Error('Password must be at least 6 characters long!');
+        if (password.length < 5) {
+            throw new Error('Password must be at least 5 characters long!');
         }
 
         let user = await getByUsername(username);
