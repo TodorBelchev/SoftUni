@@ -8,3 +8,4 @@ SoftUni Homeworks from my SoftUni courses
 - JavaScript Backend [certificate](https://softuni.bg/certificates/details/108959/fb0420c9)
 - MySQL [certificate](https://softuni.bg/certificates/details/107625/3d73e134)
 - Angular [certificate](https://softuni.bg/certificates/details/110766/11249b08)
+- ReactJS [certificate](https://softuni.bg/certificates/details/122106/07bc9622)
