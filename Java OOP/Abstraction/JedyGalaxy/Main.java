@@ -6,21 +6,39 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int[] dimensions = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        int[] dimensions = readPositions(scanner.nextLine());
+        int rows = dimensions[0];
+        int cols = dimensions[1];
+
+        Field field = new Field(rows, cols);
+        JediMovement jediMovement = new JediMovement();
+        Galaxy galaxy = new Galaxy(field, jediMovement);
+
         String command = scanner.nextLine();
-
-        Field field = new Field(dimensions[0], dimensions[1]);
-        int[] jediCoordinates = Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
-        int[] evilCoordinates = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        long power = 0;
-
+        long starsCollected = 0;
         while (!command.equals("Let the Force be with you")) {
-            field.moveEvil(evilCoordinates[0], evilCoordinates[1]);
-            power = field.collectJediPower(jediCoordinates[0], jediCoordinates[1]);
+            int[] jediPosition = readPositions(command);
+            int[] evilPosition = readPositions(scanner.nextLine());
+
+            int rowEvil = evilPosition[0];
+            int colEvil = evilPosition[1];
+            galaxy.moveEvil(rowEvil, colEvil);
+
+            int rowJedi = jediPosition[0];
+            int colJedi = jediPosition[1];
+
+            starsCollected = galaxy.moveJedi(rowJedi, colJedi);
 
             command = scanner.nextLine();
         }
 
-        System.out.println(power);
+        System.out.println(starsCollected);
+
+
+    }
+
+    private static int[] readPositions(String command) {
+        return Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
     }
 }

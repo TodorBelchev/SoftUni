@@ -1,6 +1,5 @@
 package abstraction.student_system;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +11,32 @@ public class StudentSystem {
     }
 
     public Map<String, Student> getRepo() {
-        return Collections.unmodifiableMap(this.repo);
+        return this.repo;
     }
 
     public void addStudent(Student student) {
         this.repo.put(student.getName(), student);
+    }
+
+    public void parseCommand(String[] args) {
+        String command = args[0];
+        String studentName = args[1];
+
+        switch (command) {
+            case "Create":
+                int age = Integer.parseInt(args[2]);
+                double grade = Double.parseDouble(args[3]);
+                if (!this.checkForStudent(studentName)) {
+                    Student student = new Student(studentName, age, grade);
+                    this.addStudent(student);
+                }
+                break;
+            case "Show":
+                if (this.checkForStudent(studentName)) {
+                    System.out.println(this.show(studentName));
+                }
+                break;
+        }
     }
 
     public String show(String name) {
