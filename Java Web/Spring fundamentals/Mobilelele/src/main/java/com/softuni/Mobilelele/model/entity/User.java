@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class User extends BaseEntity {
@@ -26,7 +27,7 @@ public class User extends BaseEntity {
     private String imageUrl;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private UserRole role;
+    private List<UserRole> roles;
 
     public String getUsername() {
         return username;
@@ -76,11 +77,11 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
     }
 }
