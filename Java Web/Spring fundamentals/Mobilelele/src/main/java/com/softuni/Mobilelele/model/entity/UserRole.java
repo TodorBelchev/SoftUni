@@ -2,14 +2,26 @@ package com.softuni.Mobilelele.model.entity;
 
 import com.softuni.Mobilelele.model.enums.UserRoleEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
-public class UserRole extends BaseEntity {
+@Table(name = "roles")
+public class UserRole {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public UserRoleEnum getRole() {
         return role;

@@ -15,6 +15,17 @@ public class BaseEntity {
     @Column(nullable = false)
     protected LocalDateTime modified;
 
+    @PrePersist
+    public void prePersist() {
+        setCreated(LocalDateTime.now());
+        setModified(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        setModified(LocalDateTime.now());
+    }
+
     public Long getId() {
         return id;
     }

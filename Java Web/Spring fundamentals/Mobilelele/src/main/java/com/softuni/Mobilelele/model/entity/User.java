@@ -1,12 +1,9 @@
 package com.softuni.Mobilelele.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String username;
@@ -26,8 +23,8 @@ public class User extends BaseEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRole> roles;
+    @OneToOne
+    private UserRole role;
 
     public String getUsername() {
         return username;
@@ -77,11 +74,11 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    public List<UserRole> getRoles() {
-        return roles;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setRoles(List<UserRole> roles) {
-        this.roles = roles;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

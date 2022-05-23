@@ -5,6 +5,7 @@ import com.softuni.Mobilelele.model.enums.CategoryEnum;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "models")
 public class Model extends BaseEntity {
     @Column(nullable = false)
     private String name;

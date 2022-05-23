@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "offers")
 public class Offer extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
