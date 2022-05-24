@@ -3,10 +3,16 @@ package com.softuni.Mobilelele.service.impl;
 import com.softuni.Mobilelele.model.entity.User;
 import com.softuni.Mobilelele.model.entity.UserRole;
 import com.softuni.Mobilelele.model.enums.UserRoleEnum;
+import com.softuni.Mobilelele.model.service.UserLoginServiceModel;
 import com.softuni.Mobilelele.repository.UserRepository;
 import com.softuni.Mobilelele.repository.UserRoleRepository;
 import com.softuni.Mobilelele.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +25,31 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final String defaultPassword;
+    private final UserDetailsService userDetailsService;
 
     public UserServiceImpl(
             UserRepository userRepository,
             UserRoleRepository userRoleRepository,
             PasswordEncoder passwordEncoder,
-            @Value("${app.default.password}") String defaultPassword
-    ) {
+            @Value("${app.default.password}") String defaultPassword,
+            UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.defaultPassword = defaultPassword;
         this.userRoleRepository = userRoleRepository;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    public void login(UserLoginServiceModel serviceModel) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(serviceModel.getUsername());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                userDetails.getPassword(),
+                userDetails.getAuthorities()
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @Override
