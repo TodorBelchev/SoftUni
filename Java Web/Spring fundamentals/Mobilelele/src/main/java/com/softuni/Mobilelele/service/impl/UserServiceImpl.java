@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +24,14 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final String defaultPassword;
-    private final UserDetailsService userDetailsService;
+    private final AppUserDetailsService userDetailsService;
 
     public UserServiceImpl(
             UserRepository userRepository,
             UserRoleRepository userRoleRepository,
             PasswordEncoder passwordEncoder,
             @Value("${app.default.password}") String defaultPassword,
-            UserDetailsService userDetailsService) {
+            AppUserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.defaultPassword = defaultPassword;
@@ -43,6 +42,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void login(UserLoginServiceModel serviceModel) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(serviceModel.getUsername());
+
+        if (!passwordEncoder.matches(serviceModel.getPassword(), userDetails.getPassword())) {
+            throw new IllegalArgumentException("Invalid credentials!");
+        }
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 userDetails.getPassword(),

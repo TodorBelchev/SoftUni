@@ -36,7 +36,7 @@ public class ApplicationSecurityConfig {
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
                 .failureForwardUrl("/users/login")
-                .and() // get Logout
+                .and()
                 .logout().logoutUrl("/users/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)

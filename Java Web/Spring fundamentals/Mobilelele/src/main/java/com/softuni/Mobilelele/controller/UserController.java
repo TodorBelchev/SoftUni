@@ -6,9 +6,8 @@ import com.softuni.Mobilelele.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -30,15 +29,25 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@Valid UserLoginBindingModel userModel,
-            BindingResult bindingResult) {
+    public String postLogin(@Valid UserLoginBindingModel userLoginBindingModel,
+                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("bad_credentials", true);
+
             return "redirect:/login";
         }
 
-        UserLoginServiceModel serviceModel = modelMapper.map(userModel, UserLoginServiceModel.class);
+        UserLoginServiceModel serviceModel = modelMapper.map(userLoginBindingModel, UserLoginServiceModel.class);
         userService.login(serviceModel);
         return "redirect:/";
+    }
+
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
     }
 }
