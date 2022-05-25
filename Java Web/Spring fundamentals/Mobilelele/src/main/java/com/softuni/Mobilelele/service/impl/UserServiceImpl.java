@@ -4,6 +4,7 @@ import com.softuni.Mobilelele.model.entity.User;
 import com.softuni.Mobilelele.model.entity.UserRole;
 import com.softuni.Mobilelele.model.enums.UserRoleEnum;
 import com.softuni.Mobilelele.model.service.UserLoginServiceModel;
+import com.softuni.Mobilelele.model.service.UserRegisterServiceModel;
 import com.softuni.Mobilelele.repository.UserRepository;
 import com.softuni.Mobilelele.repository.UserRoleRepository;
 import com.softuni.Mobilelele.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +53,28 @@ public class UserServiceImpl implements UserService {
                 userDetails,
                 userDetails.getPassword(),
                 userDetails.getAuthorities()
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public void register(UserRegisterServiceModel serviceModel) {
+        UserRole userRole = userRoleRepository.findByRole(UserRoleEnum.User);
+        User user = new User();
+        user.setUsername(serviceModel.getUsername());
+        user.setPassword(passwordEncoder.encode(serviceModel.getPassword()));
+        user.setFirstName(serviceModel.getFirstName());
+        user.setLastName(serviceModel.getLastName());
+        user.setActive(serviceModel.getActive());
+        user.setRole(userRole);
+
+        user = userRepository.save(user);
+        UserDetails principal = userDetailsService.loadUserByUsername(user.getUsername());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                principal,
+                user.getPassword(),
+                principal.getAuthorities()
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

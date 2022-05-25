@@ -10,7 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,24 +27,30 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository
-                .findByUsername(username)
-                .map(this::map)
-                .orElseThrow(() -> new IllegalAccessError("User not found"));
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException("Username not found");
+        }
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        User user = userOptional.get();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getRole().toString()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
-    private UserDetails map(User userEntity) {
-        return new org.springframework.security.core.userdetails.User(
-                userEntity.getUsername(),
-                userEntity.getPassword(),
-                asGrantedAuthorities(List.of(userEntity.getRole()))
-        );
-    }
-
-    private List<GrantedAuthority> asGrantedAuthorities(List<UserRole> roleEntities) {
-        return roleEntities.
-                stream().
-                map(r -> new SimpleGrantedAuthority("ROLE_" + r.getRole().name())).
-                collect(Collectors.toList());
-    }
+//    private UserDetails map(User userEntity) {
+//        return new org.springframework.security.core.userdetails.User(
+//                userEntity.getUsername(),
+//                userEntity.getPassword(),
+//                asGrantedAuthorities(List.of(userEntity.getRole()))
+//        );
+//    }
+//
+//    private List<GrantedAuthority> asGrantedAuthorities(List<UserRole> roleEntities) {
+//        return roleEntities.
+//                stream().
+//                map(r -> new SimpleGrantedAuthority("ROLE_" + r.getRole().name())).
+//                collect(Collectors.toList());
+//    }
 }
