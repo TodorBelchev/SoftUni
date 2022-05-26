@@ -12,9 +12,9 @@
 <div class="container">
     <h2 class="text-center text-white m-3">All Brands</h2>
     <div class='row mb-4 d-flex justify-content-around'>
-        <div class="brand-section col-md-5 mr-auto d-flex flex-column">
+        <div th:each="brand : ${brands}" th:object="${brand}" class="brand-section col-md-5 mr-auto d-flex flex-column">
             <h2>Car brand:
-                <span>Brand name</span>
+                <span th:text="*{name}">Brand name</span>
             </h2>
             <div>Models:
                 <table>
@@ -26,13 +26,13 @@
                         <th>End Year</th>
                         <th>Picture</th>
                     </tr>
-                    <tr>
-                        <th>No</th>
-                        <th>Model Name</th>
-                        <th>Model Category</th>
-                        <th>Model Start Year</th>
-                        <th>Model End Year</th>
-                        <th><img alt="image" src="/"
+                    <tr th:each="model : ${brand.models}" th:object="${model}">
+                        <th th:text="*{id}">No</th>
+                        <th th:text="*{name}">Model Name</th>
+                        <th th:text="*{category}">Model Category</th>
+                        <th th:text="*{startYear}">Model Start Year</th>
+                        <th th:text="*{endYear}">Model End Year</th>
+                        <th><img th:src="*{imageUrl}" alt="image" src="/"
                                  class="img-thumbnail rounded"></th>
                     </tr>
                 </table>
