@@ -1,6 +1,9 @@
 package com.softuni.CoffeeShop.controller;
 
 import com.softuni.CoffeeShop.model.binding.UserRegisterBindingModel;
+import com.softuni.CoffeeShop.model.service.UserServiceModel;
+import com.softuni.CoffeeShop.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
+    private final UserService userService;
+    private final ModelMapper modelMapper;
+
+    public UserController(UserService userService, ModelMapper modelMapper) {
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/login")
     public String getLogin() {
@@ -37,7 +48,7 @@ public class UserController {
             return "redirect:register";
         }
 
-
+        userService.register(modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
         return "redirect:/";
     }
 
