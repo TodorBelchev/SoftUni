@@ -7,6 +7,7 @@ import com.softuni.CoffeeShop.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -15,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     public CategoryServiceImpl(CategoryRepo categoryRepo) {
         this.categoryRepo = categoryRepo;
+    }
+
+    @Override
+    public Optional<CategoryEntity> findByCategoryNameEnum(CategoryNameEnum category) {
+        return categoryRepo.findByName(category);
     }
 
     @Override
