@@ -3,6 +3,7 @@ package com.softuni.CoffeeShop.service.impl;
 import com.softuni.CoffeeShop.model.entity.OrderEntity;
 import com.softuni.CoffeeShop.model.entity.UserEntity;
 import com.softuni.CoffeeShop.model.service.OrderServiceModel;
+import com.softuni.CoffeeShop.model.view.OrderViewModel;
 import com.softuni.CoffeeShop.repository.OrderRepo;
 import com.softuni.CoffeeShop.service.CategoryService;
 import com.softuni.CoffeeShop.service.OrderService;
@@ -12,6 +13,9 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -43,5 +47,18 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepo.save(order);
         return modelMapper.map(order, OrderServiceModel.class);
+    }
+
+    @Override
+    public List<OrderViewModel> findAllOrdersOrderByPriceDesc() {
+        return orderRepo.findAllOrdersByOrderByPriceDesc()
+                .stream()
+                .map(order -> modelMapper.map(order, OrderViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void readyOrder(Long id) {
+        orderRepo.deleteById(id);
     }
 }

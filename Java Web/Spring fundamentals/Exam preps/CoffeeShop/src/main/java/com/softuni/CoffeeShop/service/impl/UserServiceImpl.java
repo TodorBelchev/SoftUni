@@ -5,7 +5,6 @@ import com.softuni.CoffeeShop.model.service.UserServiceModel;
 import com.softuni.CoffeeShop.repository.UserRepo;
 import com.softuni.CoffeeShop.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -74,5 +75,10 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByUsername(currentUserName)
                 .map(user -> modelMapper.map(user, UserEntity.class))
                 .orElse(null);
+    }
+
+    @Override
+    public List<UserEntity> findAll() {
+        return userRepo.findAll();
     }
 }

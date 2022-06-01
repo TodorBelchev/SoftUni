@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
     <meta charset="UTF-8"/>
@@ -20,16 +20,16 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/login">Login</a>
+                    <a class="nav-link" href="/users/login" sec:authorize="!isAuthenticated()">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/register">Register</a>
+                    <a class="nav-link" href="/users/register" sec:authorize="!isAuthenticated()">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/orders/add">Add Order</a>
+                    <a class="nav-link" href="/orders/add" sec:authorize="isAuthenticated()">Add Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/logout">Logout</a>
+                    <a class="nav-link" href="/users/logout" sec:authorize="isAuthenticated()">Logout</a>
                 </li>
             </ul>
             <img width="50px" src="/images/coffee.png" alt="Coffee image">
