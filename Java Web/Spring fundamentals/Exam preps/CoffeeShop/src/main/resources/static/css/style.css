@@ -9,3 +9,13 @@
 .bg-blur {
     background-color: rgba(0, 0, 0, 0.7); /* Black w/opacity/see-through */
 }
+
+.logout-btn {
+    background: transparent;
+    border: none;
+}
+
+.logout-btn::hover {
+    color: white;
+    cursor: pointer;
+}

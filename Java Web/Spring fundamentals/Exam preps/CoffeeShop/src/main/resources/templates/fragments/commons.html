@@ -29,7 +29,9 @@
                     <a class="nav-link" href="/orders/add" sec:authorize="isAuthenticated()">Add Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/logout" sec:authorize="isAuthenticated()">Logout</a>
+                    <form th:action="@{/users/logout}" th:method="POST" sec:authorize="isAuthenticated()">
+                        <input type="submit" class="nav-link logout-btn" value="Logout"/>
+                    </form>
                 </li>
             </ul>
             <img width="50px" src="/images/coffee.png" alt="Coffee image">
