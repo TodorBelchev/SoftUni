@@ -1,0 +1,48 @@
+.bg-judge {
+	background-color: #2F4F4F
+}
+
+.text-judge {
+	color: #2F4F4F;
+}
+
+.btn-judge {
+	background-color: #2F4F4F;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+hr.hr-2 {
+	height: 2px;
+}
+
+.w-15 {
+	width: 15%;
+}
+
+.bg-code {
+	background-color: #F5F5F5;
+}
+
+.text-code {
+	font-family: 'Inconsolata', monospace;
+	font-size: 20px;
+	color: #2F4F4F;
+}
+
+.code-line {
+	outline: none;
+	border: none;
+	font-family: 'Inconsolata', monospace;
+	background-color: #F5F5F5;
+	color: #2F4F4F;
+}
+
+textarea {
+	resize: none;
+	height: 48vh !important;
+}
+
+.row {
+	margin: auto;
+}
