@@ -9,18 +9,18 @@
     <main class="mt-3">
         <h1 class="text-judge text-center font-weight-bold">Create Problem</h1>
         <hr class="hr-2 bg-judge w-25">
-        <form id="create-problem-form" class="form w-25 mx-auto" action="/problem/create" method="post">
+        <form id="create-problem-form" class="form w-25 mx-auto" th:action="@{/problems/create}" th:method="post" th:object="${problemCreateBindingModel}">
             <div class="form-group">
                 <div class="d-flex justify-content-center">
                     <label for="name" class="text-judge font-weight-bold">Name</label>
                 </div>
-                <input type="text" class="form-control" id="name" placeholder="Name..." name="name">
+                <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Name..." name="name">
             </div>
             <div class="form-group">
                 <div class="d-flex justify-content-center">
                     <label for="total-points" class="text-judge font-weight-bold">Total Points</label>
                 </div>
-                <input type="number" class="form-control" id="total-points" placeholder="Total Points..." name="total-points">
+                <input th:field="*{points}" type="number" class="form-control" id="total-points" placeholder="Total Points..." name="total-points">
             </div>
             <hr class="hr-2 bg-judge"/>
             <div id="button-holder" class="d-flex justify-content-center">
