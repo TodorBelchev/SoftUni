@@ -15,4 +15,12 @@ public class BaseEntity {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

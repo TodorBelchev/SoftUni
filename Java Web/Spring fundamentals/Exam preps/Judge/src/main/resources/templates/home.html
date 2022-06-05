@@ -9,71 +9,14 @@
     <main class="mt-3 mb-3">
         <div id="problems">
             <div class="problem-row d-flex justify-content-around row mt-4">
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">Create-a-House-Matic</h5>
+                <div th:each="p : ${problems}" th:object="${p}" class="problem bg-judge text-white rounded p-3 col-md-2">
+                    <h5 class="text-center font-weight-bold" th:text="*{name}">Name</h5>
                     <h5 class="text-center mt-3">Completed: 75%</h5>
                     <hr class="hr-2 bg-white">
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="/problems/submit/d5d8b5dd-0605-437f-ba1f-b8ff3664b0d2"
+                        <a th:href="@{/problems/submit/{id}(id = *{id})}"
                            class="text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/d5d8b5dd-0605-437f-ba1f-b8ff3664b0d2"
-                           class="text-white font-weight-bold"><h5>Details</h5></a>
-                    </div>
-                </div>
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">The Rounding of Isaac</h5>
-                    <h5 class="text-center mt-3">Completed: 100%</h5>
-                    <hr class="hr-2 bg-white">
-                    <div class="d-flex justify-content-between">
-                        <a href="/problems/submit/62e53d86-b36f-4fbe-9226-a33384cbd7a3"
-                           class="btn bg-judge text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/62e53d86-b36f-4fbe-9226-a33384cbd7a3"
-                           class="btn bg-judge text-white font-weight-bold"><h5>Details</h5></a>
-                    </div>
-                </div>
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">Other-Problem-1</h5>
-                    <h5 class="text-center mt-3">Completed: 0%</h5>
-                    <hr class="hr-2 bg-white">
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="/problems/submit/{id}"
-                           class="text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/{id}"
-                           class="text-white font-weight-bold"><h5>Details</h5></a>
-                    </div>
-                </div>
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">Other-Problem-2</h5>
-                    <h5 class="text-center mt-3">Completed: 0%</h5>
-                    <hr class="hr-2 bg-white">
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="/problems/submit/{id}"
-                           class="text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/{id}"
-                           class="text-white font-weight-bold"><h5>Details</h5></a>
-                    </div>
-                </div>
-            </div>
-            <div class="problem-row d-flex justify-content-around row mt-4">
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">Other-Problem-3</h5>
-                    <h5 class="text-center mt-3">Completed: 0%</h5>
-                    <hr class="hr-2 bg-white">
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="/problems/submit/{id}"
-                           class="text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/{id}"
-                           class="text-white font-weight-bold"><h5>Details</h5></a>
-                    </div>
-                </div>
-                <div class="problem bg-judge text-white rounded p-3 col-md-2">
-                    <h5 class="text-center font-weight-bold">Other-Problem-4</h5>
-                    <h5 class="text-center mt-3">Completed: 0%</h5>
-                    <hr class="hr-2 bg-white">
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="/problems/submit/{id}"
-                           class="text-white font-weight-bold"><h5>Submit</h5></a>
-                        <a href="/problems/details/{id}"
+                        <a th:href="@{/problems/details/{id}(id = *{id})}"
                            class="text-white font-weight-bold"><h5>Details</h5></a>
                     </div>
                 </div>

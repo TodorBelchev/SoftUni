@@ -7,6 +7,9 @@ import com.softuni.Judge.service.ProblemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProblemServiceImpl implements ProblemService {
 
@@ -24,5 +27,13 @@ public class ProblemServiceImpl implements ProblemService {
 
         ProblemEntity saved = problemRepo.save(problem);
         return modelMapper.map(saved, ProblemServiceModel.class);
+    }
+
+    @Override
+    public List<ProblemServiceModel> findAll() {
+        return problemRepo.findAll()
+                .stream()
+                .map(problemEntity -> modelMapper.map(problemEntity, ProblemServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,6 @@
-package com.softuni.Judge.model.service;
+package com.softuni.Judge.model.view;
 
-public class ProblemServiceModel {
+public class ProblemViewModel {
     private String id;
 
     private String name;
