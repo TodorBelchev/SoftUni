@@ -1,5 +1,6 @@
 package com.example.ShoppingList.controller;
 
+import com.example.ShoppingList.model.binding.UserLoginBindingModel;
 import com.example.ShoppingList.model.binding.UserRegisterBindingModel;
 import com.example.ShoppingList.model.service.UserServiceModel;
 import com.example.ShoppingList.service.UserService;
@@ -31,6 +32,30 @@ public class UserController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public String postLogin(@Valid UserLoginBindingModel userLoginBindingModel,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = userService.findByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword());
+
+        if (userServiceModel == null) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("isFound", false);
+
+            return "redirect:login";
+        }
+
+        return "redirect:/";
+    }
+
     @GetMapping("/register")
     public String getRegister() {
         return "register";
@@ -55,5 +80,10 @@ public class UserController {
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
+    }
+
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
     }
 }
