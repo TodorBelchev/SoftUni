@@ -1,35 +1,21 @@
-package com.example.ShoppingList.model.entity;
+package com.example.ShoppingList.model.binding;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserRegisterBindingModel {
 
-    @Column(unique = true)
     @Size(min = 3, max = 20)
     private String username;
 
-    @Column
     @Email
     private String email;
 
-    @Column(unique = true)
-    @Size(min = 3)
+    @Size(min = 3, max = 20)
     private String password;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Size(min = 3, max = 20)
+    private String confirmPassword;
 
     public String getUsername() {
         return username;
@@ -53,5 +39,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

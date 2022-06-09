@@ -1,26 +1,13 @@
-package com.example.ShoppingList.model.entity;
+package com.example.ShoppingList.model.service;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
+public class UserServiceModel {
 
-@Entity
-@Table(name = "users")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @Size(min = 3, max = 20)
     private String username;
 
-    @Column
-    @Email
     private String email;
 
-    @Column(unique = true)
-    @Size(min = 3)
     private String password;
 
     public Long getId() {
