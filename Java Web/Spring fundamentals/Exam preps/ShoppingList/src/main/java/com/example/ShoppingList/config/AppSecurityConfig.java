@@ -15,7 +15,7 @@ public class AppSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/js/**", "/css/**", "/img/**").permitAll()
                 .antMatchers("/", "/home", "/users/login", "/users/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
