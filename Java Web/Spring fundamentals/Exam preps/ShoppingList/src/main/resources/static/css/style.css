@@ -53,3 +53,7 @@ footer {
     position: sticky;
     left: 0;
 }
+
+.is-invalid {
+    background: red;
+}

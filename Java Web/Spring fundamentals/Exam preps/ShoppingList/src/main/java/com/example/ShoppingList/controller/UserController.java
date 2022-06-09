@@ -5,10 +5,12 @@ import com.example.ShoppingList.model.binding.UserRegisterBindingModel;
 import com.example.ShoppingList.model.service.UserServiceModel;
 import com.example.ShoppingList.service.UserService;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
+import org.dom4j.rule.Mode;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(Model model) {
+        if (!model.containsAttribute("isFound")) {
+            model.addAttribute("isFound", true);
+        }
+
         return "login";
     }
 
@@ -38,6 +44,14 @@ public class UserController {
                             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
+            FieldError usernameError = bindingResult.getFieldError("username");
+            FieldError passwordError = bindingResult.getFieldError("password");
+            if (usernameError != null) {
+                redirectAttributes.addFlashAttribute("usernameError", true);
+            }
+            if (passwordError != null) {
+                redirectAttributes.addFlashAttribute("passwordError", true);
+            }
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 

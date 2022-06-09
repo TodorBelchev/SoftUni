@@ -9,9 +9,11 @@
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
     <form class="mx-auto w-25 bg-blur" th:action="@{/users/login}" th:method="POST" th:object="${userLoginBindingModel}">
-        <small class="text-danger">Error message</small>
+        <small th:if="${usernameError}" class="text-danger">Password must be between 3 and 20 characters</small>
         <br/>
-        <small class="text-danger">Incorrect username or password!</small>
+        <small th:if="${passwordError}" class="text-danger">Username must be between 3 and 20 characters</small>
+        <br/>
+        <small th:if="${!isFound}" class="text-danger">Incorrect username or password!</small>
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label for="username" class="h3 mb-2">Username</label>
