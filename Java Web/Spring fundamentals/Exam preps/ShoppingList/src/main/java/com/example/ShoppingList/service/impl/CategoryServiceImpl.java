@@ -7,6 +7,7 @@ import com.example.ShoppingList.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -30,5 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
 
                     categoryRepo.save(category);
                 });
+    }
+
+    @Override
+    public Optional<CategoryEntity> findByCategoryNameEnum(CategoryEnum category) {
+        return categoryRepo.findByName(category);
     }
 }
