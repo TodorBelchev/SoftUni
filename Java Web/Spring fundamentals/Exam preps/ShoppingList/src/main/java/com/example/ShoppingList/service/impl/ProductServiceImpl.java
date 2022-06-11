@@ -39,4 +39,14 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductEntity> findAll() {
         return productRepo.findAll();
     }
+
+    @Override
+    public void buy(Long id) {
+        productRepo.deleteById(id);
+    }
+
+    @Override
+    public void buyAll() {
+        productRepo.deleteAll();
+    }
 }

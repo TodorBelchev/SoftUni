@@ -25,9 +25,9 @@
                 <li class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" href="/users/register" sec:authorize="!isAuthenticated()">Register</a>
                 </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/users/logout" sec:authorize="isAuthenticated()">Logout</a>
-                </li>
+                <form th:action="@{/users/logout}" th:method="POST" sec:authorize="isAuthenticated()">
+                    <input type="submit" class="nav-link text-white active h5" value="Logout"/>
+                </form>
             </ul>
         </div>
     </nav>

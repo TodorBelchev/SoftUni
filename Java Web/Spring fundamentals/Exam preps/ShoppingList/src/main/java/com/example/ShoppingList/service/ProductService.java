@@ -10,4 +10,8 @@ public interface ProductService {
     ProductServiceModel create(ProductServiceModel map);
 
     List<ProductEntity> findAll();
+
+    void buy(Long id);
+
+    void buyAll();
 }
