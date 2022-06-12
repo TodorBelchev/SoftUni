@@ -25,11 +25,9 @@ import java.util.stream.Stream;
 public class HomeController {
 
     private final ShipService shipService;
-    private final ModelMapper modelMapper;
 
-    public HomeController(ShipService shipService, ModelMapper modelMapper) {
+    public HomeController(ShipService shipService) {
         this.shipService = shipService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/")
