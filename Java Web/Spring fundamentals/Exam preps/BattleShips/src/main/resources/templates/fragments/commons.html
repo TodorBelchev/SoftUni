@@ -27,7 +27,9 @@
                     <a class="nav-link" href="/ships/add" sec:authorize="isAuthenticated()">Add Ship</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/logout" sec:authorize="isAuthenticated()">Logout</a>
+                    <form th:action="@{/users/logout}" th:method="POST" sec:authorize="isAuthenticated()">
+                        <input type="submit" class="nav-link" value="Logout"/>
+                    </form>
                 </li>
             </ul>
             <img width="50px" src="/images/ufo.png" alt="Ufo image">
