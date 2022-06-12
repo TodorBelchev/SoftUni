@@ -42,4 +42,24 @@ public class UserServiceImpl implements UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return modelMapper.map(savedUser, UserServiceModel.class);
     }
+
+    @Override
+    public UserServiceModel findByUsernameAndPassword(String username, String password) {
+        UserServiceModel userServiceModel = userRepo.findByUsernameAndPassword(username, password)
+                .map(user -> modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
+
+        if (userServiceModel != null) {
+            UserDetails principal = appUserDetailsService.loadUserByUsername(userServiceModel.getUsername());
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    principal,
+                    userServiceModel.getPassword(),
+                    principal.getAuthorities()
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        return userServiceModel;
+    }
 }
