@@ -26,9 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/ships/add" sec:authorize="isAuthenticated()">Add Ship</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logout-btn">
                     <form th:action="@{/users/logout}" th:method="POST" sec:authorize="isAuthenticated()">
-                        <input type="submit" class="nav-link" value="Logout"/>
+                        <input class="logout-btn nav-link" type="submit" value="Logout"/>
                     </form>
                 </li>
             </ul>
