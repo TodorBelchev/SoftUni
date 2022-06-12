@@ -1,38 +1,35 @@
-package com.example.BattleShips.model.entity;
+package com.example.BattleShips.model.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import com.example.BattleShips.model.entity.CategoryEntity;
+import com.example.BattleShips.model.entity.UserEntity;
+import com.example.BattleShips.model.enums.CategoryNameEnum;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
-@Table(name = "ships")
-public class ShipEntity extends BaseEntity {
+public class ShipServiceModel {
 
-    @Column(unique = true)
-    @Size(min = 2, max = 10)
+    private Long id;
+
     private String name;
 
-    @Positive
     private Long health;
 
-    @Positive
     private Long power;
 
-    @PastOrPresent
-    @Column(columnDefinition = "DATE")
     private Date created;
 
-    @ManyToOne
-    private CategoryEntity category;
+    private CategoryNameEnum category;
 
-    @ManyToOne
     private UserEntity user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -66,11 +63,11 @@ public class ShipEntity extends BaseEntity {
         this.created = created;
     }
 
-    public CategoryEntity getCategory() {
+    public CategoryNameEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public void setCategory(CategoryNameEnum category) {
         this.category = category;
     }
 

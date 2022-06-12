@@ -1,20 +1,17 @@
-package com.example.BattleShips.model.entity;
+package com.example.BattleShips.model.binding;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.example.BattleShips.model.entity.CategoryEntity;
+import com.example.BattleShips.model.entity.UserEntity;
+import com.example.BattleShips.model.enums.CategoryNameEnum;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
-@Table(name = "ships")
-public class ShipEntity extends BaseEntity {
-
-    @Column(unique = true)
+public class ShipBindingModel {
     @Size(min = 2, max = 10)
     private String name;
 
@@ -25,13 +22,12 @@ public class ShipEntity extends BaseEntity {
     private Long power;
 
     @PastOrPresent
-    @Column(columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created;
 
-    @ManyToOne
-    private CategoryEntity category;
+    @NotNull
+    private CategoryNameEnum category;
 
-    @ManyToOne
     private UserEntity user;
 
     public String getName() {
@@ -66,11 +62,11 @@ public class ShipEntity extends BaseEntity {
         this.created = created;
     }
 
-    public CategoryEntity getCategory() {
+    public CategoryNameEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public void setCategory(CategoryNameEnum category) {
         this.category = category;
     }
 

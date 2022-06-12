@@ -7,6 +7,7 @@ import com.example.BattleShips.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -34,5 +35,10 @@ public class CategoryServiceImpl implements CategoryService {
 
                     categoryRepo.save(category);
                 });
+    }
+
+    @Override
+    public Optional<CategoryEntity> findByCategoryNameEnum(CategoryNameEnum category) {
+        return categoryRepo.findByName(category);
     }
 }
