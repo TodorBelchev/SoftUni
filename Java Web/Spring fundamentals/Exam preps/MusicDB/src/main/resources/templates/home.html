@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Music DB Application</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav rounded">
+        <a class="nav-link" href="/">
+            <img src="/img/headphones.png" width="40px" alt="HeadPhones picture">
+        </a>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Login</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Register</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Add Album</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="p-5 align-content-center bg-blur my-main">
+    <h2 class="text-light border-bottom">Total sold copies
+        of all albums: 10000</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4 box-shadow">
+                <img src="/image/metallica.jpg" class="card-img-top" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p class="card-text border-bottom ">Name: Name of album</p>
+                        <p class="card-text border-bottom ">Artist: Metallica</p>
+                        <p class="card-text border-bottom ">Genre: Metal</p>
+                        <p class="card-text border-bottom ">Price: 19.99</p>
+                        <p class="card-text border-bottom">Release Date: </p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        </div>
+                        <small class="text-muted">1000 copies</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer bg-blur">
+    <div class="container-fluid text-center">
+        <div class="h5 text-white">
+            &copy;SoftUni Spring Team 2021. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
