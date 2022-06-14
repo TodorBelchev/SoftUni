@@ -2,15 +2,13 @@ package com.example.MusicDB.model.entity;
 
 import com.example.MusicDB.model.enums.SingerNameEnum;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "artists")
 public class ArtistEntity extends BaseEntity {
 
-    @Column
+    @Enumerated(value = EnumType.STRING)
     private SingerNameEnum name;
 
     @Column(columnDefinition = "TEXT")
