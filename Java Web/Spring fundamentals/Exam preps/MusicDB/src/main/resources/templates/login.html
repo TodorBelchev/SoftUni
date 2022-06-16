@@ -12,18 +12,17 @@
             <img alt="Metallica image" src="/img/metallica.jpg" class="w-50 rounded">
         </div>
         <div class="row g-3 align-items-center">
-            <form action="/" method="POST">
-                <h5 class="text-center text-light form-text bg-danger rounded">User doesn't exists</h5>
+            <form th:action="@{/users/login}" th:method="POST" th:object="${userLoginBindingModel}">
+                <h5 th:if="${!isFound}" class="text-center text-light form-text bg-danger rounded">User doesn't exists</h5>
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label text-light">Username</label>
                     </div>
                     <div class="col-auto">
                         <input type="text" name="username" id="inputUsername" class="form-control"
-                               aria-describedby="usernameHelpInline">
-                    </div>
-                    <div class="col-auto">
-                        <small id="usernameError" class="text-light form-text bg-danger rounded">Length must between 3
+                               aria-describedby="usernameHelpInline" th:field="*{username}" th:errorclass="is-invalid">
+                        <small id="usernameError" class="text-light form-text bg-danger rounded invalid-feedback">Length
+                            must between 3
                             and 20 characters</small>
                     </div>
                 </div>
@@ -33,10 +32,9 @@
                     </div>
                     <div class="col-auto">
                         <input type="password" name="password" id="inputPassword" class="form-control"
-                               aria-describedby="passwordHelpInline">
-                    </div>
-                    <div class="col-auto">
-                        <small id="passwordError" class="text-light form-text bg-danger rounded">Length must between 5
+                               aria-describedby="passwordHelpInline" th:field="*{password}" th:errorclass="is-invalid">
+                        <small id="passwordError" class="text-light form-text bg-danger rounded invalid-feedback">Length
+                            must between 5
                             and 20 characters</small>
                     </div>
                 </div>

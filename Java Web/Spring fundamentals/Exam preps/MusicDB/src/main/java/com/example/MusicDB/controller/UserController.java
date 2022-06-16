@@ -1,10 +1,12 @@
 package com.example.MusicDB.controller;
 
+import com.example.MusicDB.model.binding.UserLoginBindingModel;
 import com.example.MusicDB.model.binding.UserRegisterBindingModel;
 import com.example.MusicDB.model.service.UserServiceModel;
 import com.example.MusicDB.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,8 +29,36 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(Model model) {
+        if (!model.containsAttribute("isFound")) {
+            model.addAttribute("isFound", true);
+        }
+
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String postLogin(@Valid UserLoginBindingModel userLoginBindingModel,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = userService.findByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword());
+
+        if (userServiceModel == null) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("isFound", false);
+
+            return "redirect:login";
+        }
+
+        return "redirect:/";
     }
 
     @GetMapping("/register")
@@ -55,5 +85,10 @@ public class UserController {
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
+    }
+
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
     }
 }

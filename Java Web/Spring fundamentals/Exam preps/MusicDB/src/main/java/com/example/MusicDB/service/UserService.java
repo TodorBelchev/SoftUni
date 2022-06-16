@@ -4,4 +4,6 @@ import com.example.MusicDB.model.service.UserServiceModel;
 
 public interface UserService {
     UserServiceModel register(UserServiceModel map);
+
+    UserServiceModel findByUsernameAndPassword(String username, String password);
 }
