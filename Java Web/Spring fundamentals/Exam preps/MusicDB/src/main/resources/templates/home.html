@@ -6,27 +6,27 @@
 <header th:replace="fragments/commons::nav">
 </header>
 <main class="p-5 align-content-center bg-blur my-main">
-    <h2 class="text-light border-bottom">Total sold copies
+    <h2 th:text="|Total sold copies of all albums: ${totalCopies}|" class="text-light border-bottom">Total sold copies
         of all albums: 10000</h2>
     <div class="row">
         <div class="col-md-3">
-            <div class="card mb-4 box-shadow">
-                <img src="/image/metallica.jpg" class="card-img-top" alt="Thumbnail [100%x225]"
+            <div th:each="a : ${albums}" th:object="${a}" class="card mb-4 box-shadow">
+                <img th:src="*{imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
                      style="height: 225px; width: 100%; display: block;">
                 <div class="card-body">
                     <div class="text-center">
-                        <p class="card-text border-bottom ">Name: Name of album</p>
-                        <p class="card-text border-bottom ">Artist: Metallica</p>
-                        <p class="card-text border-bottom ">Genre: Metal</p>
-                        <p class="card-text border-bottom ">Price: 19.99</p>
-                        <p class="card-text border-bottom">Release Date: </p>
+                        <p th:text="|Name: *{name}|" class="card-text border-bottom ">Name: Name of album</p>
+                        <p th:text="|Artist: *{artist.getName()}|" class="card-text border-bottom ">Artist: Metallica</p>
+                        <p th:text="|Genre: *{genre}|" class="card-text border-bottom ">Genre: Metal</p>
+                        <p th:text="|Price: *{price}|" class="card-text border-bottom ">Price: 19.99</p>
+                        <p th:text="|Release Date: *{releaseDate}|" class="card-text border-bottom">Release Date: </p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            <a th:href="@{/albums/delete/{id}(id = *{id})}" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
                         </div>
-                        <small class="text-muted">1000 copies</small>
+                        <small th:text="|*{copies} copies|" class="text-muted">1000 copies</small>
                     </div>
                 </div>
             </div>
