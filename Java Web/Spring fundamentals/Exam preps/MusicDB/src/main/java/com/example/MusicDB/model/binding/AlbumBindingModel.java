@@ -1,56 +1,46 @@
-package com.example.MusicDB.model.entity;
+package com.example.MusicDB.model.binding;
 
+import com.example.MusicDB.model.entity.ArtistEntity;
+import com.example.MusicDB.model.entity.UserEntity;
 import com.example.MusicDB.model.enums.GenreEnum;
+import com.example.MusicDB.model.enums.SingerNameEnum;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "albums")
-public class AlbumEntity extends BaseEntity {
+public class AlbumBindingModel {
 
-    @Column
+    private Long id;
+
     @Size(min = 3, max = 20)
     private String name;
 
-    @Column
     @Positive
     private BigDecimal price;
 
-    @Column
     @Size(min = 5)
     private String imageUrl;
 
-    @Column(columnDefinition = "TEXT")
     @Size(min = 5)
     private String description;
 
-    @Column
     @Min(10)
     private int copies;
 
-    @Column
     @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
-    @Column
     private String producer;
 
-    @Column
+    @NotNull
     private GenreEnum genre;
 
-    @ManyToOne
-    private ArtistEntity artist;
+    @NotNull
+    private SingerNameEnum artist;
 
-    @ManyToOne
     private UserEntity addedFrom;
 
     public BigDecimal getPrice() {
@@ -59,6 +49,14 @@ public class AlbumEntity extends BaseEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -117,11 +115,11 @@ public class AlbumEntity extends BaseEntity {
         this.genre = genre;
     }
 
-    public ArtistEntity getArtist() {
+    public SingerNameEnum getArtist() {
         return artist;
     }
 
-    public void setArtist(ArtistEntity artist) {
+    public void setArtist(SingerNameEnum artist) {
         this.artist = artist;
     }
 

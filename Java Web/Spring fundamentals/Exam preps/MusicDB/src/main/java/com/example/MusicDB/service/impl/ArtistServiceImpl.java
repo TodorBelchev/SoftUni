@@ -54,4 +54,9 @@ public class ArtistServiceImpl implements ArtistService {
                     artistRepo.save(artist);
                 });
     }
+
+    @Override
+    public ArtistEntity findByNameEnum(ArtistEntity artist) {
+        return artistRepo.findByName(artist.getName());
+    }
 }

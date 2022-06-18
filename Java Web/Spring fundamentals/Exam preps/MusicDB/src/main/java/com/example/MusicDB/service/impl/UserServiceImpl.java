@@ -62,4 +62,11 @@ public class UserServiceImpl implements UserService {
 
         return userServiceModel;
     }
+
+    @Override
+    public UserEntity findByUsername(String currentUserName) {
+        return userRepo.findByUsername(currentUserName)
+                .map(user -> modelMapper.map(user, UserEntity.class))
+                .orElse(null);
+    }
 }

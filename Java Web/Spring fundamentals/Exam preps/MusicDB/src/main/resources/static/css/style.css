@@ -32,3 +32,7 @@ body {
 .my-main {
     min-height:90.2vh;
 }
+
+.invalid-feedback {
+    color: white;
+}
