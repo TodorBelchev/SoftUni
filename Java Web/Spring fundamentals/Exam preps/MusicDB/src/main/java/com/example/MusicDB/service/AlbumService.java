@@ -9,4 +9,6 @@ public interface AlbumService {
     AlbumServiceModel add(AlbumServiceModel map);
 
     List<AlbumViewModel> findAll();
+
+    void deleteById(Long id);
 }

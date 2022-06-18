@@ -56,4 +56,9 @@ public class AlbumServiceImpl implements AlbumService {
                 .map(albumEntity -> modelMapper.map(albumEntity, AlbumViewModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(Long id) {
+        albumRepo.deleteById(id);
+    }
 }
