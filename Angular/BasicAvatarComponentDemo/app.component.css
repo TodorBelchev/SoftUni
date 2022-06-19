@@ -1,0 +1,37 @@
+.avatar-container {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.avatar {
+  background-size: contain;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease;
+}
+
+.btn-container {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.btn-container button:hover {
+  cursor: pointer;
+}
+
+.avatar-container:hover .btn-container {
+  display: block;
+}
+
+.avatar-container:hover .avatar {
+  box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, 0.7);
+}
